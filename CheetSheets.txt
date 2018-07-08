@@ -1,0 +1,28 @@
+============Login as System================
+connect
+username: system
+password: sys
+==================================
+show user
+==================================
+clear screen
+===============Create New User Like idb===================
+ create user idb identified by idb
+ ========== Give Grant Permission========================
+ grand dba to idb
+ =============Find out DBA User List OR Database Name=======================
+ select USERNAME, DEFAULT_TABLESPACE from DBA_USERS;
+====================Create Table =======================
+create table test(
+         id      NUMBER(5) PRIMARY KEY,
+         ename      VARCHAR2(15) NOT NULL,
+         salary       NUMBER(7,2));
+============Show Table List==========
+select table_name from all_tables;
+===========Show Details Of A Table===============
+ describe test;
+=========Query Table===============
+select * from test;
+=============Insert Data Into Table==========  
+insert into test(id, ename, salary) values(100,'Rojina Akter',30000);
+		 
