@@ -26,9 +26,18 @@ select table_name from all_tables;
 10=========Query Table===============
 select * from test;
 11=============Insert Data Into Table==========  
-insert into test(id, ename, salary) values(100,'Rojina Akter',30000);
+insert into test(id, ename, salary) values(110,'Israt Akter',42000);
 12==========show autocommit=======
 show autocommit
 13============Make autocommit on==============
 set  autocommit on
-		 
+14============Substitution Variables==============	
+select * from &abc where id=&idddddd;
+Enter value for abc: test
+Enter value for idddddd: 105
+old   1: select * from &abc where id=&idddddd
+new   1: select * from test where id=105
+
+        ID ENAME               SALARY
+---------- --------------- ----------
+       105 Moly Akter           40000
