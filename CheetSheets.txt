@@ -41,3 +41,6 @@ new   1: select * from test where id=105
         ID ENAME               SALARY
 ---------- --------------- ----------
        105 Moly Akter           40000
+================Unlock a user===========
+CONNECT SYS as SYSDBA
+alter user hr identified by hr ACCOUNT UNLOCK;
