@@ -1,3 +1,4 @@
+Open SQL Comand Line Tool 
 1============Login as System================
 connect
 username: system
@@ -9,7 +10,7 @@ clear screen
 4===============Create New User Like idb===================
  create user idb identified by idb
 5========== Give Grant Permission========================
- grand dba to idb
+ grant dba to idb
 6=============Find out DBA User List OR Database Name=======================
  select USERNAME, DEFAULT_TABLESPACE from DBA_USERS;
 7====================Create Table =======================
@@ -18,6 +19,7 @@ create table test(
          ename      VARCHAR2(15) NOT NULL,
          salary       NUMBER(7,2));
 8============Show Table List==========
+select table_name from user_tables;
 select table_name from all_tables;
 9===========Show Details Of A Table===============
  describe test;
