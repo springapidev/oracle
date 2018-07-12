@@ -1,0 +1,54 @@
+Step-1: ng new lab001 --style=scss --routing
+Step-2: ng generate component user-item
+Step-3:
+	Let’s introduce name as a new property of our component. 
+		name:string;
+	And in the 
+		constructor() { 
+		this.name = 'Sami'; // set the name 
+		}
+	We’re saying that whenever a new UserItemComponent is created, set the name to 'Felipe'.
+	RenderingTheTemplate
+
+	When we have a property on a component, we can show that value in our template by using two curly brackets {{ }} to display the value of the variable in our template. For instance:
+		<p> 2 Hello {{ name }} 3 </p>
+
+Step-4: WorkingWithArrays
+	Let’s introduce names array as a new property of our component.
+		names:string[];
+		constructor(){
+		this.names=['Sami','Sayonti','Sejuti'];
+		}		
+	And we can view aboble array object in the view template like bellow
+	 <ul> 2 <li *ngFor="let name of names">Hello {{ name }}</li> 3 </ul>
+	
+		NgFor repeats the element that the ngFor is called. That is, we put it on 
+	the li tag and not the ul tag because we want to repeat the list element 
+	(li) and not the list itself (ul). Note that the capitalization here isn’t
+	a typo: NgFor is the capitalization of the class that implements the logic
+	and ngFor is the “selector” for the attribute we want to use.
+
+Step-5:UsingtheUserItemComponent
+	Remember that earlier we created a UserItemComponent? Instead of rendering 
+	each name within the UserListComponent,weoughttouse UserItemComponent 
+	asachildcomponent -thatis,instead ofrenderingthetext Hello andthenamedirectly,
+	weshouldletour UserItemComponent specifythe template (and functionality) of each
+	item in the list. To do this, we need to do three things:
+	
+	1. Configure the UserListComponent to render to UserItemComponent (in the template)
+	2. Configure the UserItemComponent to accept the name variable as an input and 
+	3. Configure the UserListComponent template to pass the name to the UserItemComponent.
+Let’s perform these steps one-by-one.
+Step-6:
+Step-7:
+Step-8:
+Step-9:
+Step-10:
+Step-11:
+Step-12:
+Step-13:
+Step-14:
+Step-15:
+Step-16:
+Step-17:
+Step-18:
