@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>from</title>
+
+<script>
+function datep()
+{
+var d=new Date();
+var t=d.toLocaleTimeString();
+document.getElementById('dat').value=t;
+}
+
+
+
+function openit()
+{
+winR=open();	
+}
+
+function closeit()
+{
+winR.close();	
+}
+
+function writeit()
+{
+var fid=document.getElementById('id').value;
+winR.document.write('ID : '+fid);
+var fname=document.getElementById('name').value;
+winR.document.write('<br>Name : '+fname);
+var fmail=document.getElementById('mail').value;
+winR.document.write('<br>Email : '+fmail);
+var fsex=(document.getElementById('m').checked)?'Male':'Female';
+winR.document.write('<br>Sex : '+fsex);
+var sub='';
+sub+=(document.getElementById('a').checked)?'Bangla, ':'';
+sub+=(document.getElementById('b').checked)?'English, ':'';
+sub+=(document.getElementById('c').checked)?'Math, ':'';
+winR.document.write('<br>Subject : '+sub);
+var ftsp=document.getElementById('tsp').value;
+winR.document.write('<br>TSP : '+ftsp);	
+var fcomm=document.getElementById('comm').value;
+winR.document.write('<br>Comment : '+fcomm);
+}
+
+function submitit()
+{
+var fid=document.getElementById('id').value;
+var fname=document.getElementById('name').value;
+var fmail=document.getElementById('mail').value;
+var fsex=(document.getElementById('m').checked)?'Male':'Female';
+var sub='';
+sub+=(document.getElementById('a').checked)?'Bangla, ':'';
+sub+=(document.getElementById('b').checked)?'English, ':'';
+sub+=(document.getElementById('c').checked)?'Math, ':'';
+var ftsp=document.getElementById('tsp').value;
+var fcomm=document.getElementById('comm').value;
+document.getElementById('show').innerHTML=('ID : '+fid+'\n'+'Name : '+fname+'\n'+'Mail : '+fmail+'\n'+'Sex : '+fsex+'\n'+'Subject : '+sub+'\n'+'TSP : '+ftsp+'\n'+'Comment : '+fcomm+'\n');
+}
+
+function mailval()
+{
+var fm=document.getElementById('mail').value;
+var i=fm.indexOf('@');
+var j=fm.lastIndexOf('.');
+if(i<1 || j<i+2 || j+2>=fm.length)
+{alert('Enter valid mail');}
+return;
+}
+</script>
+</head>
+
+<body onLoad="javascript:window.setInterval('datep()',1000)">
+<pre>
+Date	: <input type='text' id='dat'/>
+
+ID	: <input type='text' id='id'/>
+
+
+Name	: <input type='text' id='name'/>
+
+
+Email	: <input type='text' id='mail' onBlur='mailval()'/>
+
+
+Sex	: <input type='radio' id='m' name='sex'/>Male	<input type='radio' id='fm' name='sex'/>Female
+
+Subject	: <input type='checkbox' id='a'/>Bangla	<input type='checkbox' id='b'/>English	<input type='checkbox' id='c'/>Math
+
+TSP	: <select id='tsp'>
+	<option>DIIT</option>
+	<option>CCL</option>
+	<option>DD</option></select>
+
+
+Comment	: 
+	 <textarea id='comm'></textarea>
+
+
+<input type='button' value='open' onclick='openit()'/>	<input type='button' value='close' onclick='closeit()'/>	<input type='button' value='Write' onclick='writeit()'/>	<input type='button' value='Submit' onClick='submitit()'/>
+
+Show :
+
+<textarea id='show' cols='50' rows='15'></textarea>
+</pre>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCtype html>
+<html>
+<head>
+<title>time</title>
+<script language='javascript'>
+
+function TM(){
+var TIME=new Date();
+var hh=TIME.getHours();
+var mm=TIME.getMinutes();
+var ss=TIME.getSeconds();
+var show=(hh<10?'0':'')+hh+' : '+(ss<10?'0':'')+mm+' : '+(ss<10?'0':'')+ss;
+document.getElementById('time').value=show;
+}
+</script>
+
+</head>
+<body onLoad="javascript:window.setInterval('TM()',1000)">
+
+Time : <input type='text' id='time'/>
+
+</body>
+</html>

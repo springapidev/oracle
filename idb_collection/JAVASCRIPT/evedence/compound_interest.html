@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script language="javascript"> 
+
+var amount=parseFloat( prompt('Enter Amount',0));
+var rate=parseFloat(prompt('Enter Interest Rate',0.0));
+var year=parseFloat(prompt('Enter Year',1));
+for(i=1;i<=year;i++)
+	{
+		interest=amount*rate/100
+		document.write('Amount '+amount+', Year '+i+', Total '+(amount+interest)+'</br>')
+		amount+=interest	
+	}
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

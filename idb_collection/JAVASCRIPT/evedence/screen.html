@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FrameA Document</title>
+<script language="javascript">
+	var nav=new Array();
+	nav[0]='Code Name = '+self.navigator.appCodeName+'</br>';
+	nav[1]='Browser Name = '+self.navigator.appName+' </br> ';
+	nav[2]='Using Version Number : '+self.navigator.appVersion+'</br>';
+	nav[3]='Your Platform is : '+self.navigator.platform+'</br>';
+	nav[4]='and your user agent is '+self.navigator.userAgent;
+	
+	var display='<h3>Navigator Information</h3><div class=bod>'
+	for(var counter=0;counter<nav.length;counter++)
+	{
+		display+=nav[counter];
+	}
+	display+='</div>';
+	document.write(display);
+	
+	document.write(window.location);
+	
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>infoPage Document</title>
+<style type="text/css">
+	body{
+		font-family:Verdana;}
+</style>
+<script language="javascript">
+	function reply()
+	{
+		var hi=new String();
+		hi=parent.frames[0].name;
+		parent.header.document.forms[0].elements[0].value='Hello, '+hi.toUpperCase()+'!';
+		var menName=parent.frames[1].name;
+		document.forms[0].elements[1].value=menName; 
+	}
+</script>
+</head>
+
+<body bgcolor="#828793">
+	<h3>Data</h3>
+    <form><h4>
+    <input type="Text">One<br>
+    <input type="Text">Two<br>
+    <input type="Text">Three<p>
+    <input type="button" value="Change Something" onClick="reply()"/>
+    </form>
+</body>
+</html>

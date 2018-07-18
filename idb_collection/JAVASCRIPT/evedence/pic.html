@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script language="javascript">
+	var pic1=new Image();
+	pic1.src='dog1.gif';
+	
+	var pic2=new Image()
+	pic2.src='dog2.gif';
+	
+	function f1()
+		{
+			document.pic.src=pic1.src;
+		}
+		function f2()
+		{
+			document.pic.src=pic2.src;
+		}
+</script>
+</head>
+
+<body>
+	<img name="pic" src="dog1.gif" onMouseOver="f2()" onMouseOut="f1()"/>
+</body>
+</html>

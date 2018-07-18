@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>form event 2</title>
+<script language="javascript">
+	function cal()
+	{
+		with(document){
+			var amount=parseFloat(getElementById('amount').value);
+			var rate=parseFloat(getElementById('rate').value);
+			var year=parseFloat(getElementById('year').value);
+			var interest=amount*year*rate/100;
+			var final=amount+interest;
+			getElementById('interest').value=interest;
+			getElementById('final').value=final;
+		}
+	}
+</script>
+</head>
+
+<body bgcolor="#CCCCCC">
+<form name="f">
+<pre>	
+	Amount:		<input type="text" id="amount" name="amount" value="0" onChange="cal()"/>
+    
+	Rate:		<input type="text" id="rate" name="rate" value="0" onChange="cal()"/>
+    
+	Year:		<input type="text" id="year" name="year" value="0" onChange="cal()"/>
+    
+	Interest:	<input type="text" id="interest" name="interest" value="0"/> 
+    
+	Final Amount:	<input type="text" id="final" name="final" value="0"/>
+    				
+                    <input type="reset"/>
+</pre>
+</form>
+</body>
+</html>

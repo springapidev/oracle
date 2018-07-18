@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>key event</title>
+<script language="javascript">
+	function f1()
+	{
+		alert('Key Event 1');
+	}
+	function f2()
+	{
+		alert('Key Event 2')
+	}
+</script>
+</head>
+
+<body>
+	<form>
+    	<input type="text" size="20" onKeyUp="f2()"/></br>
+        </br>
+        <input type="text" size="20" onKeyDown="f1()"/>
+       </form>
+</body>
+</html>

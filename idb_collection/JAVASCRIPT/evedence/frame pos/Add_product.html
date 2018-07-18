@@ -1,0 +1,48 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Add Product</title>
+<script type="text/javascript" language="javascript">
+function add()
+{
+	document.getElementById('proid').value;
+	document.getElementById('proname').value;
+	document.getElementById('proprice').value;
+	document.getElementById('quan').value;
+	i=0;
+	var row=parent.display.document.getElementById('table').insertRow(++i);
+		var col0=row.insertCell(0);
+		col0.innerHTML=document.getElementById('proid').value;
+		var col1=row.insertCell(1);
+		col1.innerHTML=document.getElementById('proname').value;
+		var col2=row.insertCell(2);
+		col2.innerHTML=document.getElementById('proprice').value;
+		var col3=row.insertCell(3);
+		col3.innerHTML=document.getElementById('quan').value;
+		
+}
+</script>
+
+</head>
+
+<body bgcolor="skyblue">
+<h2>Add product</h2>
+<pre>
+<form method="get" action="Display_product.html">
+<b>Product ID	: <input type="text" id="proid"/><br>
+Product Name	: <input type="text" id="proname"/><br>
+Product Price	: <input type="text" id="proprice"/><br>
+Quantity	: <input type="text" id="quan"/></b>
+
+		  <input type="button" value="Add" onClick="add()"/>   <input type="reset"/>
+</form>
+</pre>
+</body>
+</html>

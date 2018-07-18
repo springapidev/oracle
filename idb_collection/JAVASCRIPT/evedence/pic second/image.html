@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+var a=new Array();
+		a[0]="IMG_1448.JPG";
+		a[1]="IMG_1450.JPG";
+		a[2]="IMG_1451.JPG";
+		a[3]="IMG_1440.JPG";
+		a[4]="IMG_1441.JPG";
+		a[5]="IMG_1442.JPG";
+		a[6]="IMG_1443.JPG";
+		a[7]="IMG_1444.JPG";
+		a[8]="IMG_1445.JPG";
+		a[9]="IMG_1446.JPG";
+		a[10]="IMG_1447.JPG";
+		
+		
+
+var i=0;
+
+
+function f(){
+			document.image.src=a[i++];
+			if (i==10)
+            i=0;
+			}
+			
+			function f1(){
+			window.setInterval("f()",1500);
+			}
+</script>
+</head>
+
+<body onLoad="f1()">
+<br /><br />
+
+<img src="IMG_1449.JPG" name="image" alt=""  height="500" width="700">
+
+</body>
+</html>

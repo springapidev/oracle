@@ -1,0 +1,276 @@
+
+1)Choose the built-in object:
+a) Password
+b) Math
+c) Link
+d) Hidden
+Show Answer b
+
+2)Choose the object(s) associated with the onMouseOut event handler:
+a) Layer
+b) Window
+c) Both
+d) Neither
+Show Answer a
+
+3)Which is not a package of the Java class hierarchy available in Navigator?
+a) netscape
+b) javasoft
+c) sun
+d) java
+Show Answer b
+
+4)You unsuccessfully use navigator.preferences() to alter browser preferences. How come?
+a) You're using export instead of import.
+b) You're using import instead of export.
+c) That's the wrong method.
+d) You're not using a signed script.
+Show Answer d
+
+5)Choose the object(s) associated with the onFocus event handler:
+a) Password
+b) Hidden
+c) Both
+d) Neither
+Show Answer a
+
+6)How do you delete a cookie?
+a) You can't. They're valid until they expire.
+b) Overwrite it with an expiry date in the past.
+c) escape() the value of the path attribute.
+d) unescape() the value of the path attribute.
+Show Answer b
+
+7)Choose the object(s) associated with the onKeyPress event handler:
+a) Document 
+b) Layer
+c) Both
+d) Neither
+Show Answer a
+
+8)Choose the best pattern for the string: 840-21-3688
+a) /\d+-\d{2,}-?\d*/
+b) /\w+-\w+-\w+/
+c) /\d+\d+\d+/
+d) /\d+-\d?-\d+/
+Show Answer a
+
+9)How would you add a property to an object class?
+a) With the prototype() method.
+b) With the prototype property.
+c) Sorry. Can't be done.
+d) With the this object.
+Show Answer b
+
+10)What's the default setting for the expires attribute of the document.cookie property?
+a) The duration of the browser session.
+b) The duration the current document stays loaded.
+c) Twenty-four hours from the time the cookie is set.
+d) There is no default setting.
+Show Answer a
+
+11)Which best describes JavaScript?
+a) a low-level programming language.
+b) a scripting language precompiled in the browser.
+c) a compiled scripting language.
+d) an object-oriented scripting language.
+Show Answer d
+
+12)After clicking on a link, your main browser window spawns a small new window and 
+writes some text to it. However, when viewing both window page sources, the small window
+page source is identical to that of the large. How can this be?
+a) The function writing to the new window didn't close the document stream.
+b) Gimme a break. It'd never happen.
+c) Windows receive the source code of the window that wrote to them.
+d) Since the new window has no filename, it receives the source code of its parent.
+Show Answer a
+
+13) Which would JavaScript assign to an uninitialized variable?
+a) NaN
+b) null
+c) undefined
+d) false
+Show Answer  c
+
+14)How would you randomly choose an element from an array named myStuff if the number 
+of elements changes dynamically?
+a) randomElement = myStuff[Math.floor(Math.random() * myStuff.length)];
+b) randomElement = myStuff[Math.ceil(Math.random() * myStuff.length)];
+c) randomElement = myStuff[Math.random(myStuff.length)];
+d) randomElement = Math.random(myStuff.length);
+Show Answer a
+
+15)What's the default string passed to document.open()?
+a) application/pdf
+b) image/gif
+c) text/html
+d) text/plain
+Show Answer c
+
+16)Which would JavaScript assign to an uninitialized array element?
+a) NaN
+b) null
+c) undefined
+d) false
+Show Answer b
+
+17)Select the property that doesn't hold a Boolean value:
+a) mimeType.enabledPlugin
+b) option.defaultSelected
+c) form.reset.enabled
+d) image.complete
+Show Answer a
+
+18)With the advent of JavaScript1.2, the String.replace() method facilitates character 
+replacement in strings. How would you remove every 'x' from the variable myString 
+without the new features of 1.2?
+a) for(var i = 0; i < myString.length; i++) { if(myString.charAt(i) != 'x') 
+	{ myStringCopy += myString.charAt(i); } }myString = myStringCopy;
+b) var myArray = myString.split('x'); myString = myArray.join('');
+c) It wasn't possible until now. Thanks JavaScript1.2!
+d) The first two both work fine.
+Show Answer d
+
+19)You've embedded the document.write() method to write some text within a pair of 
+<td></td> table tags. Upon loading the file, however, you get some garbled junk on 
+the page where that text should be. What browser are you most likely using?
+a) MSIE 2.x
+b) Netscape Navigator 3.x
+c) Netscape Navigator 4 beta 2
+d) MSIE 3.02
+Show Answer b
+
+20)Which is not considered a JavaScript operator?
+a) new
+b) this
+c) delete
+d) typeof
+Show Answer b
+
+21)What's wrong with this: var charConvert = toCharCode('x');
+a) toCharCode() is a bogus method.
+b) Nothing. I use it all the time.
+c) toCharCode accepts only numbers.
+d) toCharCode takes no arguments.
+Show Answer a
+
+22)Choose the object(s) associated with the onUnLoad event handler:
+a) Window
+b) Layer
+c) Both
+d) Neither
+Show Answer a
+
+23)Which is not a built-in function?
+a) parseInt()
+b) exec()
+c) eval()
+d) parseFloat()
+Show Answer b
+
+24)Choose the object(s) associated with the onBlur event handler:
+a) Image
+b) Document
+c) Both
+d) Neither
+Show Answer d
+
+25)Seek the truth about setTimeOut():
+a) The statement(s) it executes run(s) only once.
+b) It pauses the script in which it is called.
+c) clearTimeOut() won't stop its execution.
+d) The delay is measured in hundredths of a second.
+Show Answer a
+
+26)What happens to cookies.txt data if the file exceeds the maximum size?
+a) Your script automatically generates a run-time error.
+b) Your script automatically generates a load-time error.
+c) All processes using document.cookie are ignored.
+d) The file is truncated to the maximum length.
+Show Answer d
+
+27)Consider an HTML form with a checkbox and a text field. When data is entered and 
+the return key is pressed, the data seems to be lost before the user can click on the 
+button that calls the processing function. How do you correct this?
+a) Add a TYPE=HIDDEN INPUT to the form
+b) Trap the return keypress and return (null)
+c) Add 'return false' to onsubmit="..." in the FORM tag
+d) Instruct the user not to press the Return key.
+Show Answer c
+
+28)What allows JavaScript to access methods and properties of a Java applet?
+a) The Java console
+b) LiveConnect
+c) LiveWire
+d) LiveWire Pro
+Show Answer b
+
+29)Choose the read-only property:
+a) images[index].src
+b) layers[index].right
+c) layers[index].parentLayer
+d) links[index].target
+Show Answer c
+
+30)Choose the built-in JavaScript object:
+a) Image
+b) mimeTye
+c) Password
+d) Area 
+Show Answer a
+
+31)Which cookies.txt filesize is too large?
+a) 1k
+b) 3k
+c) 5k
+d) There is no theoretical limit.
+Show Answer c
+
+32)Which property returns the number of arguments expected by a function?
+a) arguments.length
+b) Function.caller
+c) Function.display
+d) Function.arity
+Show Answer d
+
+33)What HTML attribute allows a Java applet explicit permission to access JavaScript 
+objects and functions?
+a) MAYSCRIPT
+b) CODE
+c) PARAM
+d) CODEBASE
+Show Answer a
+
+34)Choose the external object:
+a) Date
+b) Option
+c) Layer
+d) Checkbox
+Show Answer d
+
+35)Choose another way to write x ? a = b : a = c
+a) if ('x') { a = b; } else { a = c; }
+b) if (x) { a = c; } else { a = b; }
+c) x : a = c ? a = b
+d) All of these are bogus.
+Show Answer d
+ 
+36)Choose the object(s) associated with the onUnLoad event handler:
+a) Window
+b) Layer
+c) Both
+d) Neither
+Show Answer a
+
+37)navigator.platform indicates 'Win16', but you are running Win NT. What gives
+a) Impossible. This is a sick joke.
+b) The userAgent property reflects the correct OS.
+c) The property can be modified.
+d) navigator.platform shows the OS for which the browser was compiled.
+Show Answer d
+
+Answers
+(1) b 	 (2) a 	 (3) b 	 (4) d 	 (5) a 	 (6) b 	 (7) a 	 (8) a 	 (9) b 	 (10) a 
+(11) d 	 (12) a 	 (13) c 	 (14) a 	 (15) c 	 (16) b 	 (17) a 	 (18) d 	 (19) b 	 (20) b 
+(21) a 	 (22) a 	 (23) b 	 (24) d 	 (25) a 	 (26) d 	 (27) c 	 (28) b 	 (29) c 	 (30) a 
+(31) c 	 (32) d 	 (33) a 	 (34) d 	 (35) d 	 (36) a 	 (37) d 

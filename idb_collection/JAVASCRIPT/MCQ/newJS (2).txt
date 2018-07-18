@@ -1,0 +1,568 @@
+
+
+1. JavaScript is a web programming language, that is, 
+a language that enables you, the designer of your website, 
+to control how a web page -----.
+
+a. behaves
+b. presentation
+c. static content
+Ans: a
+
+2. To insert a JavaScript script in an HTML page, 
+you use the <script> ... </script> tag. Don't 
+forget the closing </script> tag!.for Embed which one is true .
+
+a. script goes to body
+b. script goes to head
+c. script goes to oudtside body and head.
+
+Ans: a,b
+
+3. Need to apply the same code to several pages in your website, 
+then packaging your JavaScript code into a separate file is your 
+best bet how you import to you page.
+
+a. <script type="text/javascript" src="yourjavascript.js"></script>
+b. <script type="text/javascript" href="yourjavascript.js"></script>
+c. <link rel="style" href="yourjavascript.js"/>
+
+ans: a 
+
+4. JavaScript is a sequence of statements to be executed 
+by the browser.which one is not true for js
+
+a. JavaScript is case sensitive 
+b. JavaScript define variable by type.  
+c. In javaScribt must use semicolon for each statement.
+
+Ans: b,c
+
+5. JavaScript variables are used to hold values or expressions.
+A variable can have a short name, like x, or a more descriptive name. 
+which is rule of nameing variable?
+
+a. Variable names are case sensitive (y and Y are two different variables)
+b. Variable names must begin with a letter, the $ character, or the underscore character
+c. Each character after the first character can be a letter, an ( _ ) underscore, 
+	a ( $ ) dollar sign, or a number
+d. none of the
+e. all of them
+ 
+Ans: e
+
+6. A variable declared within a JavaScript function becomes LOCAL and can only 
+be accessed within that function.Variables declared outside a function become 
+GLOBAL, and all scripts and functions on the web page can access it.
+which one is true for Local variable .
+
+a. Local variables are deleted before the function is completed.
+b. Local variables are deleted as soon as the function is completed.
+c. Local variables are deleted when you close the page.
+
+Ans: b
+  
+7. <script > 
+      var salary; docment.write(salary);
+   </script>
+   what is the result?
+a. undefined with no error
+b. undefined with  error
+c. blank or 0 
+
+Ans: a
+
+8. <script > 
+       docment.write(salary);
+   </script>
+   what is the result?
+a. undefined with no error
+b. undefined with  error
+c. blank or 0 
+
+Ans: b
+
+9. var x=10; y=++x +20; what is the value of x,y?
+
+a. 10 30
+b. 11 31
+c. 11 20
+
+ans: b
+
+10. var x=10; y=20 z=30; what is the  expression for the output 3030 ?
+
+a. x+z+y
+b. x+''+y+z
+c. x+y+''+z
+
+Ans: c
+
+11. var x=10; y=20 z='30'; var result=x+y*z;
+  
+a. 610
+b. 3030
+c. NaN
+
+Ans: a
+
+12. var x=10; y=20 z='30 Tk'; var result=x+y*z;
+  
+a. 610
+b. 3030
+c. NaN
+
+Ans: c
+
+13. The ( = ) operator is used to 
+
+a. It is not a sign for equality.
+b. do stand for equality, compares only values
+c. do stand for equality,compares both values and data type
+
+Ans: a
+
+14. what is the result of  total
+	unit=10;
+	price='30.50 taka';
+        tota=10*parseInt(price);
+
+a. nan
+b. 300
+c. 305
+
+Ans: b
+
+15. How maney literal of Javascript
+
+a. 5
+b. 8
+c. 7
+
+Ans: c
+
+16. How one is not literal of Javascript
+
+a. Char
+b. number
+c. undefined
+
+Ans: a
+
+17. whitch one is not number literal 
+
+a. 20
+b. oxff2345
+c. 0xffwew
+d. 459e-1
+
+Ans: c
+
+
+18. what is the output 
+    var age=16
+    if(age<18 );
+     document.write("under age ");
+     document.write("well come")	
+
+a. under age well come
+b. under age 
+c. well come
+
+ans: a
+
+19. what is the output 
+    var age=16
+    if(age<18 )
+     document.write("under age ");
+     document.write("well come")	
+
+a. under age well come
+b. under age 
+c. well come
+
+ans: a
+
+20. what is the output 
+    var age=16
+    if(age<18 );
+     document.write("under age ");
+    else  
+    document.write("well come")	
+
+a. under age well come
+b. under age 
+c. well come
+d. Syntex error
+
+Ans: d
+
+
+21. var ch=-10;
+    switch(ch){
+	case 1 : ch++; break;
+	case 2 : ch++; break;
+	default: ch++; 
+        case 3 : ch++; break;
+	case 4 :	ch++;
+	}
+	document.write(ch)
+a. -8
+b.  8
+c. 10
+
+Ans: a
+
+22. For the following code fregmant  
+    for(i=10;i<3;i++)
+    document.write(i);
+
+a. 12
+b. No output
+c. 10 
+
+Ans:b
+
+ 
+23. For the following code fregmant  
+    for(i=10;i<3;i++)
+    document.write(i);
+
+a. 12
+b. No output
+c. 10 
+
+Ans:b
+
+24. For the following code fregmant 
+    for(i=1;i<4;i++){
+       if (i<2) continue;    
+    document.write(i);
+    }
+
+a. 12
+b. 23
+c. 34
+
+Ans: b
+
+25. For the following code fregmant 
+
+<script >
+ out:
+ for(j=1;j<=3;j++){
+ for(i=1;i<=j;i++){
+ if (i==j) continue out;    
+    document.write(i);
+ }
+}
+</script>
+
+a. 122
+b. 112
+c. 113
+
+ans: b
+
+26. i=10;
+    while(i<=10){
+    i++;
+    }
+   how maney times increase  
+a. 1
+b. 10
+c. 0 times.
+    
+ans: c
+
+
+27. i=10;
+    while(i>10){
+    i--;
+    }
+how maney times repeat  
+
+a. 1
+b. 10
+c. 0 times.
+d. more then 10 times
+    
+ans: c
+
+
+28. i=10;
+    do{
+    i--;
+    }while(i>10)
+how maney times repeat  
+
+a. 1
+b. 10
+c. 0 times.
+d. more then 10 times
+    
+ans: a
+
+
+29. var i=0;
+
+for (i=0;i<=10;i++)
+  {
+  if (i==3)
+    {
+    break;
+    }
+  document.write("The number is " + i);
+  document.write("<br />");
+  }
+
+how maney times repeat  
+
+a. 1
+b. 10
+c. 0 times.
+d. 3
+
+Ans: d
+
+30. how function define As Data-
+
+a. var f=new Function("Exp1" ,"Exp2","returm Exp1+Exp2");
+b. var f=new function("Exp1" ,"Exp2","returm Exp1+Exp2");
+c. var f=function(Exp1 ,Exp2){returm Exp1+Exp2};
+d. var f=Function("Exp1" ,"Exp2","returm Exp1+Exp2");
+
+Ans:a,c
+
+31. How do you get user reaction form JS-
+
+a. write ,open,close
+b. prompt,alert,conform
+c. input,text,focus
+
+Ans:b
+
+32. how do you declear Object ?
+
+a. var person={fname:"John",lname:"Doe",age:25}; 
+b. var person =new Object();
+c. var p=Object();
+
+Ans: a,c
+
+33. what is the property of function 
+
+a. functionName.length
+b. functionName.args
+c. functionName.length()
+
+Ans: a,b
+
+34. screen has some read only prorperty. which one is not screen properties
+a. screen.height
+b. screen.colorDept
+c. screen.color
+
+Ans: c
+
+35. how do you delclear an Array?
+
+a. var data=new Array();data[0]=20;data[1]=30;data[2]=25;
+b. var data=new Array(20,30,25);
+c. var data=(20,30,25);
+
+Ans:a,b
+
+36. The typeof operator is unary, which return
+
+a. only object
+b. only String
+c. object, String, boolean
+
+Ans: c
+
+37. var family=new Array("Dad","Mom","Sue","Kris");
+    delete family[2];
+
+a. Dad , Mom, Kris
+b. Dad , Mom, Sue, Kris
+c. Dad , Sue, Kris
+d. Sue, Kris
+
+Ans: a
+
+38. The setInterval() method repects a script action every so many milliseconds
+The statement is-
+a. True
+b. False
+
+Ans: a
+
+39. Which is not window method-
+
+a. open()
+b. close()
+c. moveBy()
+d. resizeTo()
+e. None
+
+Ans: e
+
+40. The Date object return 
+
+a. date
+b. time
+c. date and time
+d. None
+
+Ans: c
+
+41. toUpperCase() method transforms a string to all 
+
+a. lowercase
+b. uppercase
+c. no change
+d. toString
+
+Ans: b
+
+42.Which range Milliseconds expressed
+
+a. 0 to 59
+b. 0 to 999
+c. 0 to 23
+d. a, b
+
+Ans: b
+
+43. Which is correct syntex about Frame?
+
+a. parent.frames[2]
+b. parent.frames[0].name
+c. a, b
+d. None
+
+Ans: c
+
+44. The history object (previously visited) is a property of the______object.
+
+a. window
+b. String
+c. properties
+d. HTML body
+
+Ans: a
+
+45.Which are HTML and JavaScript catagories?
+
+a. Mouse events
+b. Key events
+c. Form events
+d. page/window/image events
+e. above all
+
+Ans: e
+
+46. Seven mouse events can be used to trigger a JavaScript program. 
+Which is not following them-
+
+a. onDblClick
+b. onMouseOver
+c. onMouseLost
+d. None
+
+Ans: c
+
+47. JavaScript recognizes key events-
+a. onKeyPress
+b. onKeyDown
+c. onKeyUp
+d. all
+
+Ans: d
+
+48. HTML element in Buttons are
+
+a. <input type=button>
+b. <input type=checkbox>
+c. <input type=image>
+d. <input type=reset>
+e. a and d
+f. a,b,c,d
+
+Ans: f
+
+49. parseInt() used for convert which data type?
+
+a. String
+b. Integer
+c. both
+d. None
+
+Ans: b
+
+50. textArea container which has width and height can be used for
+
+a. input source of data
+b. output source of data
+c. a and b
+d. None
+
+Ans: c
+
+51. Jobs of Dynamic HTML?
+
+a. move object
+b. change object
+c. a and b
+
+Ans: c
+
+52. Computer monitor screen measured by
+
+a. in
+b. px
+c. pc
+d. cm
+
+Ans: b
+
+53. Cookie is a small text file.
+
+a. False
+b. True
+
+Ans: b
+
+54. All personal information stored in cookie file when we browsing.
+
+a. True
+b. false
+
+Ans: a
+
+55. i=10;
+    while(i<=10){
+    i--;
+    }
+ how maney times repeat  
+
+a. 1
+b. 10
+c. 0 times.
+d. more then 10 times
+
+Ans: d
+
+56.  the method of Array?
+
+a. var data=new Array();data[0]=20;data[1]=30;data[2]=25;
+b. var data=new Array(20,30,25);
+c. var data=(20,30,25);
+
+Ans:a,b
+
+
+
+      
+  

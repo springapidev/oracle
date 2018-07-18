@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>test R-18</title>
+<script language="javascript">
+	function intcal(){
+		var interest=0;
+		var total=0;
+		
+		var amount=parseFloat(document.f1.amount.value);
+		var rate=parseFloat(document.f1.rate.value);
+		var year=parseFloat(document.f1.year.value);
+		
+		var interest=(amount*year*rate/100);
+		var total=(amount+interest);
+			document.f1.interest.value=interest;
+			document.f1.total.value=total;	
+		}
+</script>
+</head>
+
+<body bgcolor="#CCCCCC">
+<form name='f1'>
+
+<pre>
+Amount:		<input type="text" name="amount"/>
+
+Rate:		<input type="text" name="rate"/>
+
+Year:		<input type="text" name="year"/>
+
+		<input type="button" value="Calculation" onClick="intcal()"/>
+        
+Interest:	<input type="text" name="interest"/>
+
+Total:		<input type="text" name="total"/>
+
+		<input type="reset"/>
+</pre>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>salesForm Document</title>
+<script type="text/javascript" language="javascript">
+	function show()
+	{
+		var date=new Date();
+		var sdate=(date.getMonth()<=9?'0':'')+(date.getMonth()+1)+'-'+(date.getDate()<=9?'0':'')+(date.getDate())+"-"+(date.getYear()+1900);
+		document.getElementById('dt').value=sdate;
+	}
+	function get()
+	{
+		var selval=document.getElementById('sel').value;
+		item=selval.split(',');
+		document.getElementById('price').value=item[0];
+		document.getElementById('tax').value=item[1];
+		document.getElementById('dis').value=item[2];
+	}
+	function calculation()
+	{
+		var uni=parseFloat(document.getElementById('unit').value);
+		var pri=parseFloat(document.getElementById('price').value);
+		var ta=parseFloat|(document.getElementById('tax').value);
+		var disc=parseFloat(document.getElementById('dis').value);
+		var tot=(pri+ta-disc)*uni;
+		document.getElementById('total').value=tot;	
+	}
+	i=0;
+	var gt=0;
+	function adddata()
+	{var selval=document.getElementById('sel');
+	var selvalue=selval.options[selval.selectedIndex].text;
+		var row=document.getElementById('table').insertRow(++i);
+		var col0=row.insertCell(0);
+		col0.innerHTML=document.getElementById('dt').value;
+		var col1=row.insertCell(1);
+		col1.innerHTML=document.getElementById('sln').value;
+		var col2=row.insertCell(2);
+		col2.innerHTML=document.getElementById('name').value;
+		var col3=row.insertCell(3);
+		col3.innerHTML=selvalue;
+		var col4=row.insertCell(4);
+		col4.innerHTML=document.getElementById('price').value;
+		var col5=row.insertCell(5);
+		col5.innerHTML=document.getElementById('tax').value;
+		var col6=row.insertCell(6);
+		col6.innerHTML=document.getElementById('dis').value;
+		var col7=row.insertCell(7);
+		col7.innerHTML=document.getElementById('unit').value;
+		var col8=row.insertCell(8);
+		col8.innerHTML=document.getElementById('total').value;
+		
+		gt+=parseFloat(document.getElementById('total').value);
+		document.getElementById('gtotal').value=gt;
+		
+	}
+</script>
+</head>
+
+<body bgcolor="#CCCCCC" onLoad="javascript:window.setInterval('show()')">
+
+<form>
+<pre>
+	Date		: <input type="text" id="dt"/>
+    
+	Serial No	: <input type="text" id="sln"/>
+    
+	Customer Name	: <input type="text" id="name"/> 
+    
+	Product Name	: <select id="sel" onChange="get()">
+	<b><option>Choose One</option></b>
+    <option value="10000,500,500">Monitor</option>
+    <option value="1000,50,50">RAM</option>
+    <option value="7000,350,500">Hard Disk</option>
+    <option value="15000,750,1000">Processor</option>
+    <option value="5000,250,500">Motherboard</option>
+    </select> 
+     
+	Price		: <input type="text" id="price"/>
+	
+	Tax		: <input type="text" id="tax"/>
+    
+	Discount	: <input type="text" id="dis"/>
+    
+	Units		: <input type="text" id="unit" onBlur="calculation()"/>
+    
+	Total		: <input type="text" id="total"/>
+    
+		<input type="button" value="Add" id="add" onClick="adddata()"/>
+         
+	
+</form>
+<table border="2" width="100%" id="table">
+<tr>
+<th>Date</th>
+<th>Serial No</th>
+<th>Customer Name</th>
+<th>Product Name</th>
+<th>Price</th>
+<th>Tax</th>
+<th>Discount</th>
+<th>Units</th>
+<th>Total</th>
+</tr>
+</table>
+
+Grand Total	: <input type="text" id="gtotal"/> 
+			 
+            
+</pre>   
+</body>
+</html>

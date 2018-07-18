@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+
+<script type="text/javascript">
+function sum(){
+
+var a=parseInt(document.f.num1.value);
+var b=parseInt(document.f.num2.value);
+	document.f.result.value=(a+b);
+	
+	}
+
+function minus(){
+
+var a=parseInt(document.f.num1.value);
+var b=parseInt(document.f.num2.value);
+	document.f.result.value=(a-b);
+
+
+
+
+	}
+
+function mul(){
+
+var a=parseInt(document.f.num1.value);
+var b=parseInt(document.f.num2.value);
+	document.f.result.value=(a*b);
+
+}
+
+
+function div(){
+
+var a=parseInt(document.f.num1.value);
+var b=parseInt(document.f.num2.value);
+	document.f.result.value=(a/b);
+
+}
+
+</script>
+</head>
+
+<body>
+
+	<pre>
+	<form action="" method="get" name="f">
+
+	Num 1<input name="num1" type="text" value="0"  size="10"/>
+
+	Num 2<input name="num2" type="text" value="0"  size="10"/>
+
+	
+
+	<input name="" type="button" value="+" onclick="sum()"/>
+
+	<input name="" type="button" value="-" onclick="minus()"/>
+
+	<input name="" type="button" value="*" onclick="mul()"/>
+
+	<input name="" type="button" value="/" onclick="div()"/>
+
+
+	Result<input name="result" type="text"/>
+
+
+	</form>
+	</pre>
+
+	</body>
+	</html>

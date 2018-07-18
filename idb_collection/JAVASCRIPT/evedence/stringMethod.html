@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>stringMethod Document</title>
+<script language="javascript">
+	var str="This is a book";
+	document.write('2nd position charecter '+str.charAt(1));
+	document.write('</br>2nd charecter code '+str.charCodeAt(1));
+	
+	var word=str.split(' ');
+	document.write('</br>Word = '+word);
+	document.write('</br>count = '+word.length);
+	document.write('</br>Index of '+ str.indexOf('i')+' and last index of '+str.lastIndexOf('i'));
+	document.write('</br>'+str.big().bold().italics().blink().fontcolor('red'));
+	document.write('</br>'+str.match('is'));
+	
+	document.write('</br>'+new Date());	
+	
+</script>
+</head>
+
+<body>
+</body>
+</html>
