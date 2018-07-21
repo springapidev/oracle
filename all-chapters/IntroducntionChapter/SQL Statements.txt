@@ -1,0 +1,23 @@
+SQL STATEMENTS
+===========================================================================================
+Data Manipulation Language (DML)
+    Data manipulation language (DML): Retrieves data from the database, enters new rows, changes existing rows, and removes unwanted rows from tables in the database, respectively. Collectively known as data manipulation language.
+    1. SELECT 2. INSERT 3. UPDATE 4. DELETE and 5. MERGE
+
+============================================================================================
+
+Data Definition Language (DDL)
+    Data definition language (DDL): Sets up, changes, and removes data structures from tables. Collectively known as data definition language.
+    1. CREATE 2. ALTER 3. DROP 4. RENAME 5. TRUNCATE and 6. COMMENT
+
+============================================================================================
+
+Data Control Language (DCL)
+    Data control language (DCL): Gives or removes access rights to both the Oracle database and the structures within it.
+    1. GRANT and 2. REVOKE
+
+============================================================================================
+
+Transaction Control
+    Transaction control: Manages the changes made by DML statements. Changes to the data can be grouped together into transactions.
+    1. COMMIT 2. ROLLBACK and 3. SAVEPOINT

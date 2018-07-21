@@ -1,0 +1,14 @@
+@charset "utf-8";
+#container{
+	width:600px;
+	height:550px;
+	background-color:pink;
+	margin:0 auto;
+	padding: 5px;
+	border: 2px solid red;
+	}
+dt{
+	background-color:wheat;
+	font-size:20px;
+	font-weight:bold;
+	}

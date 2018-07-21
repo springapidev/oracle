@@ -1,0 +1,196 @@
+******************
+MD. SHAMIM SARKER
+IDB-BISEW
+******************
+
+Oracle SQL Clause
+-----------------
+	SELECT
+	FROM
+	AS
+	DISTINCT
+	DESCRIBE
+	WHERE
+	ORDER BY
+	DESC
+	&
+	&&
+	SYSDATE
+	GROUP BY
+	HAVING
+	NATURAL JOIN
+	JOIN
+	USING
+	ON
+	LEFT OUTER JOIN
+	RIGHT OUTER JOIN
+	FULL OUTER JOIN 
+	CROSS JOIN 
+	
+
+Case Manipulation Function
+--------------------------
+	LOWER
+	UPPER
+	INITCAP
+	
+Character Manipulation Function
+-------------------------------
+	CONCAT 
+	SUBSTR
+	INSTR
+	LENGTH
+	LPAD
+	RPAD
+	TRIM
+	REPLACE
+	
+Number Function
+---------------
+	ROUND
+	TRUNC
+	MOD
+	
+Date Function
+-------------
+	MONTHS_BETWEEN
+	ADD_MONTHS
+	NEXT_DAY
+	LAST_DAY
+	
+Conversion Function
+-------------------
+	TO_CHAR
+	TO_NUMBER
+	TO_DATE
+
+Conversion Date Element
+-----------------------
+	YYYY
+	YY
+	YEAR
+	MM
+	MONTH
+	MON
+	DD
+	DAY
+	DY
+	FM
+	SPTH
+	AM
+	PM
+	HH OR HH12
+	HH24
+	MI
+	SS
+	SSSSS
+
+Conversion Number Element
+-------------------------
+	9
+	0
+	$
+	.
+	,
+
+General Function
+----------------
+	NVL
+	NVL2
+	NULLIF
+	COALESCE
+	
+Conditional Expression Method
+-----------------------------
+	CASE
+		WHEN
+		THEN
+		ELSE
+		END
+	DECODE
+	
+Group Function
+--------------
+	AVG
+	COUNT
+	MAX
+	MIN
+	STDDEV
+	SUM
+	VARIANCE
+
+Arithmetic Operator
+-------------------
+	+
+	-
+	*
+	/
+
+Concatenation Operator
+----------------------
+	||
+	
+Comparision Operator
+--------------------
+	=
+	>
+	<
+	>=
+	<=
+	<>
+	!=
+	^=
+	BETWEEN....AND....
+	IN
+	LIKE
+	IS NULL
+	
+Logical Operator
+----------------
+	AND
+	OR
+	NOT
+	
+Multiple Row Operator
+---------------------
+	IN
+	ANY
+	ALL
+	
+Set Operator
+------------
+	UNION
+	UNION ALL
+	INTERSECT
+	MINUS
+
+Data Manipulation Language
+--------------------------
+	SELECT
+	INSERT
+	UPDATE
+	DELETE
+	MERGE
+
+Keyword
+-------
+	INSERT INTO
+	VALUE
+	
+
+Some Important Code For SQL Plus
+--------------------------------
+	alter user hr identified by hr account unlock;
+	
+	select tname
+	from tab;
+	
+	show all;
+	show pagesize;
+	show linesize;
+	set pagesize 500;
+	set linesize 200;
+	connect;
+	conn system/system;
+	conn hr/hr;
+	
