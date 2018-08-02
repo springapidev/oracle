@@ -1,0 +1,39 @@
+1.create an user name eid
+2. create following tables;
+	A. department
+		Fields: dep_id, department_name	
+	B. employee
+		Fields: emp_id, emp_name, mobile unique, salary more than 10000,
+		joining_date using default, country default as BD,
+		dep_id Foreign Key with department
+	C. Show Both table Structres.
+3. Create sequence for
+	A. department incremented by 10
+	B. employee incremented by 5
+	C. Show created sequence list.
+	
+4. Department table:
+	A. show index
+	B. create an index for the column department_name
+	C. show index again.
+	D.Insert 3 data's to departments for ADMIN, SOFTWARE and MARKETING 
+	  using Sequence.
+	E. create view for department
+	F. Show View List
+	G. create synonym for table and View
+	H. retrieve data from view, table synonym and view synonym.
+5. Employee table:
+	A. show index
+	B. create an index for the column emp_name
+	C. show sequence again.
+	D.Insert 5 data's to employee 
+	  using sequence.
+	E. create view for employee
+	F. Show View List
+	G. create synonym for table and View
+	H. retrieve data from view, table synonym and view synonym.
+	
+6.  A. update MARKETING department to SALES
+	B. add new column at employee table like email unique
+	C. update first row of employee table with department SALES.
+	D. 
