@@ -1,0 +1,5 @@
+1. Open SQL command Line Tool
+2. spool D:\test.txt
+3. Press Enter
+4. Complete your all necessary task
+5. spool off;
