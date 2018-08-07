@@ -1,0 +1,76 @@
+Playing with User, Privileges and Role
+Step-1: Connect as sysdba like bellow
+-> connect sys as sysdba
+Step-2: create an user 
+-> create user xyz identified by xyz;
+Step-3: Try to login using user 'xyz', and you will see error, because 
+		you do not have enough privileges/permission
+Step-4: Now connect AGAIN as sysdba
+-> connect sys as sysdba
+Step-5: Give privileges/permission to user 'XYZ'
+-> grant create session to xyz
+Step-6: Now Try to Connect using user 'XYZ' and you will be able to connect
+->connect
+->username: xyz
+->password: xyz
+Step-7:Try to create a table using user 'xyz', and you will see error, because 
+		you do not have enough privileges/permission
+Step-8: Now connect AGAIN as sysdba
+-> connect sys as sysdba
+Step-9:  Give privileges/permission to user 'XYZ' for table create
+-> grant create table to xyz
+Step-10: Try to create table, if you see an error asking you insufficient 
+		table space, then.....Try connect AGAIN as sysdba 
+->alter user xyz quota 500m on system;
+Step-11: Now connect AGAIN as sysdba
+-> create table test(id number(5) primary key,name varchar2(15));
+
+=====================Playing with User <- Role <- Privileges ===================
+Step-1: connect AGAIN as sysdba
+-> connect sys as sysdba
+Step-2: create user xyz2 identified by xyz2;
+Step-3: Now create a role like manager
+-> create role manager;
+Step-4: Give privileges/permission to role manager
+-> grant create session, create table, create view to manager;
+Step-5: Now add role manager to xyz2
+-> grant manager to xyz2;
+Step-4: for table space---------
+->alter user xyz2 quota 500m on system;
+Step-6: Now connect/login as xyz2
+->connect
+->username: xyz2
+->password: xyz2
+Step-7: Now create table, insert data, create view and check view
+Step-8: Now connect AGAIN as sysdba
+-> connect sys as sysdba
+Step-9: Now we shall remove create view privileges/permission from user xyz2
+-> revoke create view from manager;
+
+======================Display Privileges ===========================
+SELECT * FROM USER_SYS_PRIVS; 
+SELECT * FROM USER_TAB_PRIVS;
+SELECT * FROM USER_ROLE_PRIVS;
+
+=================Give Permission to other User============================
+Step-1:  Now connect as sysdba
+-> connect sys as sysdba
+Step-2: grant select on xyz.test to xyz2 with grant option;
+Step-3: connect as xyz2 and try to view user xyz's table test data.
+-> select * from xyz.test;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
