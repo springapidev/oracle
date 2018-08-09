@@ -1,0 +1,345 @@
+SQL> connect
+Enter user-name: jp
+Connected.
+SQL> show user;
+USER is "JP"
+SQL> select table_name from user_tables;
+
+TABLE_NAME                                                                      
+------------------------------                                                  
+TEST                                                                            
+JAPAN                                                                           
+JAPANX                                                                          
+HIHI                                                                            
+XYZ                                                                             
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(50)
+
+SQL> alter table test add (email varchar2(50));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(50)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> alter table test modify (last_name varchar2(20));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> alter table test drop column email;
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table test add (email number(11));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              NUMBER(11)
+
+SQL> alter table test modify (email varchar2(50));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> alter table test add (age number(3),phone varchar2(11));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ AGE                                                NUMBER(3)
+ PHONE                                              VARCHAR2(11)
+
+SQL> alter table test add (country varchar2(51));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ AGE                                                NUMBER(3)
+ PHONE                                              VARCHAR2(11)
+ COUNTRY                                            VARCHAR2(51)
+
+SQL> alter table test modify (country varchar2(51) default 'BD');
+
+Table altered.
+
+SQL> show user
+USER is "JP"
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ AGE                                                NUMBER(3)
+ PHONE                                              VARCHAR2(11)
+ COUNTRY                                            VARCHAR2(51)
+
+SQL> alter table test set unused (age);
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ PHONE                                              VARCHAR2(11)
+ COUNTRY                                            VARCHAR2(51)
+
+SQL> alter table test drop unused columns;
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ PHONE                                              VARCHAR2(11)
+ COUNTRY                                            VARCHAR2(51)
+
+SQL> create table kk(id number(3), name varchar2(20));
+
+Table created.
+
+SQL> alter table kk modify id primary key;
+
+Table altered.
+
+SQL> alter table kk modify name varchar2(20) not null;
+
+Table altered.
+
+SQL> alter table kk modify name varchar2(22) not null;
+alter table kk modify name varchar2(22) not null
+                      *
+ERROR at line 1:
+ORA-01442: column to be modified to NOT NULL is already NOT NULL 
+
+
+SQL> alter table kk modify name varchar2(22);
+
+Table altered.
+
+SQL> alter table kk modify name varchar2(22) unique;
+
+Table altered.
+
+SQL> alter table kk modify name varchar2(22) not null;
+alter table kk modify name varchar2(22) not null
+                      *
+ERROR at line 1:
+ORA-01442: column to be modified to NOT NULL is already NOT NULL 
+
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(5)
+ LAST_NAME                                          VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+ PHONE                                              VARCHAR2(11)
+ COUNTRY                                            VARCHAR2(51)
+
+SQL> describe kk;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(22)
+
+SQL> alter table kk add (test_id number(5));
+
+Table altered.
+
+SQL> describe kk;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(22)
+ TEST_ID                                            NUMBER(5)
+
+SQL> alter table kk add constraint test_kk_fk foreign key(test_id) references test(id);
+
+Table altered.
+
+SQL> alter table kk modify constraint test_kk_fk foreign key(test_id) references test(id) on delete cascade;
+alter table kk modify constraint test_kk_fk foreign key(test_id) references test(id) on delete cascade
+                                            *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table kk modify test_id on delete cascade;
+alter table kk modify test_id on delete cascade
+                              *
+ERROR at line 1:
+ORA-00902: invalid datatype 
+
+
+SQL> alter table kk modify test_id number(5) on delete cascade;
+alter table kk modify test_id number(5) on delete cascade
+                                        *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> create table dep(id number(3) primary key,dep_name varchar2(20));
+
+Table created.
+
+SQL> insert into dep(id, dep_name) values(10, 'Admin');
+
+1 row created.
+
+SQL> insert into dep(id, dep_name) values(20, 'Software');
+
+1 row created.
+
+SQL> create table emp(id number(3) primary key,dep_name varchar2(30));
+
+Table created.
+
+SQL> alter table emp add (dep_id number(3));
+
+Table altered.
+
+SQL> alter table emp add constraint emp_dep_fk foreign key(dep_id) references dep on delete cascade);
+alter table emp add constraint emp_dep_fk foreign key(dep_id) references dep on delete cascade)
+                                                                                              *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table emp add constraint emp_dep_fk foreign key(dep_id) references dep on delete cascade;
+
+Table altered.
+
+SQL> describe emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ DEP_NAME                                           VARCHAR2(30)
+ DEP_ID                                             NUMBER(3)
+
+SQL> alter table emp rename column dep_name to emp_name;
+
+Table altered.
+
+SQL> describe emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ EMP_NAME                                           VARCHAR2(30)
+ DEP_ID                                             NUMBER(3)
+
+SQL> insert into emp(id, emp_name, dep_id) values(100, 'King', 10);
+
+1 row created.
+
+SQL> insert into emp(id, emp_name, dep_id) values(100, 'Bing', 10);
+insert into emp(id, emp_name, dep_id) values(100, 'Bing', 10)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (JP.SYS_C007033) violated 
+
+
+SQL> insert into emp(id, emp_name, dep_id) values(110, 'Bing', 10);
+
+1 row created.
+
+SQL> insert into emp(id, emp_name, dep_id) values(120, 'Ting', 10);
+
+1 row created.
+
+SQL> insert into emp(id, emp_name, dep_id) values(130, 'Arefin', 20);
+
+1 row created.
+
+SQL> select * from emp;
+
+        ID EMP_NAME                           DEP_ID                            
+---------- ------------------------------ ----------                            
+       100 King                                   10                            
+       110 Bing                                   10                            
+       120 Ting                                   10                            
+       130 Arefin                                 20                            
+
+SQL> delete from dep where id=10;
+
+1 row deleted.
+
+SQL> select * from dep;
+
+        ID DEP_NAME                                                             
+---------- --------------------                                                 
+        20 Software                                                             
+
+SQL> select * from emp;
+
+        ID EMP_NAME                           DEP_ID                            
+---------- ------------------------------ ----------                            
+       130 Arefin                                 20                            
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table test set unused (phone);
+
+Table altered.
+
+SQL> select * from dba_unused_col_tabs;
+
+OWNER                          TABLE_NAME                          COUNT        
+------------------------------ ------------------------------ ----------        
+JP                             TEST                                    1        
+
+SQL> spool off;
