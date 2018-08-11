@@ -1,0 +1,36 @@
+CREATE or REPLACE TRIGGER usa_after_insert AFTER INSERT ON usa
+FOR EACH ROW
+DECLARE
+BEGIN
+insert into usa_backup values (:new.usaid, :new.fname, :new.lname);
+DBMS_OUTPUT.PUT_LINE('Record successfully inserted into usa_backup table');
+END;
+==================
+insert into usa values(2,'Mr','Shohan');
+===============================
+select * from usa;
+================
+CREATE or REPLACE TRIGGER usa_after_update
+AFTER UPDATE ON usa
+FOR EACH ROW
+DECLARE
+BEGIN
+update usa_backup
+set usaid = :new.usaid
+where usaid = :old.usaid;
+DBMS_OUTPUT.PUT_LINE('Record successfully updated into usa table');
+END;
+========================
+update usa set usaid=100
+where usaid=1;
+========================
+CREATE or REPLACE TRIGGER usa_after_delete
+AFTER DELETE ON usa
+FOR EACH ROW
+DECLARE
+BEGIN
+Delete usa_backup
+where usaid = :old.usaid;
+DBMS_OUTPUT.PUT_LINE('Record successfully Deleted from usa table');
+END;
+========================================
