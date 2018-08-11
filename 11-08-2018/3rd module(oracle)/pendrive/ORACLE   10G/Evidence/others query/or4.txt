@@ -1,0 +1,56 @@
+Cross join:
+select d.department_id,d.department_name,e.employee_id,e.last_name,e.salary
+from departments d CROSS JOIN employees e;
+
+Natural join:
+select department_id,department_name,employee_id,last_name,salary
+from departments Natural JOIN employees ;
+
+select department_id,department_name,employee_id,last_name,salary
+from departments  Join employees
+Using(department_id);
+
+select d.department_id,d.department_name,e.employee_id,e.last_name,e.salary
+from departments d right Join employees e
+on (d.department_id=e.department_id);
+
+self joining:
+select e.employee_id,e.last_name,e.salary,e.manager_id,m.last_name manager_name
+from employees e,employees m
+where e.manager_id=m.employee_id;
+
+
+select employee_id,last_name,salary
+from employees
+where salary in(select min(salary)
+from employees group by department_id);
+
+
+select last_name,job_id,salary
+from employees
+where job_id=(select job_id
+from employees
+where employee_id=141)
+and salary>(select salary
+from employees
+where employee_id=143);
+
+select employee_id,last_name,salary
+from employees
+where salary>any(select max(salary)
+from employees group by department_id);
+
+select department_id,min(salary)
+from employees
+group by department_id
+having min(salary)>
+(select min(salary)
+from employees
+where department_id=50);
+
+select employee_id,job_id,salary
+from employees
+UNION ALL
+select employee_id,job_id,0
+from job_history
+order by employee_id;

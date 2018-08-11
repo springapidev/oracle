@@ -1,0 +1,38 @@
+select last_name,hire_date,hire_date+365*10
+from employees;
+
+
+select last_name,hire_date,hire_date+365*20 as reurnment
+from employees;
+
+select last_name,hire_date,(sysdate-hire_date)/365
+from employees;
+
+
+select last_name,hire_date,trunc((sysdate-hire_date)/365,0) as year,trunc(mod((sysdate-hire_date),365)/30,0)as month,trunc(mod(mod((sysdate-hire_date),365),30),0)as day
+from employees;
+
+select last_name,hire_date,trunc((sysdate-hire_date)/365,0) as year,trunc(mod((sysdate-hire_date),365)/30,0)as month,trunc(mod(mod((sysdate-hire_date),365),30),0)as day,trunc(mod(mod((sysdate-hire_date),365),30)/7,0)as week
+from employees;
+
+select last_name,hire_date,months_between('5-Apr-12', hire_date) tenure,add_months(hire_date,6) review
+from employees;
+
+
+select next_day(sysdate,'Monday')
+from dual;
+
+select hire_date,round(hire_date,'month')
+from employees;
+
+Table create:
+
+Create Table Products(
+PID Number (8) Primary Key,
+Pname varchar2(15) NOT NULL,
+Stock Number(10),
+Price Number (10,2) 
+);
+
+
+insert into Products values(110,'Pencil',100,1050);

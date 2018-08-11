@@ -1,0 +1,13 @@
+Authors Table:
+insert into Authors values(1008,'Manik','IBCS','manik.com');
+insert into Books values(&bookid,'&Booktitle',&copy,&Authorid,&price);
+
+query:
+select Authorid, price,copy,(copy*price)+(copy*price*.35)"Roylaty"
+from books;
+
+create view:create view Authorsview
+As
+select a.Authorid,Authername,booktitle,copy
+from Authors a, Books b 
+where a.Authorid=b.Authorid;

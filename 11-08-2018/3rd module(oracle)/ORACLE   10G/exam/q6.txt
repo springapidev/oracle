@@ -1,0 +1,70 @@
+CREATE TABLE employee
+(emp_id NUMBER(10) CONSTRAINTS emp_id_pk PRIMARY KEY,
+emp_name VARCHAR2(20) NOT NULL,
+age NUMBER (4),
+salary NUMBER (12,2),
+dob DATE,
+mgr_id NUMBER (10),
+job_id VARCHAR2 (10) CONSTRAINTS job_id_ck CHECK ( job_id IN('Man','Prog','Sale','Admin','Fac')),
+join_date DATE  DEFAULT SYSDATE,
+email VARCHAR2(25) UNIQUE,
+CONSTRAINTS mgr_id_fk FOREIGN KEY (mgr_id) REFERENCES employee(emp_id));
+
+
+CREATE SEQUENCE emp_id_seq
+INCREMENT BY 1
+START WITH 100
+MAXVALUE 999
+NOCYCLE
+NOCACHE;
+
+
+INSERT INTO employee
+VALUES(emp_id_seq.NEXTVAL,'noman',28,12000.00,'01-FEB-13',101,'Man',sysdate,'noman@yahoo.com')
+
+
+INSERT INTO employee
+VALUES(emp_id_seq.NEXTVAL,'&emp_name',&age,&salary,'&dob',&mgr_id,'&job_id',sysdate,'&email');
+
+SELECT emp_name,salary
+FROM employee
+WHERE salary >(SELECT AVG(salary) FROM employee);
+
+
+SELECT job_id,MAX(salary), MIN(salary), AVG(salary)
+FROM employee
+GROUP BY job_id;
+
+
+
+SELECT emp_id, emp_name, salary
+FROM employee
+WHERE emp_name LIKE '_%n%_' ;
+
+SELECT emp_id, emp_name, salary
+FROM employee
+WHERE salary = (select salary from employee  WHERE emp_name LIKE '_%n%_' );
+
+SELECT emp_id, emp_name, salary
+FROM employee
+WHERE salary = (select salary from employee  WHERE emp_id = 105) 
+AND emp_id <> 105;
+
+
+SELECT emp_id, emp_name, salary
+FROM employee
+WHERE salary IN(select salary from employee  WHERE emp_name LIKE '_a%')
+AND emp_name NOT LIKE '_a%';
+
+
+
+UPDATE employee
+SET salary = (select salary from employee where emp_name = 'parly'),
+job_id = (select job_id from employee where emp_name = 'tanvir')
+WHERE emp_name = 'masud';
+
+
+CREATE VIEW employee_view
+AS SELECT mgr_id, job_id, MAX(salary) "max salary"
+FROM employee
+GROUP BY mgr_id, job_id;

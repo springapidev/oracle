@@ -1,0 +1,4 @@
+
+INSERT INTO sales
+VALUES(sales_id_seq.NEXTVAL,'&product_name',&quantity,&price,'&clint_name',sysdate,&delevary_da
+te);

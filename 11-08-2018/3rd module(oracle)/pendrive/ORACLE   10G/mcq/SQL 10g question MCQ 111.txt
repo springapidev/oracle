@@ -1,0 +1,3803 @@
+QUESTION NO: 1 
+Examine the data in the EMPLOYEES and DEPARTMENTS tables. 
+
+EMPLOYEES 
+
+LAST_NAME DEPARTMENT_ID SALARY 
+Getz 10 3000 
+Davis 20 1500 
+King 20 2200 
+Davis 30 5000 
+Kochhar 5000 
+
+DEPARTMENTS          
+
+
+DEPARTMENT_ID DEPARTMENT_NAME 
+10 Sales 
+20 Marketing 
+30 Accounts 
+40 Administration 
+
+You want to retrieve all employees, whether or not they have matching departments in 
+the departments table. Which query would you use? 
+
+A. SELECT last_name, department_name 
+FROM employees , departments(+); 
+B. SELECT last_name, department_name 
+FROM employees JOIN departments (+); 
+C. SELECT last_name, department_name 
+FROM employees(+) e JOIN departments d 
+ON (e.department_id = d.department_id); 
+D. SELECT last_name, department_name 
+FROM employees e 
+RIGHT OUTER JOIN departments d ON (e.department_id = d.department_id); 
+E. SELECT last_name, department_name 
+FROM employees(+) , departments 
+ON (e.department_id = d.department_id); 
+F. SELECT last_name, department_name 
+FROM employees e LEFT OUTER 
+JOIN departments d ON (e.department_id = d.department_id); 
+Answer: F 
+
+Explanation: 
+Answer F is correct. This query shows correct syntax to retrieve all employees, whether or not 
+they have matching departments in the department table. Oracle9i extends its compliance with 
+ANSI/ISO by supporting that standard’s requirements for outer join syntax and semantics. 
+
+Incorrect Answers 
+A: 
+This query uses “+” to create outer join as it was in Oracle8i, but it requires also usage of 
+WHERE clause in SELECT statement. 
+B: 
+The JOIN clause cannot be used with in conjunction with “+”: syntax is incorrect. 
+C: 
+The JOIN clause cannot be used with in conjunction with “+”: syntax is incorrect. 
+D: 
+This statement requires LEFT OUTER JOIN, not RIGHT OUTER JOIN. 
+E: 
+This query uses incorrect syntax with “+” and ON to create outer join. 
+
+QUESTION NO: 2 
+Examine the structure of the EMPLOYEES table: 
+
+EMPLOYEE_ID NUMBER Primary Key 
+FIRST_NAME VARCHAR2(25) 
+LAST_NAME VARCHAR2(25) 
+
+Which three statements inserts a row into the table? (Choose three) 
+
+A. INSERT INTO employees 
+VALUES ( NULL, ‘John’,‘Smith’); 
+B. INSERT INTO employees( first_name, last_name) 
+VALUES(‘John’,‘Smith’); 
+C. INSERT INTO employees 
+VALUES (‘1000’,‘John’,NULL); 
+D. INSERT INTO employees(first_name,last_name, employee_id) 
+VALUES ( 1000, ‘John’,‘Smith’); 
+E. 
+INSERT INTO employees (employee_id) 
+VALUES (1000); 
+F. 
+INSERT INTO employees (employee_id, first_name, last_name) 
+VALUES ( 1000, ‘John’,‘’); 
+Answer: C, E, F 
+
+Explanation: 
+Since EMPLOYEE_ID column is used as primary key, it cannot be NULL, so only INSERT 
+statements in C, E and F are correct. You can insert the row with NULL LAST_NAME as in 
+answer C, or only the row with EMPLOYEE_ID as in answer E, or the row with empty 
+LAST_NAME column. 
+Incorrect Answers 
+A: 
+This answer is incorrect because a primary key cannot be NULL. 
+B: 
+INSERT statement does not contain primary key value at all, so this answer needs to be 
+eliminated as correct one. 
+D: 
+This statement shows incorrect order of columns of row which needs to be inserted into 
+the table. 
+Leading the way in IT testing and certification tools, www.testking.com 
+
+
+QUESTION NO: 3 
+You need to give the MANAGER role the ability to select from, insert into, and modify 
+existing rows in the STUDENT_GRADES table. Anyone given this MANAGER role 
+should be able to pass those privileges on to others. 
+Which statement accomplishes this? 
+
+A. GRANT select, insert, update ON student_grades TO manager; 
+B. GRANT select, insert, update ON student_grades TO ROLE manager; 
+C. GRANT select, insert, modify ON student_grades TO manager WITH GRANT OPTION; 
+D. GRANT select, insert, update ON student_grades TO manager WITH GRANT OPTION; 
+E. GRANT select, insert, update ON student_grades TO ROLE manager WITH GRANT OPTION; 
+F. F.GRANT select, insert, modify ON student_grades TO ROLE manager WITH GRANT OPTION; 
+
+Answer: D 
+
+Explanation: 
+This answer provides correct syntax of GRANT command to give the MANAGER role all 
+asked privileges. Clause WITH GRANT OPTION will allow this role to pass those privileges 
+on to others. 
+Incorrect Answers 
+A: 
+This statement would be correct if it included WITH GRANT OPTION clause to allow 
+this role to pass those privileges on to others. 
+B: 
+This statement uses incorrect clause TO ROLE. 
+C: 
+There is no option with name MODIFY in the GRANT command. 
+E: 
+This statement uses incorrect clause TO ROLE. 
+F: 
+There is no option with name MODIFY in the GRANT command. And this statement also 
+uses incorrect clause TO ROLE. 
+
+QUESTION NO: 4 
+Examine the data in the EMPLOYEES table: 
+
+LAST_NAME DEPARTMENT_ID SALARY 
+Getz 10 3000 
+Davis 20 1500 
+King 20 2200 
+Davis 30 5000 
+
+Which three subqueries work? (Choose three) 
+
+A. SELECT * FROM employees where salary > (SELECT MIN(salary) FROM employees GROUP BY department.id); 
+B. SELECT * FROM employees WHERE salary = (SELECT AVG(salary) FROM employees GROUP BY department_id); 
+C. SELECT distinct department_id FROM employees Where salary > ANY (SELECT AVG(salary) FROM employees GROUP BY department_id); 
+D. SELECT department_id FROM employees WHERE SALARY > ALL (SELECT AVG(salary) FROM employees GROUP BY department_id); 
+E. SELECT last_name FROM employees Where salary > ANY (SELECT MAX(salary) FROM employees GROUP BY department_id); 
+F. SELECT department_id FROM employees WHERE salary > ALL (SELECT AVG(salary) FROM employees GROUP BY AVG(SALARY)); 
+
+Answer: C, D, E 
+
+Explanation: 
+These answers show correct syntax, because they use ANY and ALL keywords for convert multi-row output of sub-query to one-row result. 
+
+Incorrect Answers 
+A: 
+This SELECT statement is incorrect because of multi-row return of sub-query: it will 
+return minimal salary for EACH department. 
+B: 
+This SELECT statement is incorrect because of multi-row return of sub-query: it will 
+return average salary for EACH department. 
+F: 
+This SELECT statement is incorrect because GROUP BY clause cannot contain functions, 
+like AVG(), MIN(), MAX() and so on. 
+
+QUESTION NO: 5 
+The database administrator of your company created a public synonym called HR for 
+the HUMAN_RESOURCES table of the GENERAL schema, because many users 
+frequently use this table. 
+As a user of the database, you created a table called HR in your schema. What happens 
+when you execute this query? 
+
+SELECT * 
+FROM HR; 
+
+A. You obtain the results retrieved from the public synonym HR created by the database administrator. 
+B. You obtain the results retrieved from the HR table that belongs to your schema. 
+C. You get an error message because you cannot retrieve from a table that has the same name as a public synonym. 
+D. You obtain the results retrieved from both the public synonym HR and the HR table that belongs to your schema, as a Cartesian product. 
+E. You obtain the results retrieved from both the public synonym HR and the HR table that belongs to your schema, as a FULL JOIN. 
+Answer: B 
+Explanation: 
+
+By executing this query you will extract data from the HR table in your own schema, it will 
+not work with HR synonym for the HUMAN_RESOURCES table of the GENERAL schema. 
+
+Incorrect Answers 
+A: 
+The results will be retrieved from the table in your own schema, not from the GENERAL schema, using synonym HR. 
+C: 
+There is no error: data from the table in your own schema will be retrieved by this query. 
+D: 
+This query will not generate Cartesian product from both tables. 
+E: 
+This query will not retrieve data from both tables as a FULL JOIN. 
+
+QUESTION NO: 6 
+Which two statements about views are true? (Choose two.) 
+
+
+A. A view can be created as read only. 
+B. A view can be created as a join on two or more tables. 
+C. A view cannot have an ORDER BY clause in the SELECT statement. 
+D. A view cannot be created with a GROUP BY clause in the SELECT statement. 
+E. A view must have aliases defined for the column names in the SELECT statement. 
+Answer: A, B 
+Explanation: 
+
+A view can be created as read only object. However, it is possible to change data in the 
+underlying table(s) with some restrictions.A view also can be created as a join on two or more 
+tables. This type of view is called complex view. Complex views provide complicated data 
+models where many base tables are drawn together into one virtual table. 
+
+Incorrect Answers 
+
+C: 
+Query operations containing ORDER BY clause are also permitted, so long as the 
+ORDER BY clause appearsoutside the parentheses. The following is an example of what I 
+mean: CREATE VIEW my_view AS (SELECT*FROM emp) ORDER BYempno. 
+D: 
+A view can be created with a GROUP BY clause in the SELECT statement. 
+E: 
+It is not required to have aliases defined for the column names in the SELECT statement. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 292-309 
+Chapter 7: Creating Other Database Objects in Oracle 
+
+QUESTION NO: 7 
+Examine the description of the EMPLOYEES table: 
+
+
+EMP_ID NUMBER(4) NOT NULL 
+LAST_NAME VARCHAR2(30) NOT NULL 
+FIRST_NAME VARCHAR2(30) 
+DEPT_ID NUMBER(2) 
+JOB_CAT VARCHARD2(30) 
+SALARY NUMBER(8,2) 
+
+Which statement shows the maximum salary paid in each job category of each 
+department? 
+
+A. SELECT dept_id, job_cat, MAX(salary) FROM employees WHERE salary > MAX(salary); 
+B. SELECT dept_id, job_cat, MAX(salary) FROM employees GROUP BY dept_id, job_cat; 
+C. SELECT dept_id, job_cat, MAX(salary) FROM employees; 
+D. SELECT dept_id, job_cat, MAX(salary) FROM employees GROUP BY dept_id; 
+E. SELECT dept_id, job_cat, MAX(salary) FROM employees GROUP BY dept_id, job_cat, salary; 
+Answer: B 
+
+Explanation: 
+This answer provides correct syntax and semantics to show the maximum salary paid in each 
+job category of each department. 
+Incorrect Answers 
+A: 
+This query will not return any row because condition SALARY > MAX(SALARY) is 
+FALSE. 
+C: 
+This query will return error because you cannot show maximum salary with DEPT_ID 
+and JOB_CAT without grouping by these columns. 
+D: 
+The GROUP BY clause is missing JOB_ID column. 
+E: 
+You don’t need to group results of query by SALARY in the GROUP BY column. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 356-365 
+Chapter 8: User Access Control in Oracle 
+
+QUESTION NO: 8 
+Management has asked you to calculate the value 12*salary* commission_pct for all the 
+employees in the EMP table. The EMP table contains these columns: 
+
+LAST NAME VARCNAR2(35) NOT NULL 
+SALARY NUMBER(9,2) NOT NULL 
+COMMISION_PCT NUMBER(4,2) 
+
+Which statement ensures that a value is displayed in the calculated columns for all 
+employees? 
+
+A. SELECT last_name, 12*salary* commission_pct FROM emp; 
+B. SELECT last_name, 12*salary* (commission_pct,0) FROM emp; 
+C. SELECT last_name, 12*salary*(nvl(commission_pct,0)) FROM emp; 
+D. SELECT last_name, 12*salary*(decode(commission_pct,0))FROM emp; 
+Answer: C 
+Explanation: 
+
+This SELECT statement provides correct usage of NVL function to calculate columns for all 
+employees. Oracle give you possibility to substitute a value in place of NULL. The basic 
+syntax for NVL() is NVL(column_name, value_if_null). Notice that the column specified in 
+NVL() contains an actual value. That value is what Oracle returns; when the column is NULL, 
+the special string is returned. The value specified to be returned if the column value is NULL 
+must be the same datatype as the column specified. 
+
+Incorrect Answers 
+
+A: 
+This SELECT statement will return NULL value for rows with NULL 
+COMMISION_PCT column. 
+B: 
+It is incorrect syntax in this query: NVL function needs to be used for correct result. 
+D: 
+The DECODE function is used as substitution of IF-THEN-ELSE PL/SQL construction in 
+SQL queries. The SELECT statement provides incorrect syntax of it cannot have only two 
+parameters. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 31-32 
+Chapter 1: Overview of Oracle Databases 
+
+QUESTION NO: 9 
+Which syntax turns an existing constraint on? 
+
+
+A. ALTER TABLE table_name ENABLE constraint_name; 
+B. ALTER TABLE table_name STATUS = ENABLE CONSTRAINT constraint_name; 
+C. ALTER TABLE table_name ENABLE CONSTRAINT constraint_name; 
+D. ALTER TABLE table_name STATUS ENABLE CONSTRAINT constraint_name; 
+E. ALTER TABLE table_name TURN ON CONSTRAINT constraint_name; 
+F. ALTER TABLE table_name TURN ON CONSTRAINT constraint_name; 
+Answer: C 
+Explanation: 
+
+ALTER TABLE statement with ENABLE CONSTRAINT keywords is correct answer to 
+enable an existing constraint. 
+
+Incorrect Answers 
+
+A: This statement is missing CONSTRAINT keyword. 
+B: “STATUS =” is incorrect syntax to enable constraint for the table. 
+D: There is no STATUS keyword in the command to enable constraint. 
+E: There is no TURN ON keywords in the command to enable constraint. 
+F: There is no TURN ON keywords in the command to enable constraint. 
+
+QUESTION NO: 10 
+Examine the description of the STUDENTS table: 
+
+STD_ID NUMBER(4) 
+COURSE_ID VARCHARD2(10) 
+START_DATE DATE 
+END_DATE DATE 
+
+Which two aggregate functions are valid on the START_DATE column? (Choose two) 
+
+A. SUM(start_date) 
+B. AVG(start_date) 
+C. COUNT(start_date) 
+D. AVG(start_date, end_date) 
+E. MIN(start_date) 
+F. MAXIMUM(start_date) 
+Answer: C, E 
+Explanation: 
+
+It is possible to apply COUNT() and MIN() functions on the column with DATE data type. 
+
+Incorrect Answers 
+
+A: Function SUM() cannot be used with DATE data type column. 
+B: Function AVG() cannot be used with DATE data type column. 
+D: Function AVG() cannot be used with DATE data type column. And function AVG() just has one parameter X, not two. It averages all X column values returned by the SELECT 
+statement. 
+F: 
+There is no MAXIMUM() function in Oracle, only MAX() function exists. 
+
+QUESTION NO: 11 
+The EMPLOYEE tables has these columns: 
+
+LAST_NAME VARCHAR2(35) 
+SALARY NUMBER(8,2) 
+COMMISSION_PCT NUMBER(5,2) 
+
+You want to display the name and annual salary multiplied by the commission_pct for 
+all employees. For records that have a NULL commission_pct, a zero must be displayed 
+against the calculated column. 
+Which SQL statement displays the desired results? 
+
+A. SELECT last_name, (salary * 12) * commission_pct FROM EMPLOYEES; 
+B. SELECT last_name, (salary * 12) * IFNULL(commission_pct, 0) FROM EMPLOYEES; 
+C. SELECT last_name, (salary * 12) * NVL2(commission_pct, 0) FROM EMPLOYEES; 
+D. SELECT last_name, (salary * 12) * NVL(commission_pct, 0) FROM EMPLOYEES; 
+Answer: D 
+Explanation: 
+
+This SELECT statement provides correct usage of NVL function to calculate columns for all 
+employees. Oracle give you possibility to substitute a value in place of NULL. The basic 
+syntax for NVL() is NVL(column_name, value_if_null). Notice that the column specified in 
+NVL() contains an actual value. That value is what Oracle returns; when the column is NULL, 
+the special string isreturned. The value specified to be returned if the column value is NULL 
+must be the same datatype as the column specified. 
+
+Incorrect Answers 
+
+A: 
+This SELECT statement will return NULL value for rows with NULL 
+COMMISION_PCT column. 
+B: 
+There is no IFNULL() function in Oracle. 
+C: 
+The NVL2() function requires 3 parameters, not 2. Function NVL2(expr1, expr2, expr3) 
+returns expr2 if expr1 is not NULL. If expr1 is NULL, it returns expr3. 
+
+QUESTION NO: 12 
+Examine the data from the ORDERS and CUSTOMERS table. 
+
+
+ORDERS 
+
+ORD_ID ORD_DATE CUST_ID ORD_TOTAL 
+100 12-JAN-2000 15 10000 
+101 09-MAR-2000 40 8000 
+102 09-MAR-2000 35 12500 
+103 15-MAR-2000 15 12000 
+104 25-JUN-2000 15 6000 
+105 18-JUL-2000 20 5000 
+106 18-JUL-2000 35 7000 
+107 21-JUL-2000 20 6500 
+108 04-AUG-2000 10 8000 
+
+CUSTOMERS 
+
+
+CUST_ID CUST_NAME CITY 
+10 Smith Los Angeles 
+15 Bob San Francisco 
+20 Martin Chicago 
+25 Mary New York 
+30 Rina Chicago 
+35 Smith New York 
+40 Linda New York 
+
+Which SQL statement retrieves the order ID, customer ID, and order total for the 
+orders that are placed on the same day that Martin places his orders? 
+
+A. SELECT ord_id, cust_id, ord_total FROM orders, customers WHERE cust_name=’Mating’ AND ord_date IN (’18-JUL-2000’,’21-JUL-2000’); 
+B. SELECT ord_id, cust_id, ord_total FROM orders Where ord_date IN (SELECT ord_date FROM orders<br/> WHERE cust_id = (SELECT cust_id FROM customers WHERE cust_name = ‘Martin’)); 
+C. SELECT ord_id, cust_id, ord_total FROM orders Where ord_date IN (SELECT ord_date FROM orders, customers Where cust_name = ‘Martin’); 
+D. SELECT ord_id, cust_id, ord_total FROM orders WHERE cust_id IN (SELECT cust_id FROM customers WHERE cust name = ‘Martin’); 
+
+Answer: B 
+Explanation: 
+
+This query will return the order ID, customer ID, and order total for the orders that are placed 
+on the same day that Martin places his orders. 
+
+Incorrect Answers 
+
+A: 
+This query returns only Martin’s orders for July 18, 2000 and July 21, 2002, not orders of 
+others that were placed on the same day that Martin placed his orders. 
+C: 
+This query uses incorrect sub-query to extract dates when Martin placed his orders. 
+D: 
+This query will return only Martin’s orders. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 145-156 
+Chapter 4: Subqueries 
+
+QUESTION NO: 13 
+You need to modify the STUDENTS table to add a primary key on the STUDENT_ID column. The table is currently empty. 
+Which statement accomplishes this task? 
+
+
+A. ALTER TABLE students ADD PRIMARY KEY student_id; 
+B. ALTER TABLE students ADD CONSTRAINT PRIMARY KEY (student_id); 
+C. ALTER TABLE students ADD CONSTRAINT stud_id_pk PRIMARY KEY student_id; 
+D. ALTER TABLE students ADD CONSTRAINT stud_id_pk PRIMARY KEY (student_id); 
+E. ALTER TABLE students MODIFY CONSTRAINT stud_id_pk PRIMARY KEY (student_id); 
+
+Answer: D 
+Explanation: 
+
+This statement provides correct syntax to add a primary key on the STUDENT_ID column of 
+the STUDENT table. 
+
+Incorrect Answers 
+
+A: 
+This ALTER TABLE statement is missing CONSTRAINT keyword and the name of the 
+constraint. 
+B: 
+This ALTER TABLE statement is missing the name of the constraint. 
+C: 
+It’s incorrect syntax in the ALTER TABLE command: STUDENT_ID must be used with 
+brackets. 
+E: 
+We need to add constraint, not to modify existing one. Usage of the MODIFY keyword is 
+incorrect in this case. 
+
+QUESTION NO: 14 
+Evaluate the SQL statement: 
+
+1 SELECT a.emp_name, a.sal, a.dept_id, b.maxsal 
+2 FROM employees a, 
+
+3 (SELECT dept_id, MAX(sal) maxsal 
+4 FROM employees 
+5 GROUP BY dept_id) b 
+
+6 WHERE a.dept_id = b.dept_id 
+7 AND a.sal < b.maxsal; 
+
+What is the result of the statement? 
+
+A. The statement produces an error at line 1. 
+B. The statement produces an error at line 3. 
+C. The statement produces an error at line 6. 
+D. The statement returns the employee name, salary, department ID, and maximum salary earned in <br/>the department of the employee for all departments that pay  <br/>less salary then the maximum salary paid in the company. 
+E. The statement returns the employee name, salary, department ID, and maximum salary earned in  <br/>the department of the employee for all employees who earn less than the  <br/>maximum salary in their department. 
+Answer: E 
+Explanation: 
+
+The statement returns the employee name, salary, department ID, and maximum salary earned 
+in the department of the employee for all employees who earn less than the maximum salary 
+in their department. This query is example of an inline view which is the sub-query in the 
+FROM clause of the main query. The sub-query can be a SELECT statement that utilizes 
+joins, the GROUP BY clause, or the ORDER BY clause. 
+
+Incorrect Answers 
+
+A: 
+The statement does not produce an error at line 1. 
+
+B: The statement does not produce an error at line 3. 
+C: The statement does not produce an error at line 6. 
+D: The statement returns the employee name, salary, department ID, and maximum salary <br/>earned in the department of the employee for all EMPLOYEES, NOT DEPARTMENTS, who  <br/>earn less than the maximum salary in their department. 
+
+QUESTION NO: 15 
+Examine the data in the EMPLOYEES and DEPARTMENTS tables: 
+
+EMPLOYEES 
+
+EMPLOYEE_ID EMP_NAME DEPT_ID MGR_ID JOB_ID SALARY 
+101 Smith 20 120 SA_REP 4000 
+102 Martin 10 105 CLERK 2500 
+103 Chris 20 120 IT_ADMIN 4200 
+104 John 30 108 HR_CLERK 2500 
+105 Diana 30 108 IT_ADMIN 5000 
+106 Smith 40 110 AD_ASST 3000 
+108 Jennifer 30 110 HR_DIR 6500 
+110 Bob 40 EX_DIR 8000 
+120 Ravi 20 110 SA*DIR 6500 
+
+DEPARTMENTS 
+
+
+DEPARTMENT_ID DEPARTMENT_NAME 
+10 Admin 
+20 Education 
+30 IT 
+40 Human Resources 
+
+Also examine the SQL statements that create the EMPLOYEES and DEPARTMENTS 
+tables: 
+
+CREATE TABLE departments 
+(department_id NUMBER PRIMARY KEY, 
+department_name VARCHAR2(30)); 
+CREATE TABLE employees 
+(EMPLOYEE_ID NUMBER PRIMARY KEY, 
+EMP_NAME VARCHAR2(20), 
+DEPT_ID NUMBER REFERENCES 
+departments(department_id), 
+MGR_ID NUMBER REFERENCES 
+employees(employee id), 
+MGR_ID NUMBER REFERENCES 
+
+employees(employee id), 
+JOB_ID VARCHAR2(15). 
+SALARY NUMBER); 
+ON the EMPLOYEES, 
+
+
+On the EMPLOYEES table, EMPLOYEE_ID is the primary key. 
+MGR_ID is the ID of managers and refers to the EMPLOYEE_ID. 
+DEPT_ID is foreign key to DEPARTMENT_ID column of the DEPARTMENTS table. 
+On the DEPARTMENTS table, DEPARTMENT_ID is the primary key. 
+Examine this DELETE statement: 
+
+
+DELETE 
+FROM departments 
+WHERE department id = 40; 
+
+What happens when you execute the DELETE statement? 
+
+A. Only the row with department ID 40 is deleted in the DEPARTMENTS table. 
+B. The statement fails because there are child records in the EMPLOYEES table with department ID 40. 
+C. The row with department ID 40 is deleted in the DEPARTMENTS table. Also the rows with employee IDs 110 and 106 are deleted from the EMPLOYEES table. 
+D. The row with department ID 40 is deleted in the DEPARTMENTS table. Also the rows with employee IDs 106 and 110 and the employees working under employee 110 are deleted from the EMPLOYEES table. 
+E. The row with department ID 40 is deleted in the DEPARTMENTS table. Also all the rows in the EMPLOYEES table are deleted. 
+F. The statement fails because there are no columns specifies in the DELETE clause of the DELETE statement. 
+Answer: B 
+
+Explanation: 
+
+It will be error generated because there are 2 child records in the EMPLOYEES table with 
+department number you try to delete from the DEPARTMENTS table. 
+
+Incorrect Answers 
+
+A: 
+The row with department ID 40 will not be deleted because of the child records in the 
+EMPLOYEES table. 
+C: 
+Neither the row with department ID 40 will not be deleted not child records in the 
+EMPLOYEES table will be deleted. 
+D: 
+It will be error when you try to execute the DELETE statement, no rows will be deleted in 
+the EMPLOYEES or the DEPARTMENTS tables. 
+E: 
+It will be error when you try to execute the DELETE statement, no rows will be deleted in 
+the EMPLOYEES or the DEPARTMENTS tables. 
+F: The statement fails because of constraint violation not because there are no columns 
+specifies in the DELETE clause of the DELETE statement. 
+
+QUESTION NO: 16 
+Which three are DATETIME data types that can be used when specifying column definitions? (Choose three.) 
+
+A. TIMESTAMP 
+B. INTERVAL MONTH TO DAY 
+C. INTERVAL DAY TO SECOND 
+D. INTERVAL YEAR TO MONTH 
+E. TIMESTAMP WITH DATABASE TIMEZONE 
+Answer: A, C, D 
+Explanation: 
+
+TIMESTAMP, INTERVAL DAY TO SECOND and INTERVAL YEAR TO MONTH can be 
+used to specify column definition. 
+
+Incorrect Answers 
+
+B: 
+The INTERVAL MONTH TO DAY data type cannot be used when specifying column 
+definitions there are only INTERVAL DAY TO SECOND and INTERVAL YEAR TO 
+MONTH data types. 
+E: 
+The TIMESTAMP WITH DATABASE TIMEZONE data type cannot be used when 
+specifying column definitions, because there are only TIMESTAMP WITH TIME ZONE 
+and TIMESTAMP WITH LOCAL TIME ZONE data types. 
+
+QUESTION NO: 17 
+Which SQL statement defines the FOREIGN KEY constraint on the DEPTNO column 
+of the EMP table? 
+
+A. CREATE TABLE EMP (empno NUMBER(4), ename VARCNAR2(35), deptno NUMBER(7,2) NOT NULL CONSTRAINT emp_deptno_fk FOREIGN KEY deptno REFERENCES dept deptno); 
+B. CREATE TABLE EMP (empno NUMBER(4), ename VARCNAR2(35), deptno NUMBER(7,2) CONSTRAINT emp_deptno_fk REFERENCES dept (deptno)); 
+C. CREATE TABLE EMP (empno NUMBER(4) ename VARCHAR2(35), deptno NUMBER(7,2) NOT NULL, CONSTRAINT emp_deptno_fk REFERENCES dept (deptno) FOREIGN KEY (deptno)); 
+D. CREATE TABLE EMP (empno NUMBER(4), ename VARCNAR2(35), deptno NUMBER(7,2) FOREIGN KEY CONSTRAINT emp deptno fk REFERENCES dept (deptno)); 
+Answer: B 
+Explanation: 
+
+This statement provides correct syntax to define the FOREIGN KEY constraint on the 
+DEPTNO column of the EMP table. 
+
+Incorrect Answers 
+
+A: 
+There is incorrect syntax, because list of columns and column for the constraint need to be 
+surrounded with the brackets. 
+C: 
+It is incorrect to use FOREIGN KEY keywords to define constraint on the table. It can be 
+used to add integrity constraint to existing table. 
+D: 
+It is incorrect to use FOREIGN KEY keywords to define constraint on the table. It can be 
+used to add integrity constraint to existing table. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 238-245 
+Chapter 5: Creating Oracle Database Objects 
+
+QUESTION NO: 18 
+Evaluate the set of SQL statements: 
+
+CREATE TABLE dept 
+(deptno NUMBER(2), 
+dname VARCNAR2(14), 
+loc VARCNAR2(13)); 
+ROLLBACK; 
+DESCRIBE DEPT 
+
+What is true about the set? 
+
+A. The DESCRIBE DEPT statement displays the structure of the DEPT table. 
+B. The ROLLBACK statement frees the storage space occupies by the DEPT table. 
+C. The DESCRIBE DEPT statement returns an error ORA-04043: object DEPT does not exist. 
+D. The DESCRIBE DEPT statement displays the structure of the DEPT table only if there is a COMMIT statement introduced before the ROLLBACK statement. 
+Answer: A 
+Explanation: 
+
+The structure of the DEPT table will be displayed because the CREATE TABLE statement is 
+DDL operation and it cannot be rolled back because implicit commit occurs on the database 
+when a user exits SQL*Plus or issues a data-definition language (DDL) command such as a 
+create table statement, user to create a database object, or an alter table statement, used to 
+alter a database object. 
+
+Incorrect Answers 
+
+B: 
+The ROLLBACK statement has nothing to do with the storage space of the DEPT table. 
+C: 
+The DESCRIBE DEPT statement does not produce the error. It displays the structure of 
+the DEPT table. 
+D: 
+The COMMIT statement does not need to be introduced because implicit commit occurs 
+on the database after creation of the table. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 281-283 
+Chapter 6: Manipulating Oracle Data 
+
+QUESTION NO: 19 
+Which data dictionary table should you query to view the object privileges granted to the user on specific columns? 
+
+A. USER_TAB_PRIVS_MADE 
+B. USER_TAB_PRIVS 
+C. USER_COL_PRIVS_MADE 
+D. USER_COL_PRIVS 
+Answer: D 
+Explanation: 
+
+The USER_COL_PRIVS data dictionary view will show the object privileges granted to the 
+user on specific columns. 
+
+Incorrect Answers 
+
+A: 
+There is no USER_TAB_PRIVS_MADE view in Oracle. 
+B: 
+The USER_TAB_PRIVS data dictionary view is used to show the object privileges 
+granted to the user on the tables, not specific columns. 
+C: 
+There is no USER_COL_PRIVS_MADE view in Oracle. 
+
+QUESTION NO: 20 
+Examine the structure of the EMPLOYEES and DEPARTMENTS tables: 
+
+
+EMPLOYEES 
+Column name Data type Remarks 
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+EMP_NAME VARCHAR2 (30) 
+JOB_ID VARCHAR2 (20) 
+SALARY NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID COLUMN 
+DEPARTMENT ID NUMBER Foreign key to DEPARTMENT ID 
+column of the DEPARTMENTS table 
+DEPARTMENTS 
+Column name Data type Remarks 
+DEPARTMENT_ID NUMBER NOT NULL, Primary Key 
+DEPARTMENT_NAME VARCHAR2(30) 
+MGR_ID NUMBER References MGR_ID column of the 
+EMPLOYEES table 
+
+Evaluate this SQL statement: 
+
+SELECT employee_id, e.department_id, department_name, salary FROM employees e, departments d 
+WHERE e.department_id = d.department_id; 
+
+Which SQL statement is equivalent to the above SQL statement? 
+
+A. SELECT employee_id, department_id, department_name, salary FROM employees WHERE department_id IN (SELECT department_id  FROM departments); 
+B. SELECT employee_id, department_id, department_name, salary FROM employees NATURAL JOIN departments; 
+C. SELECT employee_id, d.department_id, department_name, salary FROM employees e JOIN departments d ON e.department_id = d.department_id; 
+D. SELECT employee_id, department_id, department_name, Salary FROM employees JOIN departments USING (e.department_id, d.department_id); 
+
+Answer: C 
+Explanation: 
+
+This query shows correct JOIN ON clause syntax and provides equivalent to the above SQL 
+statement. 
+
+Incorrect Answers 
+
+A: 
+This statement will show data only for the EMPLOYEES table with records that have 
+department ID from DEPARTMENTS table, not join result of two tables. 
+B: NATURAL join selects rows from the tables that have equal values in all matched 
+columns (same column names). If the columns having the same names have different 
+datatypes, an error is returned. 
+D: 
+There is incorrect usage of JOIN clause with USING keyword. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 112-114 
+Chapter 3: Advanced Data Selection in Oracle 
+
+QUESTION NO: 21 
+The EMP table contains these columns: 
+
+
+LAST NAME VARCHAR2(25) 
+SALARY NUMBER(6,2) 
+DEPARTMENT_ID NUMBER(6) 
+
+You need to display the employees who have not been assigned to any department. 
+You write the SELECT statement: 
+
+SELECT LAST_NAME, SALARY, DEPARTMENT_ID 
+FROM EMP 
+WHERE DEPARTMENT_ID = NULL; 
+
+What is true about this SQL statement? 
+
+A. The SQL statement displays the desired results. 
+B. The column in the WHERE clause should be changed to display the desired results. 
+C. The operator in the WHERE clause should be changed to display the desired results. 
+D. The WHERE clause should be changed to use an outer join to display the desired 
+results. 
+Answer: C 
+Explanation: 
+
+The operator in the WHERE clause should be changed to display the desired results. There are 
+times when you want to substitute a value in place of NULL. Oracle provides this 
+
+functionality with a special function, called NVL(). You cannot use operation equal with 
+NULL, but you can achieve desired results using NVL() function after the WHERE clause. 
+
+Incorrect Answers 
+
+A: 
+The SQL statement will generate an error because you cannot use operation equal with 
+NULL. 
+B: 
+The column in the WHERE clause should not be changed to display the desired results. 
+D: 
+Since there is only one table used in this query you don’t need to use outer join to display 
+the desired results. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 31-32 
+Chapter 1: Overview of Oracle Databases 
+
+QUESTION NO: 22 
+Evaluate the SQL statement: 
+
+SELECT ROUND(TRUNC(MOD(1600,10),-1),2) 
+FROM dual; 
+
+What will be displayed? 
+
+A. 0 
+B. 1 
+C. 0.00 
+D. An error statement 
+Answer: A 
+Explanation: 
+
+Result will be 0. MOD(x,y) function calculates the modulus of x, defined in long division as 
+the integer remainder when x is divided by y until no further whole number can be produced. 
+TRUNC() function truncates x to the decimal precision of y. ROUND(x,y) rounds x to the 
+decimal precision of y. 
+
+Incorrect Answers 
+
+B: 
+Result will be 0, not 1. 
+C: 
+Result will be 0, not 0.00 because MOD(1600,10) return 0 and all other functions 
+(TRUNC and ROUND) return 0 also. 
+D: 
+There is no error in this statement. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 69-71 
+Chapter 2: Limiting, Sorting, and Manipulating Return Data 
+
+QUESTION NO: 23 
+Examine the description of the MARKS table: 
+
+STD_ID NUMBER(4) 
+STUDENT_NAME VARCHAR2(30) 
+SUBJ1 NUMBER(3) 
+SUBJ2 NUMBER(3) 
+
+SUBJ1 and SUBJ2 indicate the marks obtained by a student in two subjects. 
+Examine this SELECT statement based on the MARKS table: 
+
+SELECT subj1+subj2 total_marks, std_id 
+FROM marks 
+WHERE subj1 > AVG(subj1) AND subj2 > AVG(subj2) 
+ORDER BY total_marks; 
+
+
+What is the result of the SELECT statement? 
+
+A. The statement executes successfully and returns the student ID and sum of all marks 
+for each student who obtained more than the average mark in each subject. 
+B. The statement returns an error at the SELECT clause. 
+C. The statement returns an error at the WHERE clause. 
+D. The statement returns an error at the ORDER BY clause. 
+Answer: C 
+Explanation: 
+
+The statement returns an error at the WHERE clause because group function AVG() cannot be 
+used in the WHERE clause. Group functions can be used in SELECT clause and GROUP BY 
+clause. They allow you to perform data operations on several values in a column of data as 
+though the column were one collective group of data. 
+
+Incorrect Answers 
+
+A: The statement does not execute successfully because an error will be generated. 
+B: The statement returns an error at the WHERE, not at the SELECT clause. 
+D: The statement returns an error at the WHERE, not at the ORDER BY clause. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 122-125 
+Chapter 3: Advanced Data Selection in Oracle 
+
+QUESTION NO: 24 
+Which /SQL*Plus feature can be used to replace values in the WHERE clause? 
+
+
+A. Substitution variables 
+B. Replacement variables 
+C. Prompt variables 
+D. Instead-of variables 
+E. This feature cannot be implemented through /SQL*Plus. 
+Answer: A 
+Explanation: 
+
+Lexical substitution variables can be used to replace values in the WHERE clause. 
+
+Incorrect Answers 
+
+B: There is no replacement variables SQL*Plus feature in Oracle. 
+C: There is no prompt variables SQL*Plus feature in Oracle. 
+D: There is no instead-of variables SQL*Plus feature in Oracle. 
+E: This feature is implemented in the SQL*Plus with lexical substitution variables. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 165-173 
+Chapter 4: Subqueries 
+
+QUESTION NO: 25 
+You want to display the titles of books that meet these criteria: 
+
+
+1. Purchased before January 21, 2001 
+2. Price is less then $500 or greater than $900 
+You want to sort the results by their data of purchase, starting with the most recently 
+bought book. 
+Which statement should you use? 
+
+
+A. SELECT book_title FROM books WHERE price between 500 and 900 AND purchase_date < ’21-JAN-2001’ ORDER BY purchase_date; 
+B. SELECT book_title FROM books WHERE price IN (500,900) AND purchase_date < ’21-JAN-2001’ ORDER BY purchase date ASC; 
+C. SELECT book_title FROM books WHERE price < 500 or > 900 AND purchase_date < ’21-JAN-2001’ ORDER BY purchase date DESC; 
+D. SELECT book_title FROM books WHERE (price < 500 OR price > 900) AND purchase_date < ’21-JAN-2001’ ORDER BY purchase date DESC; 
+
+Answer: D 
+Explanation: 
+
+This statement provides required results. 
+
+Incorrect Answers 
+
+A: 
+This query will show books with price in range $500 and $900, not less then $500 or 
+greater than $900. 
+B: 
+This query will show books with prices exactly $500 or $900, not less then $500 or 
+greater than $900. 
+C: 
+This order will not show correct rows because of incorrect syntax in the WHERE clause.. 
+
+QUESTION NO: 26 
+Which statement explicitly names a constraint? 
+
+A. ALTER TABLE student_grades ADD FOREIGN KEY (student_id) REFERENCES students(student_id); 
+B. ALTER TABLE student_grades ADD CONSTRAINT NAME = student_id_fk FOREIGN KEY (student_id) REFERENCES students(student_id); 
+C. ALTER TABLE student_grades ADD CONSTRAINT student_id_fk FOREIGN KEY (student_id) REFERENCES students(student_id); 
+D. ALTER TABLE student grades ADD NAMED CONSTRAINT student_id_fk FOREIGN KEY (student_id) REFERENCES students(student_id); 
+E. ALTER TABLE student grades ADD NAME student_id_fk FOREIGN KEY (student_id) REFERENCES students(student_id); 
+Answer: C 
+Explanation: 
+
+This statement provides correct syntax to add a foreign key constraint to the existing table. 
+
+Incorrect Answers 
+
+A: 
+The ADD FOREIGN KEY is wrong construction to add a foreign key constraint to the 
+existing table. 
+B: 
+The ADD CONSTRAINT NAME is wrong construction to add a foreign key constraint 
+to the existing table. 
+D: 
+The ADD NAMED CONSTRAINT is wrong construction to add a foreign key constraint 
+to the existing table. 
+E: 
+The ADD NAME is wrong construction to add a foreign key constraint to the existing 
+table. 
+
+QUESTION NO: 27 
+Examine the SQL statements that creates ORDERS table: 
+
+
+CREATE TABLE orders 
+(SER_NO NUMBER UNIQUE, 
+ORDER_ID NUMBER, 
+ORDER_DATE DATE NOT NULL 
+STATUS VARCHARD2(10) 
+CHECK (status IN (‘CREDIT’,’CASH’)), 
+PROD_ID_NUMBER 
+REFERENCES PRODUCTS(PRODUCT_ID), 
+ORD_TOTAL NUMBER, 
+PRIMARY KEY (order id, order date)); 
+
+
+For which columns would an index be automatically created when you execute the above 
+SQL statement? (Choose two) 
+
+A. SER_NO 
+B. ORDER_ID 
+C. STATUS 
+D. PROD_ID 
+E. ORD_TOTAL 
+F. 
+Composite index on ORDER_ID and ORDER_DATE 
+Answer: A, F 
+Explanation: 
+
+Indexes are created automatically by Oracle to support integrity constraints that enforce 
+uniqueness. The two types of integrity constraints that enforce uniqueness are PRIMARY 
+KEY and UNIQUE constraints. When the primary key or UNIQUE constraint is declared, a 
+unique index to support the column’s uniqueness is also created, and all values in all columns 
+that were defined as part of the primary key or UNIQUE constraint are placed into the index. 
+
+Incorrect Answers 
+
+B: 
+There will not be index for ORDER_ID column. 
+C: 
+There will not be index for STATUS column. 
+D: 
+There will not be index for PROD_ID column. 
+E: 
+There will not be index for ORD_TOTAL column. 
+
+QUESTION NO: 28 
+You created a view called EMP_DEPT_VU that contains three columns from the EMPLOYEES and DEPARTMENTS tables: 
+EMPLOYEE_ID, EMPLOYEE_NAME AND DEPARTMENT_NAME. The DEPARTMENT_ID column of the EMPLOYEES table is the foreign key to the 
+primary key DEPARTMENT_ID column of the DEPARTMENTS table. You want to modify the view by adding a fourth column, MANAGER_ID of NUMBER 
+data type from the EMPLOYEES tables. 
+How can you accomplish this task? 
+
+
+A. ALTER VIEW emp_dept_vu (ADD manager_id NUMBER); 
+B. MODIFY VIEW emp_dept_vu (ADD manager_id NUMBER); 
+C. ALTER VIEW emp_dept_vu AS SELECT employee_id, employee_name, department_name, manager_id FROM employee e, departments d WHERE e.department_id = d.department_id; 
+D. MODIFY VIEW emp_dept_vu AS SELECT employee_id, employee_name, department_name, manager_id FROM employees e, departments d WHERE e.department_id = d.department_id; 
+E. CREATE OR REPLACE VIEW emp_dept_vu AS SELECT employee_id, employee_name, department_name, manager_id FROM employees e, departments d WHERE e.department_id = d.department_id; 
+F. You must remove the existing view first, and then run the CREATE VIEW command with a new column list to modify a view. 
+Answer: E 
+Explanation: 
+
+When we want to alter the underlying data used in the definition of a view, we use the 
+CREATE OR REPLACE VIEW statement. When a CREATE OR REPLACE VIEW 
+statement is issued, Oracle will disregard the error that arises when it encounters the view that 
+already exists with that name, and it will overwrite the definition for the old view with the 
+definition for the new one. 
+
+Incorrect Answers 
+
+A: 
+There is no ALTER VIEW command in Oracle. 
+B: 
+There is no MODIFY VIEW command in Oracle. 
+C: 
+There is no ALTER VIEW command in Oracle. 
+D: 
+There is no MODIFY VIEW command in Oracle. 
+F: 
+You don’t need to remove the existing view to create modified view. You are able to do 
+that with CREATE OR REPLACE command. 
+
+QUESTION NO: 29 
+For which two constraints does the Oracle Server implicitly create a unique index? (Choose two.) 
+
+A. NOT NULL 
+B. PRIMARY KEY 
+C. FOREIGN KEY 
+D. CHECK 
+E. UNIQUE 
+Answer: B, E 
+Explanation: 
+
+Indexes are created automatically by Oracle to support integrity constraints that enforce 
+uniqueness. The two types of integrity constraints that enforce uniqueness are PRIMARY 
+KEY and UNIQUE constraints. When the primary key or UNIQUE constraint is declared, a 
+unique index to support the column’s uniqueness is also created, and all values in all columns 
+that were defined as part of the primary key or UNIQUE constraint are placed into the index. 
+
+Incorrect Answers 
+
+A: 
+Oracle will not implicitly create an unique index for the NOT NULL constraint. 
+C: 
+Oracle will not implicitly create an unique index for the FOREIGN KEY constraint. 
+D: 
+Oracle will not implicitly create an unique index for the FOREIGN KEY constraint. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 237-238 
+Chapter 5: Creating Oracle Database Objects 
+
+QUESTION NO: 30 
+Which three SELECT statements displays 2000 in the format “$2,000.00”? (Choose three) 
+
+A. SELECT TO CNAR(2000, ‘$#,###.##’) FROM dual; 
+B. SELECT TO CNAR(2000, ‘$0,000.00’) FROM dual; 
+C. SELECT TO CNAR(2000, ‘$9,999.00’) FROM dual;
+D. SELECT TO CNAR(2000, ‘$9,999.99’) FROM dual; 
+E. SELECT TO CNAR(2000, ‘$2,000.00’) FROM dual; 
+F. SELECT TO CNAR(2000, ‘$N,NNN.NN’) FROM dual; 
+Answer: B, C, D 
+Explanation: 
+
+Only queries in answers B, C and D will show result as in the format “$2,000.00”. 
+
+Incorrect Answers 
+
+A: Oracle error “ORA-01481: invalid number format model” will be generated. 
+E: Oracle error “ORA-01481: invalid number format model” will be generated. 
+F: Oracle error “ORA-01481: invalid number format model” will be generated. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 356-365 
+Chapter 8: User Access Control in Oracle 
+
+QUESTION NO: 31 
+Examine the structure of the EMPLOYEES and NEW_EMPLOYEES tables: 
+
+
+EMPLOYEES 
+EMPLOYEE_ID NUMBER Primary Key 
+FIRST_NAME VARCHARD2(25) 
+LAST_NAME VARCHARD2(25) 
+HIRE_DATE DATE 
+NEW EMPLOYEES 
+EMPLOYEE_ID NUMBER Primary Key 
+NAME VARCHAR2(60) 
+
+Which UPDATE statement is valid? 
+
+A. UPDATE new_employees SET name = (Select last_name|| first_name FROM employees Where employee_id =180) WHERE employee_id =180; 
+B. UPDATE new_employees SET name = (SELECT last_name||first_name FROM employees) WHERE employee_id =180; 
+C. UPDATE new_employees SET name = (SELECT last_name|| first_name FROM employees WHERE employee_id =180) WHERE employee_id =(SELECT employee_id FROM new employees); 
+D. UPDATE new_employees SET name = (SELECT last name|| first_name FROM employees WHERE employee_id= (SELECT employee_id FROM new_employees)) WHERE employee_id =180; 
+
+Answer: A 
+Explanation: 
+Sub-query in this answer will return one row value, concatenated first and last name for the 
+employee with ID 180, so update will be successful. When sub-queries are linked to the parent by equality comparisons, 
+the parent query expects only one row of data from the sub-query. 
+
+Incorrect Answers 
+
+B: 
+Sub-query will return concatenated first and last name for ALL records from the table 
+EMPLOYEES. It will cause an error for the parent query, because it expects one only one 
+row. 
+C: 
+Last WHERE statement in this query will generate error because sub-query returns multi-
+row result. 
+D: 
+SELECT statement for the NEW_EMPLOYEES table in this query will generate error 
+because sub-query returns multi-row result. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 150-156 
+Chapter 4: Subqueries 
+
+QUESTION NO: 32 
+Examine the structure of the EMPLOYEES, DEPARTMENTS, and LOCATIONS tables. 
+
+EMPLOYEES 
+
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+EMP_NAME VARCHAR2 (30) 
+JOB_ID VARCHAR2 (20) 
+SALARY NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID column 
+DEPARTMENT_ID NUMBER Foreign key to DEPARTMENT_ID column of the 
+DEPARTMENTS table 
+
+DEPARTMENTS 
+DEPARTMENT_ID NUMBER NOT NULL, Primary Key 
+DEPARTMENT_NAME VARCHAR2 (30) MGR_ID NUMBER References NGR_ID column of the EMPLOYEES table 
+LOCATION_ID NUMBER Foreign key to LOCATION_ID column of the LOCATIONS table 
+
+LOCATIONS 
+LOCATION_ID NUMBER NOT NULL, Primary Key 
+CITY VARCHAR2 |30) 
+Which two SQL statements produce the name, department name, and the city of all the 
+employees who earn more then 10000? (Choose two) 
+
+A. SELECT emp_name, department_name, city FROM employees e JOIN departments d USING (department_id) JOIN locations 1 USING (location_id) WHERE salary > 10000; 
+B. SELECT emp_name, department_name, city FROM employees e, departments d, locations 1 JOIN ON (e.department_id = d.department id) AND (d.location_id =1.location_id) AND salary > 10000; 
+C. SELECT emp_name, department_name, city FROM employees e, departments d, locations 1 WHERE salary > 10000; 
+D. SELECT emp_name, department_name, city FROM employees e, departments d, locations 1 WHERE e.department_id = d.department_id AND d.location_id = 1.location_id AND salary > 10000; 
+E. SELECT emp_name, department_name, city FROM employees e NATURAL JOIN departments, locations WHERE salary > 10000; 
+Answer: B, D 
+Explanation: 
+
+These statements show correct syntax and semantics to receive correct results. 
+
+Incorrect Answers 
+A: 
+JOIN ON keywords need to be used to build correct query. 
+C: 
+This query will built Cartesian product because there is no join conditions in WHERE 
+clause to join tables. 
+E: 
+NATURAL JOIN is a join between two where Oracle joins the tables according to the 
+column(s) in the two tables sharing the same name. It is required to add one more 
+NATURAL JOIN clause to join additional table. 
+
+QUESTION NO: 33 
+Examine the description of the EMPLOYEES table: 
+
+EMP_ID NUMBER(4) NOT NULL 
+LAST_NAME VARCHAR2(30) NOT NULL 
+FIRST_NAME VARCHAR2(30) 
+DEPT_ID NUMBER(2) 
+JOB_CAT VARCHAR2(30) 
+SALARY NUMBER(8,2) 
+
+Which statement shows the department ID, minimum salary, and maximum salary paid 
+in that department, only of the minimum salary is less then 5000 and the maximum 
+salary is more than 15000? 
+
+A. SELECT dept_id, MIN(salary(, MAX(salary) FROM employees WHERE MIN(salary) < 5000 AND MAX(salary) > 15000; 
+B. SELECT dept_id, MIN(salary), MAX(salary) FROM employees WHERE MIN(salary) < 5000 AND MAX(salary) > 15000 GROUP BY dept_id; 
+C. SELECT dept_id, MIN(salary), MAX(salary) FROM employees HAVING MIN(salary) < 5000 AND MAX(salary) > 15000; 
+D. SELECT dept_id, MIN(salary), MAX(salary) FROM employees GROUP BY dept_id HAVING MIN(salary) < 5000 AND MAX(salary) > 15000; 
+E. SELECT dept_id, MIN(salary), MAX(salary) FROM employees GROUP BY dept_id, salary HAVING MIN(salary) < 5000 AND MAX(salary) > 15000; 
+Answer: D 
+
+Explanation: 
+This SELECT statement shows correct result. 
+Incorrect Answers 
+
+A: To provide correct data statement needs also GROUP BY clause. 
+B: This statement will not provide correct results. 
+C: HAVING clause can be used only in conjunction with GROUP BY clause. 
+E: You need only grouping by department, not by salary. 
+
+QUESTION NO: 34 
+Examine the structure if the EMPLOYEES table: 
+
+Column name Data Type Remarks 
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+EMP_NAME VARCHAR2(30) 
+JOB_ID VARCHAR2(20) NOT NULL 
+SAL NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID column 
+DEPARTMENT_ID NUMBER Foreign key to DEPARTMENT_ID 
+column of the DEPARTMENTS table 
+
+You need to create a view called EMP_VU that allows the user to insert rows through 
+the view. Which SQL statement, when used to create the EMP_VU view, allows the user 
+to insert rows? 
+
+A. CREATE VIEW emp_Vu AS SELECT employee_id, emp_name, department_id FROM employees WHERE mgr_id IN (102, 120); 
+B. CREATE VIEW emp_Vu AS SELECT employee_id, emp_name, job_id department_id FROM employees WHERE mgr_id IN (102, 120); 
+C. CREATE VIEW emp_Vu AS SELECT department_id, SUM(sal) TOTALSAL FROM employees WHERE mgr_id IN (102, 120) GROUP BY department_id; 
+D. CREATE VIEW emp_Vu AS SELECT employee_id, emp_name, job_id, DISTINCT department_id FROM employees; 
+
+Answer: B 
+
+Explanation: 
+
+This statement will create view that can be used to change tables in underlying table through 
+simple views. It includes primary key, NOT NULL column and foreign key to avoid 
+constraint restrictions. 
+
+Incorrect Answers 
+
+A: 
+This statement does not include JOB_ID column that cannot be NULL. In general, all 
+constraint restrictions defined on the underlying table also apply to modifying data via the 
+view. For example, you can’t add data to an underlying table via a view that violates the 
+table’s primary key constraint. 
+C: 
+You cannot update a column of an underlying table if the simple view use a single-row 
+function to define the column. 
+D: 
+You may not insert, update, or delete records data on the table underlying the simple view 
+if the SELECT statement creating the view contains a GROUP BY clause, GROUP 
+function, or DISTINCT clause. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 298-299 
+Chapter 7: Creating Other Database Objects in Oracle 
+
+QUESTION NO: 35 
+The STUDENT_GRADES table has these columns: 
+
+STUDENT_ID NUMBER(12) 
+SEMESTER_END DATE 
+GPA NUMBER(4,3) 
+
+The registrar has asked for a report on the average grade point average (GPA) for 
+students enrolled during semesters that end in the year 2000. Which statement 
+accomplish this? 
+
+A. SELECT AVERAGE(gpa) FROM student_grades WHERE semester_end > ’01-JAN-2000’ and semester end < 31-DEC-2000’; 
+B. SELECT COUNT(gpa) FROM student grades WHERE semester_end > ’01-JAN-2000’ and semester end < ’31-DEC-2000’; 
+C. SELECT MIN(gpa) FROM student grades WHERE semester_end > ’01-JAN-2000’ and semester end < ’31-DEC-2000’; 
+D. SELECT AVG(gpa) FROM student_grades WHERE semester_end BETWEEN ’01-JAN-2000’ and ’31.DEC.2000’; 
+E. SELECT SUM(gpa) FROM student grades WHERE semester_end > ’01-JAN-2000’ and semester end < ’31-DEC-2000’; 
+F. SELECT MEDIAN(gpa) FROM student_grades WHERE semester end > ’01-JAN-2000’ and semester end < ’31-DEC-2000’; 
+Answer: D 
+Explanation: 
+
+Statement in this answer will show correct result, using function AVG(). This function takes 
+the values for a single column on all rows returned by the query and calculates the average 
+value for that column. 
+
+Incorrect Answers 
+
+A: 
+There is no AVERAGE() function in Oracle. 
+B: 
+COUNT() will calculate number of row, not an average grade point. 
+C: 
+MIN() function will calculate minimum grade for all students enrolled during semesters 
+that end in the year 2000. 
+E: 
+SUM() will calculate sum of all grade points for all students enrolled during semesters that 
+end in the year 2000. 
+F: 
+There is no MEDIAN() function in Oracle. 
+
+QUESTION NO: 36 
+Examine the structure if the EMPLOYEES and NEW EMPLOYEES tables: 
+
+EMPLOYEES 
+EMPLOYEE_ID NUMBER Primary Key 
+FIRST_NAME VARCHAR2(25) 
+LAST_NAME VARCHAR2(25) 
+HIRE_DATE DATE 
+NEW EMPLOYEES 
+EMPLOYEE_ID NUMBER Primary Key 
+NAME VARCHAR2(60) 
+
+Which MERGE statement is valid? 
+
+A. MERGE INTO new_employees c USING employees e ON (c.employee_id = e.employee_id) WHEN MATCHED THEN UPDATE SET c.name = e.first_name ||’,’|| e.last_name WHEN NOT MATCHED THEN INSERT VALUES(e.employee_id, e.first_name ||’, ‘||e.last_name); 
+B. MERGE new_employees c USING employees e ON (c.employee_id = e.employee_id) WHEN EXIST THEN UPDATE SET c.name = e.first_name ||’,’|| e.last_name WHEN NOT MATCHED THEN INSERT VALUES(e.employee_id, e.first_name ||’, ‘||e.last_name);
+C. MERGE INTO new employees c USING employees e ON (c.employee_id = e.employee_id) WHEN EXISTS THEN UPDATE SET c.name = e.first_name ||’,’|| e.last_name WHEN NOT MATCHED THEN INSERT VALUES(e.employee_id, e.first_name ||’, ‘||e.last_name); 
+D. MERGE new_employees c FROM employees e ON (c.employee_id = e.employee_id) WHEN MATCHED THEN UPDATE SET c.name = e.first_name ||’,’|| e.last_name WHEN NOT MATCHED THEN INSERT INTO new_employees VALUES(e.employee_id, e.first_name ||’.’||e.last_name); 
+Answer: A 
+Explanation: 
+
+Correct syntax for the MERGE command is MERGE INTO table1 USING table2 on 
+(join_condition) WHEN MATCHED UPDATE SET col1 = value WHEN NOT MATCHED 
+INSERT (column_list) values (column_values). 
+
+Incorrect Answers 
+
+B: WHEN EXIST THEN clause cannot be used in the MERGE statement. 
+C: WHEN EXIST THEN clause cannot be used in the MERGE statement. 
+D: FROM clause cannot be used in the MERGE statement. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 273-275 
+Chapter 6: Manipulating Oracle Data 
+
+QUESTION NO: 37 
+Which two are true about aggregate functions? (Choose two.) 
+
+A. You can use aggregate functions in any clause of a SELECT statement. 
+B. You can use aggregate functions only in the column list of the SELECT clause and in the WHERE clause of a SELECT statement. 
+C. You can mix single row columns with aggregate functions in the column list of a SELECT statement by grouping on the single row columns. 
+D. You can pass column names, expressions, constants, or functions as parameters to an aggregate function. 
+E. You can use aggregate functions on a table, only by grouping the whole table as one single group. 
+F. You cannot group the rows of a table by more than one column while using aggregate functions. 
+Answer: C, D 
+Explanation: 
+
+It is possible to mix single row columns with aggregate functions in the column list of a 
+SELECT statement by grouping on the single row columns. Also it is acceptable to pass 
+column names, expressions, constraints, or other functions as parameters to an aggregate 
+function. 
+
+Incorrect Answers 
+
+A: 
+You cannot use aggregate functions in any clause of a SELECT statement. For example, 
+they cannot be used with a WHEN statement. 
+B: 
+It is not possible to use aggregate functions in the WHERE clause of a SELECT 
+statement. But they can be used with a HAVING clause used after the GROUP BY clause, 
+for example. 
+E: 
+You don’t need to group the whole table as one single group. 
+F: 
+It is possible to group more than one column while using aggregate functions. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 122-135 
+Chapter 3: Advanced Data Selection in Oracle 
+
+QUESTION NO: 38 
+Examine the data of the EMPLOYEES table. 
+
+EMPLOYEES (EMPLOYEE_ID is the primary key. MGR_ID is the ID of managers and refers to the EMPLOYEE_ID) 
+
+EMPLOYEE_ID EMP_NAME DEPT_ID MGR_ID JOB_ID SALARY 
+101 Smith 20 120 SA_REP 4000 
+102 Martin 10 105 CLERK 2500 
+103 Chris 20 120 IT_ADMIN 4200 
+104 John 30 108 HR_CLERK 2500 
+105 Diana 30 108 HR_MGR 5000 
+106 Bryan 40 110 AD_ASST 3000 
+108 Jennifer 30 110 HR_DIR 6500 
+110 Bob 40 EX_DIR 8000 
+120 Ravi 20 110 SA_DIR 6500 
+
+Which statement lists the ID, name, and salary of the employee, and the ID and name of 
+the employee's manager, for all the employees who have a manager and earn more than 
+4000? 
+
+A. SELECT employee_id "Emp_id", emp_name "Employee", salary, employee_id "Mgr_id", emp_name "Manager" FROM employees WHERE salary > 4000; 
+B. SELECT e.employee_id "Emp_id", e.emp_name "Employee", e.salary, m.employee_id "Mgr_id", m.emp_name "Manager" FROM employees e, employees m WHERE e.mgr_id = m.mgr_id AND e.salary > 4000; 
+C. SELECT e.employee_id "Emp_id", e.emp_name "Employee", e.salary, m.employee_id "Mgr_id", m.emp_name "Manager" FROM employees e, employees m WHERE e.mgr_id = m.employee_id AND e.salary > 4000; 
+D. SELECT e.employee_id "Emp_id", e.emp_name "Employee", e.salary, m.mgr_id "Mgr_id", m.emp_name "manager" FROM employees e, employees m WHERE e.mgr_id = m.employee_id AND e.salary > 4000; 
+E. SELECT e.employee_id "Emp_id", e.emp_name "Employee", e.salary, m.mgr_id "Mgr_id", m.emp_name "Manager" FROM employees e, employees m WHERE e.employee_id = m.employee_id AND e.salary > 4000; 
+
+Answer: C 
+Explanation: 
+
+This statement lists the ID, name, and salary of the employee, and the ID and name of the 
+employee's manager, for all the employees who have a manager and earn more than 4000 
+
+Incorrect Answers 
+
+A: 
+This statement does not check does employee have a manager or not, so it will not provide 
+correct result. 
+B: 
+Usage of “e.mgr_id = m.mgr_id” condition is wrong to achieve required result. 
+D: 
+This statement uses “m.mgr_id” to show manager’s manager, not employ’s manager. 
+E: 
+Usage of “WHERE e.employee_id = m.employee_id” condition is wrong to achieve required result. 
+
+QUESTION NO: 39 
+In a SELECT statement that includes a WHERE clause, where is the GROUP BY clause 
+placed in the SELECT statement? 
+
+A. Immediately after the SELECT clause 
+B. Before the WHERE clause 
+C. Before the FROM clause 
+D. After the ORDER BY clause 
+E. After the WHERE clause 
+Answer: E 
+Explanation: 
+
+The GROUP BY clause can be place only after the WHERE clause, or after FROM clause if 
+there is no the WHERE clause in the statement. 
+
+Incorrect Answers 
+
+A: 
+It is not possible to place the GROUP BY clause immediately after the SELECT clause. 
+B: 
+It is not possible to place the GROUP BY clause before the WHERE clause, it can be 
+done only after it. 
+C: 
+It is not possible to place the GROUP BY clause before the FROM clause. 
+D: 
+It is not possible to place the GROUP BY clause after the ORDER BY clause. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 56-67 
+Chapter 2: Limiting, Sorting, and Manipulating Return Data 
+
+QUESTION NO: 40 
+The STUDENT_GRADES table has these columns: 
+
+STUDENT_ID NUMBER(12) 
+SEMESTER_END DATE 
+GPA NUMBER(4,3) 
+
+The register has requested a report listing the students' grade point averages (GPA), 
+sorted from highest grade point average to lowest within each semester, starting from 
+the earliest date. Which statement accomplishes this? 
+
+A. SELECT student_id, semester_end, gpa FROM student_grades ORDER BY semester_end DESC, gpa DESC; 
+B. SELECT student_id, semester_end, gpa FROM student_grades ORDER BY semester_end ASC, gpa ASC; 
+C. SELECT student_id, semester_end, gpa FROM student_grades ORDER BY semester_end, gpa DESC; 
+D. SELECT student_id, semester_end, gpa FROM student_grades ORDER BY gpa DESC, semester_end DESC; 
+E. SELECT student_id, semester_end, gpa FROM student_grades ORDER BY gpa DESC, semester_end ASC; 
+Answer: C 
+Explanation: 
+
+This answer shows correct syntax and semantics to receive desired result. 
+
+Incorrect Answers 
+
+A: 
+Semesters will be sorted started from the oldest date, not the earliest. 
+B: 
+GPA data will be sorted in ascending order, what is opposite to our task. 
+D: 
+Semesters will be sorted started from the oldest date, not the earliest. Only difference with 
+answer A is order of columns in the ORDER BY clause. 
+E: 
+This query has wrong order of columns to sort: results need to be sorted first by semester, 
+than by grade point average. 
+
+QUESTION NO: 41 
+The ORDERS table has these columns: 
+
+ORDER_ID NUMBER(4) NOT NULL 
+CUSTOMER_ID NUMBER(12) NOT NULL 
+ORDER_TOTAL NUMBER(10,2) 
+
+The ORDERS table tracks the Order number, the order total, and the customer to 
+whom the Order belongs. Which two statements retrieve orders with an inclusive total 
+that ranges between 100.00 and 2000.00 dollars? (Choose two.) 
+
+A. SELECT customer_id, order_id, order_total FROM orders RANGE ON order_total (100 AND 2000) INCLUSIVE; 
+B. SELECT customer_id, order_id, order_total FROM orders HAVING order_total BETWEEN 100 and 2000; 
+C. SELECT customer_id, order_id, order_total FROM orders WHERE order_total BETWEEN 100 and 2000; 
+D. SELECT customer_id, order_id, order_total FROM orders WHERE order_total >= 100 and <= 2000; 
+E. SELECT customer_id, order_id, order_total FROM orders WHERE order_total >= 100 and order_total <= 2000; 
+Answer: C, E 
+Explanation: 
+
+Answers C and E provide correct results to show. You can use BETWEEN or comparison 
+operations to retrieve data. 
+
+Incorrect Answers 
+
+A: There is no RANGE ON or INCLUSIVE keyword in Oracle. 
+B: HAVING clause can be use only in conjunction with the GROUP BY clause. 
+D: Syntax “order_total >= 100 and <= 2000” is incorrect. 
+
+QUESTION NO: 42 
+Examine the data in the EMPLOYEES and EMP_HIST tables: 
+
+EMPLOYEES 
+
+EMPLOYEE_ID NAME DEPT_ID MGR_ID JOB_ID SALARY 
+101 Smith 20 120 SA_REP 4000 
+102 Martin 10 105 CLERK 2500 
+103 Chris 20 120 IT_ADMIN 4200 
+104 John 30 108 HR_CLERK 2500 
+105 Diana 30 108 IT_ADMIN 5000 
+106 Smith 40 110 AD_ASST 3000 
+108 Jennifer 30 110 HR_DIR 6500 
+110 Bob 40 EX_DIR 8000 
+120 Ravi 20 110 SA_DIR 6500 
+
+EMP_HIST 
+
+
+EMPLOYEE_ID NAME JOB_ID SALARY 
+101 Smith SA_CLERK 2000 
+103 Chris IT_CLERK 2200 
+104 John HR_CLERK 2000 
+106 Smith AD_ASST 3000 
+108 Jennifer HR_MGR 4500 
+
+The EMP_HIST table is updated at the end of every year. The employee ID, name, job 
+ID, and salary of each existing employee are modified with the latest data. New employee 
+details are added to the table. 
+Which statement accomplishes this task? 
+
+
+A. UPDATE emp_hist SET employee_id, name, job_id, salary = (SELECT employee_id, name, job_id, salary FROM employees) WHERE employee_id IN (SELECT employee_id FROM employees); 
+B. MERGE INTO emp_hist eh USING employees e ON (eh.employee_id = e.employee_id) WHEN MATCHED THEN UPDATE SET eh.name = e.name, eh.job_id = e.job_id, eh.salary = e.salary WHEN NOT MATCHED THEN INSERT VALUES (e.employee id, e.name, e.job id, e.salary); 
+C. MERGE INTO emp_hist eh USING employees e ON (eh.employee_id = e.employee_id) WHEN MATCHED THEN UPDATE emp hist SET eh.name = e.name, eh.job_id = e.job_id, eh.salary = e.salary WHEN NOT MATCHED THEN INSERT INTO emp_hist VALUES (e.employee_id, e.name, e.job_id, e.salary); 
+D. MERGE INTO emp_hist eh USING employees e WHEN MATCHED THEN UPDATE emp_hist SET eh.name = e.name, eh.job_id = e.job_id, eh.salary = e.salary WHEN NOT MATCHED THEN INSERT INTO emp_hist VALUES (e.employee_id, e.name, e.job_id, e.salary); 
+Answer: B 
+Explanation: 
+
+This task can be done using the MERGE command. Correct syntax for the MERGE command is MERGE INTO table1 USING table2 on (join_condition) WHEN MATCHED UPDATE 
+SET col1 = value WHEN NOT MATCHED INSERT (column_list) values (column_values). 
+
+Incorrect Answers 
+
+A: 
+MERGE command can handle this task, not UPDATE: new employee details will not be 
+added to the table 
+C: 
+This statement would by correct if UPDATE SET is syntax used, not UPDATE 
+table_name SET syntax as in usual UPDATE command. 
+D: 
+“ON condition” clause of the MERGE command is absent. 
+
+QUESTION NO: 43 
+Which two statements about subqueries are true? (Choose two.) 
+
+
+A. A single row subquery can retrieve data from only one table. 
+B. A SQL query statement cannot display data from table B that is referred to in its subquery, unless table B is included in the main query's FROM clause. 
+C. A SQL query statement can display data from table B that is referred to in its subquery, without including table B in its own FROM clause. 
+D. A single row subquery can retrieve data from more than one table. 
+E. A single row subquery cannot be used in a condition where the LIKE operator is used for comparison. 
+F. A multiple-row subquery cannot be used in a condition where the LIKE operator is used for comparison. 
+Answer: B, D 
+
+Explanation: 
+
+A SQL query statement cannot display data from table B that is referred to in its sub-query, 
+unless table B is included in the main query's FROM clause. And a single row sub-query can 
+retrieve data from more than one table. 
+
+Incorrect Answers 
+
+A: 
+A single row sub-query can retrieve data from more than one table. 
+C: 
+A SQL query statement cannot display data from table B that is referred to in its sub-
+query, unless table B is included in the main query's FROM clause. 
+E: 
+A single row sub-query can be used in a condition where the LIKE operator is used for 
+comparison. 
+F: 
+A multiple-row sub-query can be used in a condition where the LIKE operator is used for 
+comparison. 
+
+QUESTION NO: 44 
+Examine the data of the EMPLOYEES table. 
+EMPLOYEES (EMPLOYEE_ID is the primary key. MGR_ID is the ID of managers 
+and refers to the EMPLOYEE_ID) 
+
+
+EMPLOYEE_ID EMP_NAME DEPT_ID MGR_ID JOB_ID SALARY 
+101 Smith 20 120 SA_REP 4000 
+102 Martin 10 105 CLERK 2500 
+103 Chris 20 120 IT_ADMIN 4200 
+104 John 30 108 HR_CLERK 2500 
+105 Diana 30 108 HR_MGR 5000 
+106 Bryan 40 110 AD_ASST 3000 
+108 Jennifer 30 110 HR_DIR 6500 
+110 Bob 40 EX_DIR 8000 
+120 Ravi 20 110 SA_DIR 6500 
+
+Evaluate this SQL statement: 
+
+SELECT 
+e.employee_id "Emp_id", e.emp_name "Employee", e.salary, 
+m.employee_id "Mgr_id", m.emp_name "Manager" 
+
+FROM employees e, employees m 
+WHERE e.mgr_id = m.employee_id AND e.salary > 4000; 
+
+What is its output? 
+
+A. EMP_id EMPLOYEE SALARY Mgr_id Manager 
+   110 Bob 8000 Bob 
+   120 Ravi 6500 110 Ravi 
+   108 Jennifer 6500 110 Jennifer 
+   103 Chris 4200 120 Chris 
+   105 Diana 5000 108 Diana 
+B. EMP_id EMPLOYEE SALARY Mgr_id Manager 
+   120 Ravi 6500 110 Bob 
+   108 Jennifer 6500 110 Bob  
+   103 Chris 4200 120 Ravi 
+   105 Diana 5000 108 Jennifer 
+C. EMP_id EMPLOYEE SALARY Mgr_id Manager 
+   110 Bob 8000 
+   120 Ravi 6500 110 Bob 
+   108 Jennifer 6500 110 Bob 
+   103 Chris 4200 120 Ravi 
+   105 Diana 5000 108 Jennifer 
+D. EMP_id EMPLOYEE SALARY Mgr_id Manager 
+   110 Bob 8000 110 Bob 
+   120 Ravi 6500 120 Ravi 
+   108 Jennifer 6500 108 Jennifer 
+   103 Chris 4200 103 Chris 
+   105 Diana 5000 105 Dina 
+E. The SQL statement produces an error. 
+Answer: B 
+
+Explanation: 
+
+This statement lists the ID, name, and salary of the employee, and the ID and name of the 
+employee's manager, for all the employees who have a manager and earn more than 4000 
+
+Incorrect Answers 
+
+A: This output will be provided by different query. 
+C: This output will be provided by different query. 
+D: This output will be provided by different query. 
+E: This SQL query will not produce error, it will show results as in answer B. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 118-122 
+Chapter 3: Advanced Data Selection in Oracle 
+
+QUESTION NO: 45 
+You added a PHONE_NUMBER column of NUMBER data type to an existing EMPLOYEES table. The EMPLOYEES table already contains records of 100 
+employees. Now, you want to enter the phone numbers of each of the 100 employees into the table. 
+Some of the employees may not have a phone number available. Which data manipulation operation do you perform? 
+
+A. MERGE 
+B. INSERT 
+C. UPDATE 
+D. ADD 
+E. ENTER 
+F. You cannot enter the phone numbers for the existing employee records. 
+Answer: C 
+
+Explanation: 
+To update information you need to use UPDATE command. 
+Incorrect Answers 
+A: 
+Since you don’t have to add any records to the table you don’t need the MERGE 
+command. 
+B: 
+Since you don’t have to add any records to the table you don’t need the MERGE 
+command. 
+D: 
+There is no ADD command in Oracle. 
+E: 
+There is no ENTER command in Oracle. 
+F: 
+You can enter the phone numbers for the existing employee records by using UPDATE 
+command. 
+
+QUESTION NO: 46 
+In which case would you use a FULL OUTER JOIN? 
+
+A. Both tables have NULL values. 
+B. You want all unmatched data from one table. 
+C. You want all matched data from both tables. 
+D. You want all unmatched data from both tables. 
+E. One of the tables has more data than the other. 
+F. You want all matched and unmatched data from only one table. 
+Answer: D 
+Explanation: 
+
+Oracle9i also makes it possible for you to easily execute a full outer join, including all records 
+from the tables that would have been displayed if you had used both LEFT OUTER JOIN or 
+RIGTH OUTER JOIN clauses. 
+
+Incorrect Answers 
+
+A: 
+You will not use a FULL OUTER JOIN if both tables have NULL values. 
+B: 
+You will not use a FULL OUTER JOIN if you want all unmatched data from one table. 
+Only LEFT OUTER JOIN or RIGTH OUTER JOIN needs to be used. 
+C: 
+You want all unmatched, not matched, data from both tables. 
+E: 
+It is not a criterion to use a FULL OUTER JOIN if one of the tables has more data than 
+the other. 
+F: 
+You want all unmatched, not matched data or a combination of matched and unmatched 
+data, from both tables, not one table. 
+
+QUESTION NO: 47 
+Which two statements accurately describe a role? (Choose two.) 
+
+A. A role can be given to a maximum of 1000 users. 
+B. A user can have access to a maximum of 10 roles. 
+C. A role can have a maximum of 100 privileges contained in it. 
+D. Privileges are given to a role by using the CREATE ROLE statement. 
+E. A role is a named group of related privileges that can be granted to the user. 
+F. A user can have access to several roles, and several users can be assigned the same role. 
+Answer: D, F 
+Explanation: 
+
+Privileges can be given to a role by using the CREATE ROLE statement. A user can have 
+access to several roles, and several users can be assigned the same role. 
+
+Incorrect Answers 
+
+A: There is no limitation to a 1000 users for one role in Oracle. 
+B: There is no limitation to a 10 roles for one user in Oracle. 
+C: There is no limitation to a 1000 privileges for one role in Oracle. 
+E: The role can act as a named group of privileges to execute certain tasks. But privileges can be not related at all. 
+
+QUESTION NO: 48 
+What is necessary for your query on an existing view to execute successfully? 
+
+A. The underlying tables must have data. 
+B. You need SELECT privileges on the view. 
+C. The underlying tables must be in the same schema. 
+D. You need SELECT privileges only on the underlying tables. 
+Answer: B 
+Explanation: 
+
+To query an existing view you need to have SELECT privileges on the view. 
+
+Incorrect Answers 
+
+A: 
+The underlying tables can be without data: view will work correctly in that case. 
+C: 
+The underlying tables can be in different user schema. 
+D: 
+You need SELECT privileges not only on the underlying tables, but on the view also. 
+
+QUESTION NO: 49 
+The EMP table has these columns: 
+
+ENAME VARCHAR2(35) 
+SALARY NUMBER(8,2) 
+HIRE_DATE DATE 
+
+Management wants a list of names of employees who have been with the company for 
+more than five years. Which SQL statement displays the required results? 
+
+A. SELECT ENAME FROM EMP WHERE SYSDATE-HIRE_DATE > 5; 
+B. SELECT ENAME FROM EMP WHERE HIRE_DATE-SYSDATE > 5; 
+C. SELECT ENAME FROM EMP WHERE (SYSDATE-HIRE_DATE)/365 > 5; 
+D. SELECT ENAME FROM EMP WHERE (SYSDATE-HIRE_DATE)* 365 > 5; 
+Answer: C 
+Explanation: 
+
+Expression SYSDATE-HIRE_DATE will show number of days after date of hiring employee, 
+so you need to divide result of expression on 365 and this compare result with 5. 
+
+Incorrect Answers 
+
+A: 
+This query returns all employees who were hired more than 5 days ago. 
+B: 
+This query will not return any record because result of HIRE_DATE-SYSDATE 
+expression will be negative number. 
+D: 
+You need to divide, not to multiply, SYSDATE-HIRE_DATE on the number of days in 1 
+year. 
+
+QUESTION NO: 50 
+Examine the data in the EMPLOYEES table. 
+
+EMPLOYEES 
+
+EMPLOYEE_ID EMP_NAME DEPT_ID MGR_ID JOB_ID SALARY 
+101 Smith 20 120 SA_REP 4000 
+102 Martin 10 105 CLERK 2500 
+103 Chris 20 120 IT_ADMIN 4200 
+104 John 30 108 HR_CLERK 2500 
+105 Diana 30 108 IT_ADMIN 5000 
+106 Smith 40 110 AD.ASST 3000 
+108 Jennifer 30 110 HR_DIR 6500 
+110 Bob 40 EK_DIR 8000 
+120 Revi 20 110 SA_DIR 6500 
+
+On the EMPLOYEES table, EMPLOYEE_ID is the primary key. MGR_ID is the ID of 
+managers and refers to the EMPLOYEE_ID. The JOB_ID column is a NOT NULL 
+column. 
+Evaluate this DELETE statement: 
+
+
+DELETE employee_id, salary, job_id 
+FROM employees 
+WHERE dept_id = 90; 
+
+Why does the DELETE statement fail when you execute it? 
+
+A. There is no row with dept_id 90 in the EMPLOYEES table. 
+B. You cannot delete the JOB_ID column because it is a NOT NULL column. 
+C. You cannot specify column names in the DELETE clause of the DELETE statement. 
+D. You cannot delete the EMPLOYEE_ID column because it is the primary key of the table. 
+Answer: C 
+
+Explanation: 
+
+You cannot specify column names in the DELETE clause of the DELETE statement. Syntax 
+of this command is: DELETE FROM table_name WHERE column_name = value. 
+
+Incorrect Answers 
+
+A: 
+Error in this statement is related with list of columns in the DELETE statement, not with 
+absence of row with DEPT_ID = 90 in the EMPLOYEES table. 
+B: 
+Error in this statement is related with list of columns in the DELETE statement, not with 
+NOT NULL constraint on the JOB_ID column. 
+D: 
+Error in this statement is related with list of columns in the DELETE statement, not with 
+the primary key constraint on the EMPLOYEE_ID column. 
+
+QUESTION NO: 51 
+Evaluate these two SQL statements: 
+
+
+SELECT last_name, salary , hire_date 
+FROM EMPLOYEES 
+ORDER BY salary DESC; 
+SELECT last_name, salary, hire_date 
+FROM EMPLOYEES 
+ORDER BY 2 DESC; 
+
+What is true about them? 
+
+A. The two statements produce identical results. 
+B. The second statement returns a syntax error. 
+C. There is no need to specify DESC because the results are sorted in descending order by default. 
+D. The two statements can be made to produce identical results by adding a column alias 
+for the salary column in the second SQL statement. 
+Answer: A 
+Explanation: 
+
+These two statements produce identical results, because it is possible even to use numbers to 
+indicate the column position where Oracle should order the output from a statement. 
+
+Incorrect Answers 
+
+B: 
+Second statement is correct and it will not return a syntax error. 
+C: 
+The results are sorted in ascending order by default. 
+D: 
+There is no corrections need to be made for the statements. They will return identical 
+results. 
+
+QUESTION NO: 52 
+You would like to display the system date in the format "Monday, 01 June, 2001". 
+Which SELECT statement should you use? 
+
+A. SELECT TO_DATE(SYSDATE, 'FMDAY, DD Month, YYYY') FROM dual; 
+B. SELECT TO_CHAR(SYSDATE, 'FMDD, DY Month, 'YYY')  FROM dual; 
+C. SELECT TO_CHAR(SYSDATE, 'FMDay, DD Month, YYYY') FROM dual; 
+D. SELECT TO_CHAR(SYSDATE, 'FMDY, DDD Month, YYYY') FROM dual; 
+E. SELECT TO_DATE(SYSDATE, 'FMDY, DDD Month, YYYY') FROM dual; 
+Answer: C 
+Explanation: 
+
+This answer is correct: “Day” shows the day spelled out, “DD” shows the two-digit date, 
+“Month” provides the month spelled out, “YYYY” shows the four-digit year. “FMDay” is 
+special format mask to suppresses the extra spaces between the name of the day and the 
+number of the date. 
+
+Incorrect Answers 
+
+A: 
+This statement will return an error because of inappropriate usage of the TO_DATE() 
+function. 
+B: 
+Incorrect format mask “DY” is used to show the number of the day. 
+D: 
+Incorrect format mask “DY” is used to show the name of the day and format mask “DDD” 
+is used to show the number of the day. 
+E: 
+Incorrect format mask “DY” is used to show the name of the day and format mask “DDD” 
+is used to show the number of the day. Also this statement will return an error because of 
+inappropriate usage of the TO_DATE() function. 
+
+QUESTION NO: 53 
+The CUSTOMERS table has these columns: 
+
+
+CUSTOMER_ID NUMBER(4) NOT NULL 
+CUSTOMER_NAME VARCHAR2(100) NOT NULL 
+STREET_ADDRESS VARCHAR2(150) 
+CITY_ADDRESS VARCHAR2(50) 
+STATE_ADDRESS VARCHAR2(50) 
+PROVINCE_ADDRESS VARCHAR2(50) 
+COUNTRY_ADDRESS VARCHAR2(50) 
+POSTAL_CODE VARCHAR2(12) 
+CUSTOMER_PHONE VARCHAR2(20) 
+
+Which statement finds the rows in the CUSTOMERS table that do not have a postal 
+code? 
+
+A. SELECT customer_id, customer_name FROM customers WHERE postal_code CONTAINS NULL; 
+B. SELECT customer_id, customer_name FROM customers WHERE postal_code = '________'; 
+C. SELECT customer_id, customer_name FROM customers WHERE postal_code IS NULL; 
+D. SELECT customer_id, customer_name FROM customers WHERE postal code IS NVL; 
+E. SELECT customer_id, customer_name FROM customers WHERE postal_code = NULL; 
+Answer: C 
+Explanation: 
+
+This statement returns the rows in the CUSTOMERS table that do not have a postal code. The 
+correct syntax to check NULL values is usage of “IS NULL” clause. 
+
+Incorrect Answers 
+
+A: 
+“CONTAINS NULL” is incorrect clause in Oracle. 
+B: 
+This statement will just check if postal code equals to string ‘________'; 
+D: 
+Usage of “IS NVL” is incorrect in Oracle. But there is a function NVL() you can use to 
+process NULL values. 
+E: 
+You can not use equal comparison to check whether value is NULL or not. Use 
+construction “IS NULL” or “IS NOT NULL” to do that. 
+
+QUESTION NO: 54 
+Which SELECT statement will the result ‘ello world’ from the string ‘Hello World’? 
+
+
+A. SELECT SUBSTR( ‘Hello World’,1) FROM dual; 
+B. SELECT INITCAP(TRIM (‘Hello World’, 1,1)) FROM dual; 
+C. SELECT LOWER(SUBSTR(‘Hello World’, 1, 1) FROM dual; 
+D. SELECT LOWER(SUBSTR(‘Hello World’, 2, 1) FROM dual; 
+E. SELECT LOWER(TRIM (‘H’ FROM ‘Hello World’)) FROM dual; 
+
+Answer: E 
+Explanation: 
+
+This statement will return correct result because function TRIM() will trim letter ‘H’ in the 
+‘Hello World’ and function LOWER() will return data in string in lowercase.. 
+
+Incorrect Answers 
+
+A: 
+This statement will return sub-string starting at the character in position number Y to the 
+end. 
+B: 
+There is incorrect syntax in the TRIM() function. 
+C: 
+There is incorrect syntax in that statement because of absence right bracket. 
+D: 
+There is incorrect syntax in that statement because of absence right bracket. 
+
+QUESTION NO: 55 
+Evaluate this SQL statement: 
+
+SELECT e.employee_id, (.15* e.salary) + (.5 * e.commission_pct) + (s.sales amount * (.35 * e.bonus)) AS CALC_VALUE 
+FROM employees e, sales s 
+WHERE e.employee_id = s.emp_id; 
+
+What will happen if you remove all the parentheses from the calculation? 
+
+A. The value displayed in the CALC_VALUE column will be lower. 
+B. The value displayed in the CALC_VALUE column will be higher. 
+C. There will be no difference in the value displayed in the CALC_VALUE column. 
+D. An error will be reported. 
+Answer: C 
+Explanation: 
+
+There will be no difference in the value displayed in the CALC_VALUE column because not 
+arithmetic operations or usage of alias for the calculated expression in the SELECT clause 
+will not cause change the value appearance. 
+
+Incorrect Answers 
+
+A: 
+There will be no difference in the value displayed in the CALC_VALUE column. 
+B: 
+There will be no difference in the value displayed in the CALC_VALUE column. 
+D: 
+There is no error in this statement. 
+
+QUESTION NO: 56 
+From SQL*Plus, you issue this SELECT statement: 
+
+ SELECT* 
+From orders; 
+
+
+You use this statement to retrieve data from a data table for __________. (Choose all 
+that apply) 
+
+A. Updating 
+B. Viewing 
+C. Deleting 
+D. Inserting 
+E. Truncating 
+Answer: B, D 
+Explanation: 
+
+You can use SELECT statement to display and to insert data into different table. 
+
+Incorrect Answers 
+
+A: 
+You cannot update data with SELECT statement. Update command is used for this 
+purpose. 
+C: 
+You cannot delete data with SELECT statement. Delete command is used for this purpose. 
+E: 
+You cannot truncate data with SELECT statement. Truncate command is used for this 
+purpose. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 20-21 
+Chapter 1: Overview of Oracle Databases 
+
+QUESTION NO: 57 
+You need to create a view EMP_VU. The view should allow the users to manipulate the 
+records of only the employees that are working for departments 10 or 20. 
+Which SQL statement would you use to create the view EMP_VU? 
+
+
+A. CREATE VIEW emp_vu AS SELECT * FROM employees WHERE department_id IN (10,20); 
+B. CREATE VIEW emp_vu AS SELECT * FROM employees WHERE department_id IN (10,20) WITH READ ONLY; 
+C. CREATE VIEW emp_vu AS SELECT * FROM employees WHERE department_id IN (10,20) WITH CHECK OPTION; 
+D. CREATE FORCE VIEW emp_vu AS SELECT * FROM employees WHERE department_id IN (10,20); 
+E. CREATE FORCE VIEW emp_vu AS SELECT * FROM employees WHERE department_id IN (10,20) NO UPDATE; 
+Answer: C 
+Explanation: 
+
+Tables that underlie views often have constraints that limit the data that can be added to those 
+tables. Views cannot add data to the underlying table that would violate the table’s 
+constraints. However, you can also define a view to restrict the user’s ability to change 
+underlying table data even further, effectively placing a special constraint for data 
+manipulation through the view. This additional constraint says that INSERT or UPDATE 
+statements issued against the view are cannot create rows that the view cannot subsequently 
+select. This constraint is configured when the view is defined by adding the WITH CHECK 
+OPTION to the CREATE VIEW statement. 
+
+Incorrect Answers 
+
+A: This view does not provide correct semantic of question task. 
+B: WITH READ ONLY clause is incorrect syntax in the CREATE VIEW command. 
+D: This view does not provide correct semantic of question task. 
+E: NO UPDATE clause is incorrect syntax in the CREATE VIEW command. 
+
+QUESTION NO: 58 
+Examine the structure of the STUDENTS table: 
+
+STUDENT_ID NUMBER NOT NULL, Primary Key 
+STUDENT_NAME VARCHAR2(30) 
+COURSE_ID VARCHAR2(10) NOT NULL 
+MARKS NUMBER 
+START_DATE DATE 
+FINISH_DATE DATE 
+
+You need to create a report of the 10 students who achieved the highest ranking in the 
+course INT SQL and who completed the course in the year 1999. 
+
+Which SQL statement accomplishes this task? 
+
+A. SELECT student_ id, marks, ROWNUM "Rank" FROM students WHERE ROWNUM <= 10 AND finish_date BETWEEN '01-JAN-99' AND '31-DEC-99' AND course_id = 'INT_SQL' ORDER BY marks DESC; 
+B. SELECT student_id, marks, ROWID "Rank" FROM students WHERE ROWID <= 10 AND finish_date BETWEEN '01-JAN-99' AND '31-DEC-99' AND course_id = 'INT_SQL' ORDER BY marks; 
+C. SELECT student_id, marks, ROWNUM "Rank" FROM (SELECT student_id, marks FROM students WHERE ROWNUM <= 10 AND finish_date BETWEEN '01-JAN-99' AND '31-DEC-99' AND course_id = 'INT_SQL' ORDER BY marks DESC); 
+D. SELECT student_id, marks, ROWNUM "Rank” FROM (SELECT student_id, marks FROM students ORDER BY marks DESC) WHERE ROWNUM <= 10 AND finish_date BETWEEN '01-JAN-99' AND '31-DEC-99' AND course_id = 'INT_SQL'; 
+
+
+Answer: D 
+Explanation: 
+
+This statement using inline sub-query will provide correct results to show 10 students who 
+achieved the highest ranking in the course INT SQL and who completed the course in the year 
+1999. 
+
+Incorrect Answers 
+
+A: 
+This view will just show first 10 students from the STUDENTS table with limitation on 
+the course INT SQL and who completed the course in the year 1999. 
+B: 
+It’s wrong to use here ROWID to achieve desired results. 
+C: 
+This statement will provide wrong result due to wrong conditions in the inline sub-query. 
+
+QUESTION NO: 59 
+
+Which four statements correctly describe functions that are available in SQL? (Choose four) 
+
+A. INSTR returns the numeric position of a named character. 
+B. NVL2 returns the first non-null expression in the expression list. 
+C. TRUNCATE rounds the column, expression, or value to n decimal places. 
+D. DECODE translates an expression after comparing it to each search value. 
+E. TRIM trims the heading of trailing characters (or both) from a character string. 
+F. NVL compares two expressions and returns null if they are equal, or the first expression of they are not equal. 
+G. NULLIF compares twp expressions and returns null if they are equal, or the first expression if they are not equal. 
+Answer: A, D, E, G 
+Explanation: 
+
+INSTR returns the numeric position of a named character. DECODE translates an expression 
+after comparing it to each search value. TRIM trims the heading of trailing characters (or 
+both) from a character string. NULLIF compares twp expressions and returns null if they are 
+equal, or the first expression if they are not equal. 
+
+Incorrect Answers 
+
+B: 
+This statement is not correct. The following is the Syntax for NVL2 function: 
+NVL2(expr1, expr2, expr3). If expr1 is not null, NVL2 returns expr2. If expr1 is null, 
+NVL2 returns expr3. 
+C: 
+Command TRUNCATE is used to remove all row data from the table, while leaving the 
+definition of the table intact, including the definition of constraints and any associated 
+database objects as indexes, constraints, and triggers on the table. 
+F: 
+NVL returns second parameter value if first one is NULL. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 67-73 
+Chapter 2: Limiting, Sorting, and Manipulating Return Data 
+
+QUESTION NO: 60 
+Examine the data from the EMP table: 
+
+
+EMP_ID DEPT_ID COMMISSION 
+1 10 500 
+2 20 1000 
+3 10 
+4 10 600 
+5 30 800 
+6 30 200 
+7 10 300 
+
+
+The COMMISSION column shows the monthly commission earned by the employee. 
+Which three tasks would require subqueries or joins in order to perform in a single 
+step? (Choose three) 
+
+A. Deleting the records of employees who do not earn commission. 
+B. Increasing the commission of employee 3 by the average commission earned in department 20. 
+C. Finding the number of employees who do NOT earn commission and are working for department 20. 
+D. Inserting into the table a new employee 10 who works for department 20 and earns a commission that is equal to the commission earned by employee 3. 
+E. Creating a table called COMMISSION that has the same structure and data as the columns EMP_ID and COMMISSIONS of the EMP table. 
+F. Decreasing the commission by 150 for the employees who are working in department 30 and earning a commission of more then 800. 
+Answer: B, D, E 
+Explanation: 
+
+Increasing the commission of employee 3 by the average commission earned in department 20 
+will require sub-queries or joins in order to perform in a single step. Inserting into the table a 
+new employee 10 who works for department 20 and earns a commission that is equal to the 
+commission earned by employee 3 is correct answer also. To create a table that has the same 
+structure as subset of columns from another table it’s required to use a subquery in order to 
+perform in a single step. 
+
+Incorrect Answers 
+
+A: 
+This query can be done without using sub-queries or joins in order to perform in a single 
+step. 
+C: 
+It is not required to use sub-queries or joins to create SQL statement for that query. 
+F: 
+This query can be done without using sub-queries or joins in order to perform in a single 
+step: only two conditions in the WHERE clause should be specified. 
+
+QUESTION NO: 61 
+The CUSTOMERS table has these columns: 
+
+CUSTOMER_ID NUMBER(4) NOT NULL 
+CUSTOMER_NAME VARCHAR2(100) NOT NULL 
+STREET_ADDRESS VARCHAR2(150) 
+CITY_ADDRESS VARCHAR2(50) 
+STATE_ADDRESS VARCHAR2(50) 
+PROVINCE_ADDRESS VARCHAR2(50) 
+COUNTRY_ADDRESS VARCHAR2(50) 
+POSTAL_CODE VARCHAR2(12) 
+CUSTOMER_PHONE VARCHAR2(20) 
+
+The CUSTOMER_ID column is the primary key for the table. 
+Which two statements find the number of customers? (Choose two.) 
+
+A. SELECT TOTAL(*) FROM customers; 
+B. SELECT COUNT(*) FROM customers; 
+C. SELECT TOTAL(customer_id) FROM customers; 
+D. SELECT COUNT(customer_id) FROM customers; 
+E. SELECT COUNT(customers) FROM customers; 
+F. SELECT TOTAL(customer_name) FROM customers; 
+Answer: B, D 
+Explanation: 
+
+These statements provide correct syntax and semantics to show the number of customers. 
+Function COUNT() can be used with substitution symbol of all columns “*” or just with one 
+column name. Last query will be processed a little bit faster. 
+
+Incorrect Answers 
+
+A: There is no TOTAL() function in Oracle. 
+C: There is no TOTAL() function in Oracle. 
+E: You cannot table name as a parameter of COUNT() function. 
+F: There is no TOTAL() function in Oracle. 
+
+QUESTION NO: 62 
+Which two tasks can your perform by using the TO_CHAR function? (Choose two) 
+
+
+A. Convert 10 to ‘TEN’ 
+B. Convert ‘10’ to 10 
+C. Convert ‘10’ to ‘10’ 
+D. Convert ‘TEN’ to 10 
+E. Convert a date to a character expression 
+F. Convert a character expression to a date 
+Answer: C, E 
+Explanation: 
+
+TO_CHAR(x) function is used to convert the value x to a character or converts a date to a 
+character string using formatting conventions. 
+
+Incorrect Answers 
+
+A: 
+This function cannot convert the number to the string representing number spelled out. 
+B: 
+TO_CHAR() function cannot convert the character value to a number. TO_NUMBER() 
+function does this. 
+D: 
+This function is not able to convert the string representing number spelled out to the 
+number itself. 
+F: 
+TO_CHAR() function cannot convert a character expression to a date. TO_DATE() 
+function does this. 
+
+QUESTION NO: 63 
+Which two statements are true regarding the ORDER BY clause? (Choose two) 
+
+A. The sort is in ascending by order by default. 
+B. The sort is in descending order by default. 
+C. The ORDER BY clause must precede the WHERE clause. 
+D. The ORDER BY clause is executed on the client side. 
+E. The ORDER BY clause comes last in the SELECT statement. 
+F. The ORDER BY clause is executed first in the query execution. 
+Answer: A, E 
+Explanation: 
+
+The ORDER BY clause does sort data in ascending order by default. And the ORDER BY 
+clause comes last in the SELECT statement: after FROM or WHERE or GROUP BY clause. 
+
+Incorrect Answers 
+
+B: 
+The ORDER BY clause does sort data in ascending, not descending order, by default. 
+C: 
+The ORDER BY clause must be after the WHERE clause in the SQL statement. 
+D: 
+The ORDER BY clause is executed on the server side as the whole SQL statement is. 
+F: 
+The ORDER BY clause is executed last in the query execution, after results are limited 
+with the WHERE and GROUP BY clause conditions. 
+
+QUESTION NO: 64 
+
+Examine the structures of the EMPLOYEES and TAX tables. 
+
+EMPLOYEES 
+
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+EMP_NAME VARCHAR2 (30) 
+JOB_ID VARCHAR2 (20) 
+SALARY NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID column 
+DEPARTMENT_ID NUMBER Foreign key to DEPARTMENT_ID column of the 
+DEPARTMENTS table 
+TAX 
+MIN_SALARY NUMBER 
+MAX_SALARY NUMBER 
+TAX_PERCENT NUMBER Percentage tax for given salary range 
+
+You need to find the percentage tax applicable for each employee. Which SQL statement 
+would you use? 
+
+A. SELECT employee_id, salary, tax_percent FROM employees e, tax t WHERE e.salary BETWEEN t.min_salary AND t.max_salary; 
+B. SELECT employee_id, salary, tax_percent FROM employees e, tax t WHERE e.salary > t.min_salary, tax_percent 
+C. SELECT employee_id, salary, tax_percent FROM employees e, tax t WHERE MIN(e.salary) = t.min_salary AND MAX(e.salary) = t.max_salary 
+D. You cannot find the information because there is no common column between the two tables. 
+Answer: A 
+Explanation: 
+
+You can find the percentage tax applicable for each employee by using SQL statement in 
+answer A. 
+
+Incorrect Answers 
+
+B: Syntax “WHERE e.salary > t.min_salary, tax_percent” is incorrect. 
+C: Functions, like MIN() and MAX(), cannot be used in the WHERE clause. 
+D: The SQL statement from the answer A will provide requested information. 
+
+QUESTION NO: 65 
+Which are DML statements? (Choose all that apply) 
+
+A. COMMIT… 
+B. MERGE… 
+C. UPDATE… 
+D. DELETE… 
+E. CREATE… 
+F. DROP… 
+Answer: B, C, D 
+Explanation: 
+
+MERGE, UPDATE and DELETE commands are data manipulation language (DML) 
+statements. 
+
+Incorrect Answers 
+
+A: COMMIT is not a DML command. 
+E: CREATE is a data definition language (DDL) command. 
+F: DROP is a data definition language (DDL) command. 
+
+QUESTION NO: 66 
+Mary has a view called EMP_DEPT_LOC_VU that was created based on the 
+EMPLOYEES, DEPARTMENTS, and LOCATIONS tables. She granted SELECT 
+privilege to Scott on this view. 
+Which option enables Scott to eliminate the need to qualify the view with the name 
+MARY .EMP_DEP_LOC_VU each time the view is referenced? 
+
+A. Scott can create a synonym for the EMP_DEPT_LOC_VU bus using the command: CREATE PRIVATE SYNONYM EDL_VU FOR mary.EMP DEPT_LOC_VU; then he can prefix the columns with this synonymn. 
+B. Scott can create a synonym for the EMP_DEPT_LOC_VU by using the command: CREATE SYNONYM EDL_VU FOR mary.EMP_DEPT_LOC_VU; then he can prefix the columns with this synonym. 
+C. Scott can create a synonym for the EMP_DEPT_LOC_VU by using the command: CREATE LOCAL SYNONYM EDL_VU FOR mary.EMP DEPT_LOC_VU; then he can prefix the columns with this synonym. 
+D. Scott can create a synonym for the EMP_DEPT_LOC_VU by using the command: CREATE SYNONYM EDL_VU ON mary(EMP_DEPT_LOC_VU); then he can prefix the columns with this synonym. 
+E. Scott cannot create a synonym because synonyms can be created only for tables. 
+F. Scott cannot create any synonym for Mary’s view. Mary should create a private synonym for the view and grant SELECT privilege on that synonym to Scott. 
+Answer: B 
+Explanation: 
+
+Correct syntax to create a local synonym is CREATE SYNONYM synonym_name. With 
+PUBLIC keyword you can create public synonym. 
+
+Incorrect Answers 
+
+A: 
+There is no PRIVATE keyword for the CREATE SYNONYM command. 
+C: 
+There is no LOCAL keyword for the CREATE SYNONYM command. 
+D: 
+This SQL statement shows incorrect syntax to create a synonym. 
+E: 
+Synonyms can be created not only for tables but for other objects also. 
+F: 
+Scott can create synonym for Mary’s view because she granted SELECT privilege to Scott 
+
+QUESTION NO: 67 
+Examine the structure of the EMPLOYEES table: 
+
+
+EMPLOYEE_ID NUMBER Primary Key 
+FIRST_NAME VARCHAR2(25) 
+LAST_NAME VARCHAR2(25) 
+HIRE_DATE DATE 
+
+
+You issue these statements: 
+
+CREATE table new_emp ( employee_id NUMBER, name VARCHAR2(30)); 
+INSERT INTO new_emp SELECT employee_id , last_name from employees; 
+Savepoint s1; 
+UPDATE new_emp set name = UPPER(name); 
+Savepoint s2; 
+Delete from new_emp; 
+Rollback to s2; 
+Delete from new_emp where employee_id =180; 
+UPDATE new_emp set name = 'James'; 
+Rollback to s2; 
+UPDATE new_emp set name = 'James' WHERE employee_id =180; 
+Rollback; 
+At the end of this transaction, what is true? 
+
+A. You have no rows in the table. 
+B. You have an employee with the name of James. 
+C. You cannot roll back to the same savepoint more than once. 
+D. Your last update fails to update any rows because employee ID 180 was already deleted. 
+Answer: A 
+Explanation: 
+
+At the end of this transaction you will not have rows in the table. 
+
+Incorrect Answers 
+
+B: 
+All transactions will be roll backed, so it will be no rows in the table. 
+C: 
+It is possible to roll back to the same savepoint more than once. 
+D: 
+Your last update will not fail because there is employee with ID 180 in the table and 
+transactions have been rolled back only to the savepoint s2 before issue this update. 
+
+QUESTION NO: 68 
+Which two are attributes of /SQL*Plus? (Choose two) 
+
+
+A. /SQL*Plus commands cannot be abbreviated. 
+B. /SQL*Plus commands are accesses from a browser. 
+C. /SQL*Plus commands are used to manipulate data in tables. 
+D. /SQL*Plus commands manipulate table definitions in the database. 
+E. /SQL*Plus is the Oracle proprietary interface for executing SQL statements. 
+Answer: C, D 
+Explanation: 
+
+SQL*Plus commands can be used to manipulate data in tables and SQL*Plus commands 
+manipulate table definitions in the database. 
+
+Incorrect Answers 
+
+A: 
+SQL*Plus commands can be abbreviated. Like command DESCRIBE can be abbreviated 
+as DESC, or SELECT as SELE. 
+B: 
+SQL*Plus commands are not accesses from a browser. 
+E: 
+SQL*Plus is not only the Oracle proprietary interface for executing SQL statements. 
+
+QUESTION NO: 69 
+In which scenario would index be most useful? 
+
+A. The indexed column is declared as NOT NULL. 
+B. The indexed columns are used in the FROM clause. 
+C. The indexed columns are part of an expression. 
+D. The indexed column contains a wide range of values. 
+Answer: D 
+Explanation: 
+
+Index will be useful if the indexed column contains a wide range of values. Especially B-tree 
+indexes will work better for tables with a wide range of values. But for tables just with some 
+distinct values bitmap indexes will be more helpful. 
+
+Incorrect Answers 
+
+A: 
+Oracle automatically creates index for NOT NULL columns, so you don’t need create an 
+index yourself. 
+B: 
+There are only table names in the FROM clause, not columns. 
+C: 
+Index may be will not work if the indexed columns are part of an expression. You need to 
+avoid expressions if you want to use index. 
+
+QUESTION NO: 70 
+Which SQL statement generates the alias Annual Salary for the calculated column 
+SALARY*12? 
+
+A. SELECT ename, salary*12 ‘Annual Salary’ FROM employees; 
+B. SELECT ename, salary*12 “Annual Salary” FROM employees; 
+C. SELECT ename, salary*12 AS Annual Salary FROM employees; 
+D. SELECT ename, salary*12 AS INITCAP(“ANNUAL SALARY”) FROM employees 
+Answer: B 
+Explanation: 
+
+This SQL statement provides correct syntax to generate the alias Annual Salary for the 
+calculated column SALARY*12. 
+
+Incorrect Answers 
+
+A: 
+Alias can be surrounded with double quotation marks, not with single. Oracle error will be 
+generated in this case. 
+C: 
+Alias needs to be surrounded with double quotation marks, it cannot just follow by the AS 
+keyword. 
+D: 
+You cannot use any function as alias, so this SQL statement will fail. 
+
+QUESTION NO: 71 
+Examine the structure of the EMPLOYEES table: 
+
+EMPLOYEE_ID NUMBER Primary Key 
+FIRST_NAME VARCHAR2(25) 
+LAST_NAME VARCHAR2(25) 
+DEPARTMENT_ID NUMBER 
+SALARY NUMBER 
+
+What is the correct syntax for an inline view? 
+
+A. SELECT a.last_name, a.salary, a.department_id, b.maxsal FROM employees a, (SELECT department_id, max(salary)maxsal FROM employees GROUP BY department_id) b WHERE a.department_id = b.department_id AND a.salary < b.maxsal; 
+B. SELECT a.last name, a.salary, a.department_id FROM employees a WHERE a.department_id IN (SELECT department_id FROM employees b GROUP BY department_id having salary = (SELECT max(salary) from employees));
+C. SELECT a.last_name, a.salary, a.department_id FROM employees a WHERE a.salary = (SELECT max(salary) FROM employees b WHERE a.department_id = b.department_id); 
+D. SELECT a.last_name, a.salary, a.department_id FROM employees a WHERE (a.department_id, a.salary) IN (SELECT department_id, a.salary) IN  (SELECT department_id max(salary) FROM employees b GROUP BY department_id ORDER BY department_id); 
+
+Answer: A 
+Explanation: 
+
+This SQL statement shows correct syntax to build inline views. You must enclose the query 
+text for the inline view in parentheses and also give a label for the inline view so that columns 
+in it can be referenced later. In answer A inline view is marked as B. 
+
+Incorrect Answers 
+
+B: 
+This SQL statement will fail because it is not correct syntax for inline views. There is no a 
+label for this inline view also. 
+C: 
+This SQL statement will fail because it is not correct syntax for inline views. There is no a 
+label for this inline view also. 
+D: 
+This SQL statement will fail because it is not correct syntax for inline views. There is no a 
+label for this inline view also. 
+
+QUESTION NO: 72 
+Which clause would you use in a SELECT statement to limit the display to those 
+employees whose salary is greater then 5000? 
+
+A. ORDER BY SALARY > 5000 
+B. GROUP BY SALARY > 5000 
+C. HAVING SALARY > 5000 
+D. WHERE SALARY > 5000 
+Answer: D 
+Explanation: 
+
+You need to use the WHERE clause to limit the display to those employees whose salary is 
+greater then 5000. 
+
+Incorrect Answers 
+
+A: 
+The ORDER BY clause will just sort data, but it will not limit them. 
+B: 
+You cannot use the GROUP BY clause with conditions. Oracle error will be generated. 
+C: 
+The HAVING clause may be used only in conjunction with the GROUP BY clause. 
+
+QUESTION NO: 73 
+When should you create a role? (Choose two) 
+
+A. To simplify the process of creating new users using the CREATE USER xxx IDENTIFIED by yyy statement. 
+B. To grant a group of related privileges to a user. 
+C. When the number of people using the database is very high. 
+D. To simplify the process of granting and revoking privileges. 
+E. To simplify profile maintenance for a user who is constantly traveling. 
+Answer: C, D 
+Explanation: 
+
+You should use roles to grant a group of privileges to a user. You grant the appropriate 
+privileges to the role and after that grant this role to specific users. By granting to or revoking 
+privileges from the role you can simplify procedure of users privileges maintainance: you 
+don’t need to grant/revoke privileges to/from each user. It’s especially very helpful when you 
+are experiencing a high number of people using the database. 
+
+Incorrect Answers 
+
+A: Roles have nothing to do with simplifying the process of creating new users. 
+B: You can use roles to grant a group of privileges to a user, but they can be not related at all. 
+E: Roles have nothing to do with user who is constantly traveling. 
+
+QUESTION NO: 74 
+Which three statements about subqueries are true? (Choose three) 
+
+A. A single row subquery can retrieve only one column and one row. 
+B. A single row subquery can retrieve only one row but many columns. 
+C. A multiple row subquery can retrieve multiple rows and multiple columns. 
+D. A multiple row subquery can be compared by using the “>” operator. 
+E. A single row subquery can use the IN operator. 
+F. A multiple row subquery can use the “=” operator. 
+Answer: B, C, D 
+Explanation: 
+
+A single row sub-query can retrieve only one row but many columns. A multiple row sub-
+query can retrieve one row or multiple rows and multiple columns. A multiple row sub-query 
+can be compared by using the “>” operator. 
+Incorrect Answers 
+
+A: A single row sub-query can retrieve only one row, but many columns.. 
+E: A single row sub-query cannot use the IN operator. 
+F: A multiple row sub-query cannot use the “=” operator. 
+
+QUESTION NO: 75 
+Examine the structure of the EMPLOYEES table: 
+
+EMPLOYEE_ID NUMBER NOT NULL 
+EMP_NAME VARCHAR2(30) 
+JOB_ID VARCHAR2(20) DEFAULT 'SA_REP' 
+SAL NUMBER 
+COMM_PCT NUMBER 
+MGR_ID NUMBER 
+DEPARTMENT_ID NUMBER 
+
+You need to update the records of employees 103 and 115. The UPDATE statement you 
+specify should update the rows with the values specified below: 
+
+JOB_ID: 
+Default value specified for this column definition. 
+
+SAL: 
+Maximum salary earned for the job ID SA_REP. 
+
+COMM_PCT: 
+Default value specified for this commission percentage column, if any. 
+If no default value is specified for the column, the value should be 
+NULL. 
+
+DEPARTMENT_ID: Supplied by the user during run time through substitution variable. 
+
+Which UPDATE statement meets the requirements? 
+
+A. UPDATE employees SET job_id = DEFAULT AND Sal = (SELECT MAX(sal) FROM employees WHERE job_id = 'SA_REP') AND comm_pct = DEFAULT AND department_id = &did WHERE employee_id IN (103,115); 
+B. UPDATE employees SET job_id = DEFAULT AND Sal = MAX(sal) AND comm_pct = DEFAULT OR NULL AND department_id = &did WHERE employee_id IN (103,115) AND job_id = 'SA_REP'; 
+C. UPDATE employees SET job_id = DEFAULT, Sal = (SELECT MAX(sal) FROM employees WHERE job_id = 'SA_REP'), comm_pct = DEFAULT, department_id = &did WHERE employee_id IN (103,115); 
+D. UPDATE employees SET job_id = DEFAULT, Sal = MAX(sal), comm_pct = DEFAULT, department_id = &did WHERE employee_id IN (103,115) AND job_id = 'SA_REP'; 
+E. UPDATE employees SET job_id = DEFAULT, Sal = (SELECT MAX(sal) FROM employees WHERE job_id = 'SA_REP') comm_pct = DEFAULT OR NULL, department_id = &did WHERE employee_id IN (103,115); 
+Answer: C 
+Explanation: 
+
+This UPDATE statement is correct to receive desired results. Correct syntax is UPDATE 
+table_name SET column_name1 = value, column_name2 = value2. You can also use the 
+DEFAULT keyword to set a column value to its specified default value in update statements 
+as well. 
+
+Incorrect Answers 
+
+A: 
+You cannot use syntax like UPDATE table_name SET column_name1 = value AND 
+column_name2 = value2. Correct syntax is UPDATE table_name SET column_name1 = 
+value, column_name2 = value2. 
+B: 
+You cannot use syntax like UPDATE table_name SET column_name1 = value AND 
+column_name2 = value2. Correct syntax is UPDATE table_name SET column_name1 = 
+value, column_name2 = value2. 
+D: 
+Group function is not allowed to use in the SET clause of the UPDATE command. 
+E: 
+You cannot set column to value DEFAULT OR NULL: this is wrong syntax to use. 
+
+QUESTION NO: 76 
+
+Which two statements about sequences are true? (Choose two) 
+
+A. You use a NEXTVAL pseudo column to look at the next possible value that would be generated from a sequence, without actually retrieving the value. 
+B. You use a CURRVAL pseudo column to look at the current value just generated from a sequence, without affecting the further values to be generated from the sequence. 
+C. You use a NEXTVAL pseudo column to obtain the next possible value from a sequence by actually retrieving the value from the sequence. 
+D. You use a CURRVAL pseudo column to generate a value from a sequence that would be used for a specified database column. 
+E. If a sequence starting from a value 100 and incremented by 1 is used by more then one application, then all of these applications could have a value of 105 assigned to their column whose value is being generated by the sequence. 
+F. You use REUSE clause when creating a sequence to restart the sequence once it generates the maximum value defined for the sequence. 
+Answer: B, C 
+Explanation: 
+
+You use a CURRVAL pseudo column to look at the current value just generated from a 
+sequence, without affecting the further values to be generated from the sequence. You use a 
+NEXTVAL pseudo column to obtain the next possible value from a sequence by actually 
+retrieving the value from the sequence. 
+
+Incorrect Answers 
+
+A: 
+You use a NEXTVAL pseudo column to obtain the next possible value from a sequence 
+by actually retrieving the value from the sequence. 
+D: You use a CURRVAL pseudo column to look at the current value just generated from a 
+sequence, without affecting the further values to be generated from the sequence. 
+E: 
+This statement is not correct. There is no limitation like that in Oracle. 
+F: 
+You use CYCLE clause, not REUSE, when creating a sequence to restart the sequence 
+once it generates the maximum value defined for the sequence. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 315-322 
+Chapter 7: Creating Other Database Objects in Oracle 
+
+QUESTION NO: 77 
+Which four are correct guidelines for naming database tables? (Choose four) 
+
+A. Must begin with either a number or a letter. 
+B. Must be 1-30 characters long. 
+C. Should not be an Oracle Server reserved word. 
+D. Must contain only A-Z, a-z, 0-+, _, *, and #. 
+E. Must contain only A-Z, a-z, 0-9, _, $, and #. 
+F. 
+Must begin with a letter. 
+Answer: B, C, E, F 
+Explanation: 
+
+Oracle database object must begin with a letter and can usually be between 1 and 30 
+characters long, except for databases (which have a maximum of eight characters) and 
+database links (with a maximum of 128 characters). Name cannot be an Oracle Server 
+reserved word. Name must contain only A-Z, a-z, 0-9, _, $, and #. 
+
+Incorrect Answers 
+
+A: Database tables may not begin with number. 
+D: It cannot contain symbols “+” or “*”. 
+
+QUESTION NO: 78 
+Examine the structure of the EMPLOYEES table: 
+
+Column name Data type Remarks 
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+LAST_NAME VARCNAR2(30) 
+FIRST_NAME VARCNAR2(30) 
+JOB_ID NUMBER 
+SAL NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID column 
+DEPARTMENT_ID NUMBER 
+
+You need to create an index called NAME_IDX on the first name and last name fields of 
+the EMPLOYEES table. Which SQL statement would you use to perform this task? 
+
+A. CREATE INDEX NAME_IDX (first_name, last_name); 
+B. CREATE INDEX NAME_IDX (first_name AND last_name); 
+C. CREATE INDEX NAME_IDX ON (first_name, last_name); 
+D. CREATE INDEX NAME_IDX ON employees (first_name AND last_name); 
+E. CREATE INDEX NAME_IDX ON employees(first_name, last_name); 
+F. CREATE INDEX NAME_IDX FOR employees(first_name, last_name); 
+Answer: E 
+Explanation: 
+
+Answer E provides correct syntax to create index: CREATE INDEX index_name ON table_name(list of columns). 
+Incorrect Answers 
+
+A: 
+You need to use keyword ON also to create index. 
+B: 
+You cannot use keyword AND to build a list of columns for index. Also this statement is 
+missing the table name on which the index is creating. 
+C: 
+This statement is missing the table name on which the index is creating. 
+D: 
+You cannot use keyword AND to build a list of columns for index. 
+F: 
+You cannot use keyword FOR to create an index. 
+
+QUESTION NO: 79 
+Which operator can be used with a multiple-row subquery? 
+
+
+A. = 
+B. LIKE 
+C. BETWEEN 
+D. NOT IN 
+E. IS 
+F. <> 
+Answer: D 
+Explanation: 
+
+Only NOT IN operator can be used with a multi-row sub-query. All others may be used with 
+single-row sub-query only. 
+
+Incorrect Answers 
+
+A: 
+When sub-queries are linked to the parent by equality comparisons, the parent query 
+expects only one row of data from the sub-query, so “=” operator cannot be used with a 
+multiple-row sub-query. 
+B: 
+Operator LIKE will work only with single-row sub-queries. 
+C: 
+Operator BETWEEN will not work with a multi-row sub-queries. 
+E: 
+Operator LIKE is used only for single-row sub-queries. 
+F: 
+When sub-queries are linked to the parent by equality comparisons, the parent query 
+expects only one row of data from the sub-query, so “<>” operator cannot be used with a 
+multiple-row sub-query. 
+
+QUESTION NO: 80 
+Examine the structure of the EMPLOYEES, DEPARTMENTS, and TAX tables. 
+
+EMPLOYEES 
+
+EMPLOYEE_ID NUMBER NOT NULL, Primary Key 
+EMP_NAME VARCHAR2 (30) 
+JOB_ID VARCHAR2 (20) 
+SALARY NUMBER 
+MGR_ID NUMBER References EMPLOYEE_ID column 
+DEPARTMENT_ID NUMBER Foreign key to DEPARTMENT_ID column of 
+the DEPARTMENTS table 
+
+DEPARTMENTS 
+
+
+DEPARTMENT_ID NUMBER NOT NULL, Primary Key 
+DEPARTMENT_NAME VARCHAR2 |30| 
+MGR_ID NUMBER References MGR_ID column of the 
+EMPLOYEES table 
+
+TAX 
+
+
+MIN_SALARY NUMBER 
+MAX_SALARY NUMBER 
+TAX_PERCENT NUMBER 
+
+For which situation would you use a nonequijoin query? 
+
+A. To find the tax percentage for each of the employees. 
+B. To list the name, job id, and manager name for all the employees. 
+C. To find the name, salary, and department name of employees who are not working with Smith. 
+D. To find the number of employees working for the Administrative department and earning less then 4000. 
+E. To display name, salary, manager ID, and department name of all the employees, even if the employees do not have a department ID assigned. 
+Answer: A 
+Explanation: 
+
+You will use a nonequijoin query to find the tax percentage for each of the employees because 
+you will check range of salaries without usage of equality operations in a comparison joining 
+data from two tables. 
+
+Incorrect Answers 
+
+B: 
+You will use equijoin query because EMPLOYEES and DEPARTMENTS tables will be 
+joined with equality operator. 
+C: 
+It will be equijoin query because EMPLOYEES and DEPARTMENTS tables will be 
+joined with equality operator. 
+D: 
+You will use equijoin query because EMPLOYEES and DEPARTMENTS tables will be 
+joined with equality operator. 
+E: 
+It will be equijoin query because of equality operator in join condition of two tables. 
+
+QUESTION NO: 81 
+Examine the data from the ORDERS and CUSTOMERS tables. 
+
+
+ORDERS 
+
+ORD_ID ORD_DATE CUST_ID ORD_TOTAÖ 
+100 12-JAN-2000 15 10000 
+101 09-MAR-2000 40 8000 
+102 09-MAR-2000 35 12500 
+103 15-MAR-2000 15 12000 
+104 25-JUN-2000 15 6000 
+105 18-JUL-2000 20 5000 
+106 18-JUL-2000 35 7000 
+107 21-JUL-2000 20 6500 
+109 04-AUG-2000 10 8000 
+
+CUSTOMERS 
+
+
+CUST_ID CUST_NAME CITY 
+10 Smith Los Angeles 
+15 Bob San Francisco 
+20 Martin Chicago 
+25 Mary New York 
+30 Rina Chicago 
+35 Smith New York 
+40 Lind New York 
+
+Evaluate the SQL statement: 
+
+SELECT * 
+FROM orders 
+WHERE cust_id = (SELECT cust_id 
+
+FROM customers 
+WHERE cust_name = 'Smith'); 
+
+
+What is the result when the query is executed? 
+
+A. 
+ORD_ID ORD_DATE CUST_ID ORD_TOTAL 
+102 09-MAR-2000 35 12500 
+106 18-JUL-2000 35 7000 
+108 04-AUG-2000 10 8000 
+
+B. ORD_ID ORD_DATE CUST_ID ORD_TOTAL 
+   102 09-MAR-2000 35 12500 
+   106 18-JUL-2000 35 7000 
+
+C. ORD_ID ORD_DATE CUST_ID ORD_TOTAL 
+   108 04-AUG-2000 10 8000 
+D. The query fails because the subquery returns more than one row. 
+E. The query fails because the outer query and the inner query are using different tables. 
+Answer: D 
+Explanation: 
+
+The query fails because the sub-query returns more than one row: it is possible situation when 
+there are some customers with name Smith. 
+
+Incorrect Answers 
+
+A: 
+The query fails because the sub-query returns more than one row 
+B: 
+The query fails because the sub-query returns more than one row 
+C: 
+The query fails because the sub-query returns more than one row 
+E: 
+The query fails because the sub-query returns more than one row, not because the outer 
+query and the inner query are using different tables. 
+
+QUESTION NO: 82 
+You need to display the last names of those employees who have the letter “A” as the second character in their names. 
+Which SQL statement displays the required results? 
+
+
+A. SELECT last_name FROM EMP WHERE last_name LIKE ‘_A%’; 
+B. SELECT last_name FROM EMP WHERE last name =’*A%’ 
+C. SELECT last_name FROM EMP WHERE last name =’_A%’; 
+D. SELECT last_name FROM EMP WHERE last name LIKE ‘*A%’ 
+Answer: A 
+Explanation: 
+Statement in this answer will show correct results because usage of operator LIKE and format 
+mask ‘_A%’ extract the last names of those employees who have the letter “A” as the second 
+character in their names. Symbol ‘_’ in format mask substitute exactly one symbol and cannot 
+be NULL. 
+
+Incorrect Answers 
+
+B: 
+This statement will return only names starting from symbol ‘*’. It cannot be used as 
+substitution symbol. 
+C: 
+Usage of equity operator here is not appropriate in this case: query will look exact for first 
+symbol ‘_’, it will not be considered as substitution symbol. 
+D: 
+This statement will return only names starting from symbol ‘*’. It cannot be used as 
+substitution symbol. 
+
+QUESTION NO: 83 
+You need to perform certain data manipulation operations through a view called 
+EMP_DEPT_VU, which you previously created. 
+You want to look at the definition of the view (the SELECT statement on which the view 
+was create.) 
+How do you obtain the definition of the view? 
+
+
+A. Use the DESCRIBE command in the EMP_DEPT VU view. 
+B. Use the DEFINE VIEW command on the EMP_DEPT VU view. 
+C. Use the DESCRIBE VIEW command on the EMP_DEPT VU view. 
+D. Query the USER_VIEWS data dictionary view to search for the EMP_DEPT_VU view. 
+E. Query the USER_SOURCE data dictionary view to search for the EMP_DEPT_VU view. 
+F. Query the USER_OBJECTS data dictionary view to search for the EMP_DEPT_VU view. 
+Answer: D 
+Explanation: 
+
+To look on the view definition you need to query the USER_VIEWS data dictionary view and 
+search for the EMP_DEPT_VU view. 
+
+Incorrect Answers 
+
+A: 
+You cannot see the definition of the view using the DESCRIBE command. 
+B: 
+There is no DEFINE VIEW command in Oracle. 
+C: 
+There is no DESCRIBE VIEW command in Oracle. 
+E: 
+You cannot use the USER_SOURCE data dictionary view to see the definition of your 
+view: it is used to store system objects definitions only. 
+F: 
+You can find record about view in the USER_OBJECTS, but it does not contain the 
+definition of the view itself. 
+
+QUESTION NO: 84 
+Evaluate this SQL statement: 
+
+SELECT e.EMPLOYEE_ID,e.LAST_NAME,e.DEPARTMENT_ID, d.DEPARTMENT_NAME 
+FROM EMP e, DEPARTMENT d 
+WHERE e.DEPARTMENT_ID = d.DEPARTMENT_ID; 
+
+In the statement, which capabilities of a SELECT statement are performed? 
+
+A. Selection, projection, join 
+B. Difference, projection, join 
+C. Selection, intersection, join 
+D. Intersection, projection, join 
+E. Difference, projection, product 
+Answer: A 
+Explanation: 
+
+Selection, projection and join capabilities of a SELECT statement are performed in this view. 
+
+Incorrect Answers 
+
+B: 
+Selection is performed in this query, not difference. There is no capability with name 
+difference for a SELECT statement exists. 
+C: 
+There is no intersection in this SELECT statement used. 
+D: 
+There is no intersection in this SELECT statement used. 
+E: 
+There is no difference or product capabilities exist for a SELECT statement. 
+
+QUESTION NO: 85 
+Which two are character manipulation functions? (Choose two.) 
+
+
+A. TRIM 
+B. REPLACE 
+C. TRUNC 
+D. TO_DATE 
+E. MOD 
+F. CASE 
+Answer: A, B 
+
+Explanation: 
+
+TRIM() and REPLACE() are character manipulation functions. 
+
+Incorrect Answers 
+
+C: 
+TRUNC(x,y) is arithmetic function, it truncates x to the decimal precision of y. If y is 
+negative, it truncates to y number of places to the left of the decimal point. This can also 
+be used on DATE columns. 
+D: 
+TO_DATE(x,[y]) function converts the non-date value x to a date using the format 
+specified by y. 
+E: 
+MOD(x,y) is arithmetic function, the modulus of x, defined in long division as the integer 
+remainder when x divided by y until no further whole number can be produced. 
+F: 
+There is no character manipulation function CASE in Oracle. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 67-93 
+Chapter 2: Limiting, Sorting, and Manipulating Return Data 
+
+QUESTION NO: 86 
+Which three statements correctly describe the functions and use of constraints? (Choose 
+three.) 
+
+A. Constraints provide data independence. 
+B. Constraints make complex queries easy. 
+C. Constraints enforce rules at the view level. 
+D. Constraints enforce rules at the table level. 
+E. Constraints prevent the deletion of a table if there are dependencies. 
+F. 
+Constraints prevent the deletion of an index if there are dependencies. 
+Answer: C, D, E 
+Explanation: 
+
+Constraints have functions to enforce rules at the view and table levels and to prevent the 
+deletion of data if dependencies exist between tables. 
+
+Incorrect Answers 
+
+A: 
+Constraints are used to put dependencies on data. 
+B: 
+Constrains are not used to make complex queries more easy. 
+F: 
+Constraints does not prevent the deletion of an index if there are dependencies. 
+QUESTION NO: 87 
+You define a multiple-row subquery in the WHERE clause of an SQL query with a 
+comparison operator "=". 
+What happens when the main query is executed? 
+
+A. The main query executes with the first value returned by the subquery. 
+B. The main query executes with the last value returned by the subquery. 
+C. The main query executes with all the values returned by the subquery. 
+D. The main query fails because the multiple-row subquery cannot be used with the comparison operator. 
+E. You cannot define a multiple-row subquery in the WHERE clause of a SQL query. 
+Answer: D 
+Explanation: 
+
+The main query fails because the multiple-row sub-query cannot be used with the comparison 
+operator. Only single-row query can use comparison operators, like =, <, >, <=, >, and <>. 
+
+Incorrect Answers 
+
+A: 
+The main query fails because the multiple-row sub-query cannot be used with the 
+comparison operator. 
+B: 
+The main query fails because the multiple-row sub-query cannot be used with the 
+comparison operator. 
+C: 
+The main query fails because the multiple-row sub-query cannot be used with the 
+comparison operator. 
+E: 
+You can define a multiple-row sub-query in the WHERE clause of a SQL query, but error 
+will be generated by different reason. 
+
+QUESTION NO: 88 
+You need to calculate the total of all salaries in the accounting department. Which group 
+function should you use? 
+
+A. MAX 
+B. MIN 
+C. SUM 
+D. COUNT 
+E. TOTAL 
+F. LARGEST 
+Answer: C 
+Explanation: 
+Function SUM(x) calculates the sum of all values in column x in all rows returned by the 
+SELECT statement. 
+
+Incorrect Answers 
+
+A: 
+Function MAX(x) determines the maximum value in column x for all rows returned by the 
+SELECT statement. 
+B: 
+Function MIN(x) determines the minimum value in column x for all rows returned by the 
+SELECT statement. 
+D: 
+Function COUNT(x) counts the number of non-NULL values returned by the SELECT 
+statement for column x. 
+E: 
+There is no TOTAL() function in Oracle. 
+F: 
+There is no LARGEST() function in Oracle. 
+
+QUESTION NO: 89 
+What is true about joining tables through an equijoin? 
+
+A. You can join a maximum of two tables through an equijoin. 
+B. You can join a maximum of two columns through an equijoin. 
+C. You specify an equijoin condition in the SELECT or FROM clauses of a SELECT statement. 
+D. To join two tables through an equijoin, the columns in the join condition must be primary key and foreign key columns. 
+E. You can join n tables (all having single column primary keys) in a SQL statement by specifying a minimum of n-1 join conditions. 
+Answer: E 
+Explanation: 
+
+For N joined tables using Oracle or ANSI/ISO syntax for table joins, you need at least N-1 
+equijoin conditions in the WHERE clause of your SELECT statement or N-1 JOIN 
+table_name ON join_condition clauses in order to avoid a Cartesian product, respectively. 
+
+Incorrect Answers 
+
+A: 
+There is no maximum on two tables to join them through an equijoin. 
+B: 
+There is no maximum on two columns to join them through an equijoin. 
+C: 
+You can specify an equijoin condition only in the FROM clauses of a SELECT statement. 
+D: 
+There is no limitation about primary key and foreign key for the columns to use them for an equijoin. 
+
+QUESTION NO: 90 
+Scott issues the SQL statements: 
+
+CREATE TABLE dept 
+(deptno NUMBER(2), 
+dname VARCHAR2(14), 
+loc VARCHAR2(13)}; 
+GRANT SELECT 
+ON DEPT 
+TO SUE; 
+
+
+If Sue needs to select from Scott's DEPT table, which command should she use? 
+
+A. SELECT * FROM DEPT; 
+B. SELECT * FROM SCOTT.DEPT; 
+C. SELECT * FROM DBA.SCOTT.DEPT; 
+D. SELECT * FROM ALL_USERS WHERE USER_NAME = 'SCOTT' AND TABLE NAME = 'DEPT'; 
+Answer: B 
+Explanation: 
+
+If the table doesn’t exist in your schema, you must prefix the table name with the schema 
+information, separating the owner from the table name with a period. 
+
+Incorrect Answers 
+
+A: If you don’t have DEPT table in your schema, this statement will fail. 
+C: This statement is incorrect. 
+D: This statement is incorrect. ALL_USERS view is used to extract information about users. 
+
+QUESTION NO: 91 
+Which clause should you use to exclude group results? 
+
+
+A. WHERE 
+B. HAVING 
+C. RESTRICT 
+D. GROUP BY 
+E. ORDER BY 
+Answer: B 
+Explanation: 
+
+HAVING clause is used to weed out unwanted data once the data is grouped using the 
+GROUP BY statement. 
+
+Incorrect Answers 
+
+A: 
+WHERE clause cannot be used for this purpose. 
+C: 
+There is no RESTRICT command in Oracle. 
+D: 
+GROUP BY cannot be used itself to exclude group results. 
+E: 
+ORDER BY clause may be used only to sort final results, not to exclude group results. 
+
+QUESTION NO: 92 
+A subquery can be used to _________. 
+
+
+A. Create groups of data 
+B. Sort data in a specific order 
+C. Convert data to a different format 
+D. Retrieve data based on an unknown condition 
+Answer: D 
+Explanation: 
+
+A sub-query can be used to retrieve data based on an unknown condition 
+
+Incorrect Answers 
+
+A: 
+A sub-query cannot be used to create groups of data, GROUP BY clause is used for that. 
+B: 
+A sub-query cannot be used to sort data in a specific order, ORDER BY clause is used for 
+that. 
+C: 
+A sub-query cannot convert data to a different format. 
+
+QUESTION NO: 93 
+The EMPLOYEES table contains these columns: 
+
+
+LAST_NAME VARCHAR2 (25) 
+SALARY NUMBER (6,2) 
+
+COMMISSION_PCT NUMBER (6) 
+
+You need to write a query that will produce these results: 
+
+1. Display the salary multiplied by the commission_pct. 
+2. Exclude employees with a zero commission_pct. 
+3. Display a zero for employees with a null commission value. 
+Evaluate the SQL statement: 
+
+SELECT LAST_NAME, SALARY*COMMISSION_PCT 
+FROM EMPLOYEES 
+WHERE COMMISSION_PCT IS NOT NULL; 
+
+What does the statement provide? 
+
+A. All of the desired results 
+B. Two of the desired results 
+C. One of the desired results 
+D. An error statement 
+Answer: C 
+Explanation: 
+
+This statement will provide only one of the desired results: display the salary multiplied by 
+the commission_pct. It will not exclude employees with a zero commission_pct and display a 
+zero for employees with a null commission value. 
+
+Incorrect Answers 
+
+A: This statement will provide only one of the desired results, not all. 
+B: This statement will provide only one of the desired results, not two. 
+D: This statement will not generate an error, it is correct . 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 25-38 
+Chapter 1: Overview of Oracle Databases 
+
+QUESTION NO: 94 
+Which SELECT statement should you use to extract the year from the system date and 
+display it in the format "1998"? 
+
+A. SELECT TO_CHAR(SYSDATE,'yyyy') FROM dual; 
+B. SELECT TO_DATE(SYSDATE,'yyyy') FROM dual; 
+C. SELECT DECODE(SUBSTR(SYSDATE, 8), 'YYYY') FROM dual; 
+D. SELECT DECODE(SUBSTR(SYSDATE, 8), 'year') FROM dual; 
+E. SELECT TO_CHAR(SUBSTR(SYSDATE, 8,2),'yyyy') FROM dual; 
+Answer: A 
+Explanation: 
+
+Function TO_CHAR(x, y) converts the value x to a character or converts a date to a character 
+string using formatting conventions. 
+
+Incorrect Answers 
+
+B: 
+Function TO_DATE(x,[y]) converts the non-date value x to a date using the format 
+specified by x. 
+C: 
+The DECODE function is used as substitution of IF-THEN-ELSE PL/SQL construction in 
+SQL queries. The SELECT statement provides incorrect syntax of it because it cannot 
+have only two parameters. 
+D: 
+The DECODE function is used as substitution of IF-THEN-ELSE PL/SQL construction in 
+SQL queries. The SELECT statement provides incorrect syntax of it because it cannot 
+have only two parameters. 
+E: 
+This statement provide incorrect syntax of TO_CHAR() function: it requires only one 
+parameter, not two. 
+
+QUESTION NO: 95 
+Which is an /SQL*Plus command? 
+
+
+A. INSERT 
+B. UPDATE 
+C. SELECT 
+D. DESCRIBE 
+E. DELETE 
+F. 
+RENAME 
+Answer: D 
+Explanation: 
+
+There is only one SQL*Plus command in this list: DESCRIBE. It cannot be used as SQL 
+command. This command returns a description of tablename, including all columns in that 
+table, the datatype for each column, and an indication of whether the column permits storage 
+of NULL values. 
+
+Incorrect Answers 
+
+A: 
+INSERT is not a SQL*Plus command. It’s data-manipulation language (DML) command. 
+
+B: 
+UPDATE is not a SQL*Plus command. It’s data-manipulation language (DML) 
+command. 
+C: 
+SELECT is not a SQL*Plus command. 
+E: 
+DELETE is not a SQL*Plus command. It’s data-manipulation language (DML) command. 
+F: 
+RENAME is not a SQL*Plus command. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 43 
+Chapter 1: Overview of Oracle Databases 
+
+QUESTION NO: 96 
+What does the TRUNCATE statement do? 
+
+
+A. Removes the table 
+B. Removes all rows from a table 
+C. Shortens the table to 10 rows 
+D. Removes all columns from a table 
+E. Removes foreign keys from a table 
+Answer: B 
+Explanation: 
+
+Command TRUNCATE is used to remove all row data from the table, while leaving the 
+definition of the table intact, including the definition of constraints and any associated 
+database objects as indexes, constraints, and triggers on the table. 
+
+Incorrect Answers 
+
+A: 
+Command TRUNCATE does not remove the table. DROP TABLE command does that. 
+C: 
+There is no command in Oracle to shortens the table to 10 rows: but you can do this with 
+queries. 
+D: 
+This command does not remove all columns from a table. 
+E: 
+This command does not remove all foreign keys from a table. 
+
+QUESTION NO: 97 
+You need to change the definition of an existing table. The COMMERCIALS table needs 
+its DESCRIPTION column changed to hold varying length characters up to 2000 bytes. 
+The column can currently hold 1000 bytes per value. The table contains 20000 rows. 
+Which statement is valid? 
+
+
+A. ALTER TABLE commercials MODIFY (description CHAR2(2000)); 
+B. ALTER TABLE commercials CHANGE (description CHAR2(2000)); 
+
+C. ALTER TABLE commercials CHANGE (description VARCHAR2(2000)); 
+D. ALTER TABLE commercials MODIFY (description VARCHAR2(2000)); 
+E. You cannot increase the size of a column if the table has rows. 
+Answer: D 
+Explanation: 
+
+Incorrect Answers 
+
+A: 
+There is no CHAR2 datatype in Oracle. Also 200 symbols is not enough to store up to 
+2000 bytes. 
+B: 
+There is no CHAR2 datatype in Oracle. There is no ALTER TABLE table_name 
+CHANGE command in Oracle. 
+C: 
+There is no ALTER TABLE table_name CHANGE command in Oracle. 
+E: 
+You can increase the size of a column if the table has rows. It can be done with ALTER 
+TABLE table_name MODIFY column. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 219-224 
+Chapter 5: Creating Oracle Database Objects 
+
+QUESTION NO: 98 
+Which statement creates a new user? 
+
+
+A. CREATE USER susan; 
+B. CREATE OR REPLACE USER susan; 
+C. CREATE NEW USER susan DEFAULT; 
+D. CREATE USER susan IDENTIFIED BY blue; 
+E. CREATE NEW USER susan IDENTIFIED by blue; 
+F. CREATE OR REPLACE USER susan IDENTIFIED BY blue; 
+Answer: D 
+Explanation: 
+
+The correct statement to create user is: CREATE USER user_name IDENTIFIED BY 
+password. 
+
+Incorrect Answers 
+
+A: 
+This syntax is incorrect to create user: you need to provide also password for the user. 
+B: 
+There is no CREATE OR REPLACE USER command in Oracle. 
+C: 
+There is no CREATE NEW USER user_name DEFAULT command in Oracle. 
+E: 
+There is no CREATE NEW USER user_name IDENTIFIED BY command in Oracle. 
+F: 
+There is no CREATE OR REPLACE USER user_name IDENTIFIED BY command in 
+Oracle. 
+OCP Introduction to Oracle 9i: SQL Exam Guide, Jason Couchman, p. 348-351 
+Chapter 8: User Access in Oracle 
+
+QUESTION NO: 99 
+Which three are true regarding the use of outer joins? (Choose three.) 
+
+
+A. You cannot use IN operator in a condition that involves an outerjoin. 
+B. You use (+) on both sides of the WHERE condition to perform an outerjoin. 
+C. You use (*) on both sides of the WHERE condition to perform an outerjoin. 
+D. You use an outerjoin to see only the rows that do not meet the join condition. 
+E. In the WHERE condition, you use (+) following the name of the column in the table without matching rows, to perform an outerjoin. 
+F. You cannot link a condition that is involved in an outerjoin to another condition by using the OR operator. 
+Answer: D, E, F 
+Explanation: 
+
+You can use an outerjoin to see only the rows that do not meet the join condition. In the 
+WHERE condition, you use (+) following the name of the column in the table without 
+matching rows, to perform an outerjoin. You cannot link a condition that is involved in an 
+outerjoin to another condition by using the OR operator. 
+
+Incorrect Answers 
+
+A: 
+You can use IN operator in a condition that involves an outerjoin. 
+B: 
+You use (+) following the name of the column in the table without matching rows, but not 
+on both sides of the WHERE condition to perform an outerjoin. 
+C: 
+You don’t use (*) to define outerjoin operation. 
+
+QUESTION NO: 100 
+In which scenario would TOP N analysis be the best solution? 
+
+A. You want to identify the most senior employee in the company. 
+B. You want to find the manager supervising the largest number of employees. 
+C. You want to identify the person who makes the highest salary for all employees. 
+D. You want to rank the top three sales representatives who have sold the maximum number of products. 
+Answer: D 
+Explanation: 
+
+If you want to rank the top three sales representatives who have sold the maximum number of 
+products TOP-N query will be the best solution. TON-N queries use inline views and are 
+handy for displaying a short list of table data, based on “greatest” or “least” criteria. 
+
+Incorrect Answers 
+
+A: 
+To complete this request you don’t need to use TOP-N query. 
+B: 
+It is not necessary to use TOP-N query in this case. 
+C: 
+To complete this request you don’t need to use TOP-N query. 
+
+QUESTION NO: 101 
+Which constraint can be defines only at the column level? 
+
+A. UNIQUE 
+B. NOT NULL 
+C. CHECK 
+D. PRIMARY KEY 
+E. FOREIGN KEY 
+Answer: B 
+Explanation: 
+
+The NOT NULL constraint can be defined only at the column level. It enforces that a value 
+must be defined for this column such that the column may not be NULL for any row. 
+
+Incorrect Answers 
+
+A: 
+The UNIQUE constraint enforces uniqueness on values in the constrained column. It can 
+be defined not only at the column level. 
+C: 
+The CHECK constraint enforces that values added to the constrained column must be 
+present in a static list of values permitted for the column. 
+D: 
+The PRIMARY KEY constraint stipulates that values in the constrained column(s) must 
+be unique and not NULL. If the primary key applies to multiple columns, then the 
+combination of values in the columns must be unique and not NULL. 
+E: 
+The FOREIGN KEY constraint enforces that only values in the primary key of a parent 
+table may be included as values in the constrained column(s) of the child table. 
+
+QUESTION NO: 102 
+What is true about the WITH GRANT OPTION clause? 
+
+A. It allows a grantee DBA privileges. 
+B. It is required syntax for object privileges. 
+C. It allows privileges on specified columns of tables. 
+D. It is used to grant an object privilege on a foreign key column. 
+E. It allows the grantee to grant object privileges to other users and roles. 
+Answer: E 
+Explanation: 
+
+The GRANT command with the WITH GRANT OPTION clause allows the grantee to grant 
+object privileges to other users and roles. 
+
+Incorrect Answers 
+
+A: The WITH GRANT OPTION does not allow a grantee DBA privileges. 
+B: It is not required syntax for object privileges. It is optional clause of GRANT command. 
+C: GRANT command does not allows privileges on columns of tables. 
+D: It is not used to grant an object privilege on a foreign key column. 
+
+QUESTION NO: 103 
+Which substitution variable would you use if you want to reuse the variable without 
+prompting the user each time? 
+
+A. & 
+B. ACCEPT 
+C. PROMPT 
+D. && 
+Answer: D 
+Explanation: 
+
+To reuse the variable without prompting the user each time you can use && substitution 
+variable. 
+
+Incorrect Answers 
+
+A: This substitution variable will prompt the user each time. 
+B: ACCEPT is command, not substitution variable. It used to define more accurate or 
+specific prompt or when you want more output to display as the values are defined. 
+C: PROMPT is part of the ACCEPT command, it is not a variable. 
+
+QUESTION NO: 104 
+The EMPLOYEES table has these columns: 
+LAST NAME VARCHAR2(35) 
+SALARY NUMBER(8,2) 
+HIRE_DATE DATE 
+
+Management wants to add a default value to the SALARY column. You plan to alter the 
+table by using this SQL statement: 
+
+ALTER TABLE EMPLOYEES MODIFY (SALARY DEFAULT 5000); 
+
+What is true about your ALTER statement? 
+
+A. Column definitions cannot be altered to add DEFAULT values. 
+B. A change to the DEFAULT value affects only subsequent insertions to the table. 
+C. Column definitions cannot be altered at add DEFAULT values for columns with a NUMBER data type. 
+D. All the rows that have a NULL value for the SALARY column will be updated with the value 5000. 
+Answer: B 
+Explanation: 
+
+A change to the DEFAULT value affects only subsequent insertions to the table. Existing rows will not be affected. 
+
+Incorrect Answers 
+
+A: 
+Column definitions can be altered to add DEFAULT values. 
+C: 
+Column definitions can be altered to add DEFAULT values. It works for columns with a NUMBER data type also. 
+D: 
+A change to the DEFAULT value affects only subsequent insertions to the table. Existing rows will not be affected. 
+
+QUESTION NO: 105 
+The DBA issues this SQL command: 
+
+CREATE USER scott 
+IDENTIFIES by tiger; 
+
+What privileges does the user Scott have at this point? 
+
+A. No privileges. 
+B. Only the SELECT privilege. 
+C. Only the CONNECT privilege. 
+D. All the privileges of a default user. 
+Answer: A 
+Explanation: 
+
+There are no privileges for the user Scott at this point. They are not added themselves to the 
+user immediately after creation. The DBA needs to grant all privileges explicitly. 
+
+Incorrect Answers 
+
+B: 
+There are no privileges for the user Scott at this point. SELECT privilege needs to be 
+added to the user Scott. 
+C: 
+There are no privileges for the user Scott at this point. CONNECT privilege needs to be 
+added to the user Scott. 
+D: 
+There is no default user in Oracle. 
+
+QUESTION NO: 106 
+Which two statements complete a transaction? (Choose two) 
+
+A. DELETE employees; 
+B. DESCRIBE employees; 
+C. ROLLBACK TO SAVEPOINT C; 
+D. GRANT SELECT ON employees TO SCOTT; 
+E. ALTER TABLE employees SET UNUSED COLUMN sal; 
+F. Select MAX(sal) FROM employees WHERE department_id = 20; 
+Answer: C, E 
+Explanation: 
+It is important to understand that an implicit COMMIT occurs on the database when a user 
+exits SQL*Plus or issues a data-definition language (DDL) command such as a CREATE 
+TABLE statement, used to create a database object, or an ALTER TABLE statement, used to 
+alter a database object. Also after the ROLLBACK command is issued, a new transaction is 
+started implicitly by the database session. 
+
+Incorrect Answers 
+
+A: 
+The DELETE command is data-manipulation language (DML) command and it does not 
+complete a transaction. 
+B: 
+The DESCRIBE command is internal SQL*Plus command and it has nothing to do with 
+completion a transaction. 
+D: 
+The GRANT command is data-control language (DCL) command to control user access to 
+data. It will not complete a transaction. 
+F: 
+SELECT command is used to retrieve data. It does not complete a transaction. 
+
+QUESTION NO: 107 
+You need to produce a report for mailing labels for all customers. The mailing label 
+must have only the customer name and address. The CUSTOMERS table has these 
+
+columns: 
+CUST_ID NUMBER(4) NOT NULL 
+CUST_NAME VARCHAR2(100) 
+CUST_ADDRESS VARCHAR2(150) 
+CUST_PHONE VARCHAR2(20) 
+
+Which SELECT statement accomplishes this task? 
+
+A. SELECT* FROM customers; 
+B. SELECT name, address FROM customers; 
+C. SELECT id, name, address, phone FROM customers; 
+D. SELECT cust_name, cust_address FROM customers; 
+E. SELECT cust_id, cust_name, cust_address, cust_phone FROM customers; 
+Answer: D 
+Explanation: 
+
+This answer provides correct list of columns for the output. 
+Incorrect Answers 
+
+A: 
+This answer does not provide correct list of columns for the output. It is not required to 
+show all columns of the table. Symbol “*” is used in the SELECT command to substitute 
+a list of all columns of the table. 
+B: 
+This answer does not provide correct list of columns for the output. There are not NAME 
+and ADDRESS columns in the CUSTOMERS table. 
+C: 
+This answer does not provide correct list of columns for the output. There are not ID, 
+NAME, ADDRESS or PHONE columns in the CUSTOMERS table. 
+E: 
+This answer does not provide correct list of columns for the output. It is not required to 
+show all columns of the table. 
+
+QUESTION NO: 108 
+Which statement describes the ROWID data type? 
+
+
+A. Binary data up to 4 gigabytes. 
+B. Character data up to 4 gigabytes. 
+C. Raw binary data of variable length up to 2 gigabytes. 
+D. Binary data stored in an external file, up to 4 gigabytes. 
+E. A hexadecimal string representing the unique address of a row in its table. 
+Answer: E 
+Explanation: 
+
+The ROWID datatype stores information related to the disk location of table rows. They also 
+uniquely identify the rows in your table. The ROWID datatype is stored as a hexadecimal 
+string. 
+
+Incorrect Answers 
+
+A: 
+It is not a binary data. The ROWID datatype is a hexadecimal string. 
+B: 
+It is not a character data. The ROWID datatype is a hexadecimal string. 
+C: 
+It is not a raw binary data. The ROWID datatype is a hexadecimal string. 
+D: 
+It is not binary data stored in an external file. The ROWID datatype is a hexadecimal 
+string. 
+
+QUESTION NO: 109 
+Evaluate the SQL statement 
+
+DROP TABLE DEPT: 
+
+
+Which four statements are true of the SQL statement? (Choose four) 
+
+A. You cannot roll back this statement. 
+B. All pending transactions are committed. 
+C. All views based on the DEPT table are deleted. 
+D. All indexes based on the DEPT table are dropped. 
+E. All data in the table is deleted, and the table structure is also deleted. 
+F. All data in the table is deleted, but the structure of the table is retained. 
+G. All synonyms based on the DEPT table are deleted. 
+Answer: A, B, D, E 
+Explanation: 
+
+You cannot roll back DROP TABLE statement. All pending transactions related on this table 
+are committed. If the table is dropped, Oracle automatically drops any index, trigger and 
+constraint associated with the table as well. All data in the table is deleted, and the table 
+structure is also deleted. 
+
+Incorrect Answers 
+
+C: 
+All views based on the DEPT table become invalid, but they are not deleted. 
+F: 
+All data in the table is deleted, and the table structure is also deleted. Command 
+TRUNCATE deletes all data in the table, but does not delete the structure of the table. 
+G: All synonyms based on the DEPT table are not deleted after dropping the table. 
+
+QUESTION NO: 110 
+You are granted the CREATE VIEW privilege. What does this allow you to do? 
+
+
+A. Create a table view. 
+B. Create a view in any schema. 
+C. Create a view in your schema. 
+D. Create a sequence view in any schema. 
+E. Create a view that is accessible by everyone. 
+F. 
+Create a view only of it is based on tables that you created. 
+Answer: C 
+Explanation: 
+
+You can create a view in your own schema only if you are granted the CREATE VIEW 
+privilege. 
+
+Incorrect Answers 
+
+A: 
+You can create a view in your own schema only. 
+
+B: 
+You can create a view in your own schema only, not in any schema. 
+D: 
+There is no sequence view in Oracle. 
+E: 
+You cannot create a view that is accessible by everyone. You will need specially grant 
+SELECT privileges on this view for everyone. 
+F: 
+You can create a view in your own schema, but not only for tables in your schema. You 
+can use object from other users schemas if you have privileges to retrieve data from them. 
+
+QUESTION NO: 111 
+Which two statements about creating constraints are true? (Choose two) 
+
+
+A. Constraint names must start with SYS_C. 
+B. All constraints must be defines at the column level. 
+C. Constraints can be created after the table is created. 
+D. Constraints can be created at the same time the table is created. 
+E. Information about constraints is found in the VIEW_CONSTRAINTS dictionary view. 
+Answer: C, D 
+Explanation: 
+
+Constraints can be created after the table is created. Use ALTER TABLE command for that. 
+Constraints can be created at the same time the table is created (CREATE TABLE command). 
+
+Incorrect Answers 
+
+A: 
+There is no requirements in Oracle that constraint names must start with SYS_C. Oracle 
+can use prefix “SYS” to build indexes for UNIQUE and NOT NULL constraints, but it is 
+not required for user to follow this naming rule. 
+B: 
+Not all constraints must be defines at the column level. Only NOT NULL constraint must 
+be. 
+E: 
+There is no VIEW_CONSTRAINTS dictionary view in Oracle. 

@@ -1,0 +1,8 @@
+ CREATE TABLE sales(sales_id number(10)constraints sales_id_pk primary key,
+product_name varchar(20),
+quantity number(10),
+price number(8,2),
+customer_name varchar(20),
+sales_date date default sysdate)
+
+/

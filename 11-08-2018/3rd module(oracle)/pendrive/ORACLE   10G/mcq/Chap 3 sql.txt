@@ -1,0 +1,233 @@
+1. You can embed substitution variables in a command file or in a single SQL statement. 
+A variable can be thought of as a container in which the values are temporarily stored. 
+When the statement is run, the value is substituted.how do you define it 
+
+a. DEFINE 				b. &
+c. &&				      d. store
+
+ans: b,c
+
+2. Use substitution variables to supplement the following:
+
+ a.  WHERE conditions             b.  ORDER BY clauses
+ c.  Column expressions	      		d.  Table names 
+ e.  Entire SELECT statements 
+ans: all
+
+3. Use a variable prefixed with an -------- to prompt the user for a value.
+
+a. & 			b. Define       c. &&
+ans: a
+
+4. Use a variable prefixed with an -------- to referrence to a value.
+
+a. & 				b. Define 			c. &&
+
+5. SELECT last_name, department_id, salary*12 FROM employees WHERE job_id = '&job_title' ;
+
+a. input job title within "--" 		b. input job title within '--'
+c. input job title only
+ans: c
+
+6. SELECT last_name, department_id, salary*12 FROM employees WHERE job_id = &job_title ;
+
+a. input job title within "--" 		b. input job title within '--'
+c. input job title only
+ans: b
+
+7. The substitution variable is present in the session until---
+
+a. the user undefines it 		b. exits the iSQL*Plus session.
+c. both 					d.None
+ans: a,b
+
+8. SET VERIFY off
+   SELECT employee_id, last_name, salary, department_id FROM employees WHERE employee_id = &employee_num;  
+
+if you execute this -what wiile display 
+a. old 3: WHERE employee_id = &employee_num
+   new 3: WHERE employee_id = 200 
+b. new 3: WHERE employee_id = &employee_num
+   old 3: WHERE employee_id = 200 
+c. none
+
+9. [ch-3] Functions are a very powerful feature of SQL. They can be used to do the following:
+• Perform calculations on data		• Modify individual data items
+• Manipulate output for groups of rows	• Format dates and numbers for 							display
+• Convert column data types
+which one is true 
+
+a. SQL functions allwayes take arguments and always return a value.
+b. SQL functions sometimes take arguments and sometimes return a value.
+c. SQL functions sometimes take arguments and always return a value.
+ans: c
+
+10. [ch-3] Single-row functions- which one is not true 
+a. Manipulate data items
+b. Accept arguments and return one value
+c. Act on grouup row that is returned
+d. Return one result per row
+e. May not modify the data type
+f. Can be nested
+g  Accept arguments that can not be a column or an expression
+ans: c,e,g
+
+11. [ch-3] An argument can be one of the following:
+a. User-supplied constant		b. Variable value
+c. Table name				d. Expression   
+ans: c
+
+12. [ch-3] Can be used in 
+a. SELECT, 				b. WHERE, and 
+c. ORDER BY clauses		d. can not be nested
+ans: a,b
+
+13. [ch-3] Single-Row Functions  cover the following single-row functions:
+
+a. Character functions: Accept character input and can return both character and number values
+b. Number functions: Accept numeric input and return numeric values 
+c. Date functions: Operate on values of the DATE data type .
+d. Conversion functions: Convert a value from one data type to another
+ans: all
+
+14. [ch-3] Single-row character functions accept character data as input and can return both character and numeric values. Character-manipulation functions .
+a. LOWER	b. toUPPER c. INITCAP d. senance
+ans: a,c
+
+15. [ch-3] SUBSTR(column|expression,m[,n]) Returns specified characters from character value starting at character position m, n characters long.
+a. If m is negative, thecount starts from the begin of the character value. 
+b. If n is omitted, all characters to the end of the string are returned.
+c. If m is omitted, all characters to the end of the string are returned.
+ans: b
+
+16. [ch-3] SELECT INITCAP(concat("Hello","world") from Dual;what is the result-
+a.helloworld		b.hello World	c.Helloworld 
+ans: c
+	
+17. [ch-3]which is true for ROUND Function Syn: ROUND(column|expression, n)
+a. rounds the column, expression, or value to n decimal places.
+b. n parameter can be omitted.
+c. n can not be negative.
+d. The ROUND function can also be used with date .
+ans: a,b,d
+
+18. [ch-3] DUAL is a dummy table that you can use to view results from functions and calculationstions.
+a. The DUAL table is owned by the user SYS and can nat be accessed by all users.
+b. It contains one column, temp, and one row with the value X.
+c. It contains one column, DUMMY, and one row with the value X.
+ans: a,c
+
+19. [ch-3] SELECT ROUND(45.923,2), ROUND(45.923), ROUND(45.923,-1)
+FROM DUAL; 
+what is the result --
+a. 45.92 ,45,50  	b. error 	c. 45.92 ,46,50
+ans: c
+
+20. [ch-3] The default date display format is DD-MON-RR.The Oracle database stores dates in an internal numeric format.
+
+a. representing the century, year, month, day, hours, minutes, and seconds.
+b. representing the year, month, day, hours, minutes, and seconds.
+c. there is also time and century information associated with the date.
+ans: a,c
+
+21. [ch-3] Valid Oracle dates are
+
+a. between January 1, 4712 B.C., and December 31, 9999 A.D
+b. between January 1, 1970 , and December 31, 9999 A.D
+c. between January 1, 4712 B.C., and December 31, 9999 B.C
+ans: a,b
+
+22. [ch-3] The default date display format is DD-MON-RR.
+
+a. Enables you to store 21st-century dates in the 20th century by specifying only the last two digits of the year
+b. Enables you to store 20th-century dates in the 21st century in the same way
+c. Enables you to store 21st-century dates in the 20th century by specifying only the last two digits of the century.
+ans: a,c
+
+23. [ch-3] you can perform calculations using arithmetic operators such as addition and subtraction.
+
+a. because DD-MON-RR
+b. Because the database stores dates as numbers, 
+c. because DD-MON-YY
+ans: b
+
+24. [ch-3] which one is true Arithmetic with Dates
+a. date + number Date Adds a number of days to a date
+b. date – number Date Subtracts a number of days from a date
+c. date – date Number of days Subtracts one date from another
+d. date + number/24 Date Adds a number of day to a date
+ans: a,b,c
+
+25. [ch-3] Assume SYSDATE = '25-JUL-03':
+
+a. TRUNC(SYSDATE ,'MONTH') 01-JUL-03
+b. TRUNC(SYSDATE ,'YEAR')  01-JAN-03
+c. ROUND(SYSDATE,'MONTH')  01-AUG-04
+d. ROUND(SYSDATE ,'YEAR')  01-JAN-04
+
+26. [ch-3] the Oracle server can automatically convert the following is not true
+a. NUMBER to VARCHAR2
+b. DATE to VARCHAR2
+c. Date to number 
+d.VARCHAR2 or CHAR to NUMBER
+e. VARCHAR2 or CHAR to  DATE
+ans: c
+
+27. [ch-3] TO_CHAR(number|date,[ fmt],[nlsparams])  Number conversion: The nlsparams
+parameter specifies the following characters, which are returned by number format elements. which one is not -
+
+a. Decimal character 
+b.  Group separator
+c.  Local currency symbol as Tk
+d·  International currency symbol
+ans: c
+
+28. [ch-3] TO_CHAR Function with Dates The format model:
+
+a. Must be enclosed by single quotation marks
+b. Is case-sensitive
+c. Can include any valid date format element
+d. Has an fmt element to remove padded blanks or suppress leading zeros
+e. Is separated from the date value by a comma
+ans: d (fm not fmt)
+
+29. [ch-3] Elements of the Date Format Model 
+a. DY  Full name of DAY the day of the week
+b. MM Two-digit value for month
+c. MONTH Full name of the month
+d. MON Three-letter abbreviation of the month
+e. DD Numeric day of the month
+ans: b,c,d,e
+
+30. [ch-3] If you are converting a number to the character data type, you can use the following format elements:
+
+a. 0 Display leading zeros (099999) 1234
+b. PR Parenthesize negative numbers 999999PR <1234>
+c. PR Parenthesize  numbers 999999PR <1234>
+d. B Display zero values as blank, not 0   B9999.99 1234.00
+ans: a,b,d
+
+31. [ch-3] These functions work with any data type and pertain to the use of null values in the
+expression list. Function Description
+
+a. NVL(exp1,exp2) expr1 is the source value or expression that may contain a null , expr2 is the target value for converting the null
+b. NVL2(exp1,exp2) If expr1 is not null,NVL2 returns expr2. If expr1 is null, NVL2 returns expr3. 
+c. Compares two expressions and returns null if they are equal; returns the first expression if they are not equal . 
+ans: a,b,c
+
+32. [ch-3] Provide the use of IF-THEN-ELSE logic within a SQL statement, Use two methodsare 
+a. CASE expression 	b. DECODE function 	c. COALESCE
+ans: a,b
+
+33. [ch-3] Facilitates conditional inquiries by doing the work of an IF-THEN-ELSE statement:
+CASE expr WHEN comparison_expr1 THEN return_expr1
+[WHEN comparison_expr2 THEN return_expr2
+WHEN comparison_exprn THEN return_exprn
+ELSE else_expr
+END
+
+which one is true 
+a. expr may ommited.	 b. expr con not be ommited.
+ans: 
+
+problem   4, 8, 25, 33

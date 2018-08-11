@@ -1,0 +1,76 @@
+answer no-01
+
+CREATE TABLE emp1172301(
+empid number constraint con_pk primary key,
+empname varchar2(20),
+salary number,
+Hire_date date,
+Adress varchar2(30));
+
+
+answer no-02
+
+ALTER TABLE empl1172301 ADD(Dept_id number);
+ALTER TABLE empl1172301 ADD(Dept_Name varchar2(10));
+
+
+Answer no-03
+
+INSERT INTO emp1172301(empid,empname,salary,Hire_date,Adress,Dept_id,Dept_Name)
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+INSERT INTO emp1172301(empid,empname,salary,Hire_date,Adress,Dept_id,Dept_Name)
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+INSERT INTO emp1172301(empid,empname,salary,Hire_date,Adress,Dept_id,Dept_Name)
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+INSERT INTO emp1172301(empid,empname,salary,Hire_date,Adress,Dept_id,Dept_Name)
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+INSERT INTO emp1172301(empid,empname,salary,Hire_date,Adress,Dept_id,Dept_Name)
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+//ORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+
+INSERT INTO emp1172301
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+
+INSERT INTO emp1172301
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+
+INSERT INTO emp1172301
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+
+INSERT INTO emp1172301
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+
+INSERT INTO emp1172301
+vALUES(&empid,&empname,&salary,&Hire_date,&Adress,&Dept_id,&Dept_Name);
+
+ANSWER NO-04
+
+CREATE VIEW EMP_VIEW
+AS
+SELECT empid,empname,salary,dept_name.................................
+FROM empl1172301
+where dept_id=80;
+
+
+ANSWER no-05
+
+SELECT dept_id,AVR(salary)
+From empl1172301
+GROUP BY dept_name
+Having MAX(salary)>12000;
+
+
+Answer no-06
+
+SELECT dept_id,SUM(sales)
+FROM sale_info
+GROUP BY ROLLUP(dept_id);

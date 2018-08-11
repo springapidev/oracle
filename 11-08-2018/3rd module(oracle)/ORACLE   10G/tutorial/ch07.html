@@ -1,0 +1,805 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<title>Mastering Oracle SQL: Chapter 7: Set Operations</title>
+<style type="text/css" id="wrc-middle-css">.wrc_whole_window{	display: none; 	position: fixed; 	z-index: 2147483647;	background-color: rgba(40, 40, 40, 0.9);	word-spacing: normal;	margin: 0px;	padding: 0px;	border: 0px;	line-height: normal;	letter-spacing: normal;}.wrc_middle_main {	font-family: Segoe UI, Arial Unicode MS, Arial, Sans-Serif;	font-size: 14px;	width: 600px;	height: auto;	margin: 0px auto;	margin-top: 15%;    background: url("chrome://wrc/skin/png/background-body.png");	background-color: rgb(39, 53, 62);}.wrc_middle_logo {    background: url("chrome://wrc/skin/logo.jpg") no-repeat left bottom;    width: 140px;    height: 42px;    color: orange;    display: table-cell;    text-align: right;    vertical-align: middle;}.wrc_icon_warning {	margin: 20px 10px 20px 15px;	float: left;	background-color: transparent;}.wrc_middle_title {    color: #b6bec7;	height: auto;    margin: 0px auto;	font-size: 2.2em;	white-space: nowrap;	text-align: center;}.wrc_middle_hline {    height: 2px;	width: 100%;    display: block;}.wrc_middle_description {	text-align: center;	margin: 15px;	font-size: 1.4em;	padding: 20px;	height: auto;	color: white;	min-height: 3.5em;}.wrc_middle_actions_main_div {	text-align: center;	margin-bottom: 15px;}.wrc_middle_actions_blue_button {	-moz-appearance: none;	border-radius: 7px;	-moz-border-radius: 7px/7px;	border-radius: 7px/7px;	background-color: rgb(0, 173, 223) !important;	display: inline-block;	width: auto;	cursor: Pointer;	border: 2px solid #00dddd;	text-decoration: none;}.wrc_middle_actions_blue_button:hover {	background-color: rgb(0, 159, 212) !important;}.wrc_middle_actions_blue_button:active {	background-color: rgb(0, 146, 200) !important;	border: 2px solid #00aaaa;}.wrc_middle_actions_blue_button div {	display: inline-block;	width: auto;	cursor: Pointer;	margin: 3px 10px 3px 10px;	color: white !important;	font-size: 1.2em;	font-weight: bold;}.wrc_middle_action_low {	font-size: 0.9em;	white-space: nowrap;	cursor: Pointer;	color: grey !important;	margin: 10px 10px 0px 10px;	text-decoration: none;}.wrc_middle_action_low:hover {	color: #aa4400 !important;}.wrc_middle_actions_rest_div {	padding-top: 5px;	white-space: nowrap;	text-align: center;}.wrc_middle_action {	white-space: nowrap;	cursor: Pointer;	color: red !important;	font-size: 1.2em;	margin: 10px 10px 0px 10px;	text-decoration: none;}.wrc_middle_action:hover {	color: #aa4400 !important;}</style><script language="JavaScript" type="text/javascript" id="wrc-script-middle_window">var g_inputsCnt = 0;var g_InputThis = new Array(null, null, null, null);var g_alerted = false;/* we test the input if it includes 4 digits   (input is a part of 4 inputs for filling the credit-card number)*/function is4DigitsCardNumber(val){	var regExp = new RegExp('[0-9]{4}');	return (val.length == 4 && val.search(regExp) == 0);}/* testing the whole credit-card number 19 digits devided by three '-' symbols or   exactly 16 digits without any dividers*/function isCreditCardNumber(val){	if(val.length == 19)	{		var regExp = new RegExp('[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}');		return (val.search(regExp) == 0);	}	else if(val.length == 16)	{		var regExp = new RegExp('[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}');		return (val.search(regExp) == 0);	}	return false;}function CheckInputOnCreditNumber(self){	if(g_alerted)		return false;	var value = self.value;	if(self.type == 'text')	{		if(is4DigitsCardNumber(value))		{			var cont = true;			for(i = 0; i < g_inputsCnt; i++)				if(g_InputThis[i] == self)					cont = false;			if(cont && g_inputsCnt < 4)			{				g_InputThis[g_inputsCnt] = self;				g_inputsCnt++;			}		}		g_alerted = (g_inputsCnt == 4);		if(g_alerted)			g_inputsCnt = 0;		else			g_alerted = isCreditCardNumber(value);	}	return g_alerted;}function CheckInputOnPassword(self){	if(g_alerted)		return false;	var value = self.value;	if(self.type == 'password')	{		g_alerted = (value.length > 0);	}	return g_alerted;}function onInputBlur(self, bRatingOk, bFishingSite){	var bCreditNumber = CheckInputOnCreditNumber(self);	var bPassword = CheckInputOnPassword(self);	if((!bRatingOk || bFishingSite == 1) && (bCreditNumber || bPassword) )	{		var warnDiv = document.getElementById("wrcinputdiv");		if(warnDiv)		{			/* show the warning div in the middle of the screen */			warnDiv.style.left = "0px";			warnDiv.style.top = "0px";			warnDiv.style.width = "100%";			warnDiv.style.height = "100%";			document.getElementById("wrc_warn_fs").style.display = 'none';			document.getElementById("wrc_warn_cn").style.display = 'none';			if(bFishingSite)				document.getElementById("wrc_warn_fs").style.display = 'block';			else				document.getElementById("wrc_warn_cn").style.display = 'block';			warnDiv.style.display = 'block';		}	}}</script></head><body bgcolor="#ffffff" text="#000000" vlink="#0000cc" link="#990000">
+<table border="0" cellpadding="0" cellspacing="0" width="90%">
+<tbody><tr>
+<td colspan="2">
+<img alt="Search the Catalog" usemap="#catalog_header_buttons" ismap="ismap" src="ch07_files/catalog_header_buttons.gif" align="bottom" border="0" width="515" height="37">
+<map name="catalog_header_buttons">
+<area shape="Rect" coords="407,17,512,32" href="http://oreilly.com/catalog/search.html">
+<area shape="Rect" coords="431,3,512,18" href="http://oreilly.com/catalog/prdindex.html">
+</map>
+</td>
+</tr>
+<tr>
+<td valign="top" width="25%">
+<a href="http://oreilly.com/catalog/mastorasql/">
+<img src="ch07_files/mastorasql.gif" alt="Mastering Oracle SQL" valign="top" align="left" border="0" vspace="10" hspace="10">
+</a>
+</td>
+<td valign="top" height="105">
+<br>
+<h2>Mastering Oracle SQL</h2>
+<font size="-1">
+By Sanjay Mishra, Alan Beaulieu<br>
+April 2002  <br>
+0-596-00129-0, Order Number: 1290<br>
+336 pages, $34.95 US $54.95 CA £24.95 UK 
+</font>
+</td>
+</tr>
+</tbody></table>
+<hr noshade="noshade" size="1">
+<!--sample chapter begins -->
+
+<blockquote>
+
+<h2 class="ChapterTitleLeft">Chapter 7
+<br>
+<a name="19363"></a>Set Operations</h2>
+
+
+<p class="Body">There are situations when we need to combine the results
+ from two or more SELECT statements. SQL enables us to handle these 
+requirements by using set operations. The result of each SELECT 
+statement can be treated as a set, and SQL set operations can be applied
+ on those sets to arrive at a final result. Oracle SQL supports the 
+following four set operations:</p>
+
+<ul>
+<li class="ListBullet">UNION ALL</li>
+<p>
+</p><li class="ListBullet">UNION</li>
+<p>
+</p><li class="ListBullet">MINUS </li>
+<p>
+</p><li class="ListBullet">INTERSECT</li>
+<p>
+</p></ul>
+
+<p class="Body">SQL statements containing these set operators are referred to as <em class="Emphasis">compound queries</em>, and each SELECT statement in a compound query is referred to as a <em class="Emphasis">component query</em>. Two SELECTs can be combined into a compound query by a set operation only if they satisfy the following two conditions:</p>
+
+<ol>
+<li class="ListNumber">The result sets of both the queries must have the same number of columns.</li>
+<p>
+</p><li class="ListNumber">The datatype of each column in the second 
+result set must match the datatype of its corresponding column in the 
+first result set. </li>
+<p>
+</p><blockquote>
+<p class="NoteTip"><b>TIP:</b> &nbsp;
+The datatypes do not need to be the same if those in the second result 
+set can be automatically converted by Oracle (using implicit casting) to
+ types compatible with those in the first result set.
+</p></blockquote>
+</ol>
+
+<p class="Body">These conditions are also referred to as <em class="Emphasis">union compatibility</em>
+ conditions. The term union compatibility is used even though these 
+conditions apply to other set operations as well. Set operations are 
+often called <em class="Emphasis">vertical joins</em>, because the 
+result combines data from two or more SELECTS based on columns instead 
+of rows. The generic syntax of a query involving a set operation is:
+</p><pre><code class="Code">&lt;component query&gt;</code>
+<code class="Code">{UNION | UNION ALL | MINUS | INTERSECT}</code>
+<code class="Code">&lt;component query&gt;</code>
+</pre>
+
+<p class="Body">The keywords UNION, UNION ALL, MINUS, and INTERSECT are 
+set operators. We can have more than two component queries in a 
+composite query; we will always use one less set operator than the 
+number of component queries.
+
+</p><p class="Body">The following sections discuss syntax, examples, rules, and restrictions for the four set operations.
+
+</p><h2 class="HeadA">Set Operators</h2>
+
+
+<p class="Body">The following list briefly describes the four set operations supported by Oracle SQL:
+</p><dl>
+<dt class="ListVariableTerm">UNION ALL</dt>
+<dd class="ListVariable">Combines the results of two SELECT statements into one result set.</dd>
+<p>
+</p><dt class="ListVariableTerm">UNION</dt>
+<dd class="ListVariable">Combines the results of two SELECT statements into one result set, and then eliminates any duplicate rows from that result set.</dd>
+<p>
+</p><dt class="ListVariableTerm">MINUS </dt>
+<dd class="ListVariable">Takes the result set of one SELECT statement, and removes those rows that are also returned by a second SELECT statement.</dd>
+<p>
+</p><dt class="ListVariableTerm">INTERSECT</dt>
+<dd class="ListVariable">Returns only those rows that are returned by each of two SELECT statements.</dd>
+<p>
+</p></dl>
+
+<p class="Body">Before moving on to the details on these set operators, 
+let's look at the following two queries, which we'll use as component 
+queries in our subsequent examples. The first query retrieves all the 
+customers in region 5.
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         5 Gentech Industries</code>
+</pre>
+
+<p class="Body">The second query retrieves all the customers with the sales representative is 'MARTIN'.
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         8 Zantech Inc.</code>
+</pre>
+
+<p class="Body">If we look at the results returned by these two queries,
+ we will notice that there is one common row (for Flowtech Inc.). The 
+following sections discuss the effects of the various set operations 
+between these two result sets.
+
+</p><h3 class="HeadB">UNION ALL</h3>
+
+
+<p class="Body">The UNION ALL operator merges the result sets of two 
+component queries. This operation returns rows retrieved by either of 
+the component queries. The following example illustrates the UNION ALL 
+operation:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInputReplaceable">UNION ALL</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         5 Gentech Industries</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         8 Zantech Inc.</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">7 rows selected.</code>
+</pre>
+
+<p class="Body">As we can see from the result set, there is one 
+customer, which is retrieved by both the SELECTs, and therefore appears 
+twice in the result set. The UNION ALL operator simply merges the output
+ of its component queries, without caring about any duplicates in the 
+final result set.
+
+</p><h3 class="HeadB">UNION </h3>
+
+
+<p class="Body">The UNION operator returns all distinct rows retrieved 
+by two component queries. The UNION operation eliminates duplicates 
+while merging rows retrieved by either of the component queries. The 
+following example illustrates the UNION operation:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInputReplaceable">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         5 Gentech Industries</code>
+<code class="Code">         8 Zantech Inc.</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">6 rows selected.</code>
+</pre>
+
+<p class="Body">This query is a modification of the previous query; the 
+keywords UNION ALL have been replaced with UNION. Notice that the result
+ set contains only distinct rows (no duplicates). To eliminate duplicate
+ rows, a UNION operation needs to do some extra tasks as compared to the
+ UNION ALL operation. These extra tasks include sorting and filtering 
+the result set. If we observe carefully, we will notice that the result 
+set of the UNION ALL operation is not sorted, whereas the result set of 
+the UNION operation is sorted. These extra tasks introduce a performance
+ overhead to the UNION operation. A query involving UNION will take 
+extra time compared to the same query with UNION ALL, even if there are 
+no duplicates to remove. Therefore, unless we have a valid need to 
+retrieve only distinct rows, we should use UNION ALL instead of UNION 
+for better performance.
+
+</p><h3 class="HeadB">INTERSECT</h3>
+
+
+<p class="Body">INTERSECT returns only the rows retrieved by both 
+component queries. Compare this with UNION, which returns the rows 
+retrieved by any of the component queries. If UNION acts like 'OR', 
+INTERSECT acts like 'AND'. For example:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInputReplaceable">INTERSECT</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         4 Flowtech Inc.</code>
+</pre>
+
+<p class="Body">As we saw earlier, "Flowtech Inc." was the only customer
+ retrieved by both SELECT statements. Therefore, the INTERSECT operator 
+returns just that one row.
+
+</p><h3 class="HeadB">MINUS</h3>
+
+
+<p class="Body">MINUS returns all rows from the first SELECT that are not also returned by the second SELECT. For example:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInputReplaceable">MINUS</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         5 Gentech Industries</code>
+</pre>
+
+<p class="Body">You might wonder why we don't see "Zantech Inc." in the 
+output. An important thing to note here is that the execution order of 
+component queries in a set operation is from top to bottom. The results 
+of UNION, UNION ALL, and INTERSECT will not change if we alter the 
+ordering of component queries. However, the result of MINUS will be 
+different if we alter the order of the component queries. If we rewrite 
+the previous query by switching the positions of the two SELECTs, we get
+ a completely different result:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN')</em></code>
+<code class="Code"><em class="CodeUserInputReplaceable">MINUS</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ------------------------------</code>
+<code class="Code">         8 Zantech Inc.</code>
+</pre>
+
+<p class="Body">The row for "Flowtech Inc." is returned by both queries,
+ so in our first MINUS example the first component query adds "Flowtech 
+Inc." to the result set while the second component query removes it. The
+ second example turns the MINUS operation around. The first component 
+query adds "Flowtech Inc." and "Zantech Inc." to the result set. The 
+second component query specifies rows to subtract. One of the rows to 
+subtract is "Flowtech Inc.", leaving "Zantech Inc." as the sole 
+remaining row.
+</p><blockquote>
+
+<p class="NoteTip">&nbsp;
+In a MINUS operation, rows may be returned by the second SELECT that are
+ not also returned by the first. These rows are not included in the 
+output. 
+</p></blockquote>
+
+<h2 class="HeadA">Using Set Operations to Compare Two Tables</h2>
+
+
+<p class="Body">Developers, and even DBAs, occasionally need to compare 
+the contents of two tables to determine whether the tables contain the 
+same data. The need to do this is especially common in test 
+environments, as developers may want to compare a set of data generated 
+by a program under test with a set of "known good" data. Comparison of 
+tables is also useful for automated testing purposes, when we have to 
+compare actual results with a given set of expected results. SQL's set 
+operations provide an interesting solution to this problem of comparing 
+two tables. </p>
+
+
+<p class="Body">The following query uses both MINUS and UNION ALL to 
+compare two tables for equality. The query depends on each table having 
+either a primary key or at least one unique index. </p>
+
+<pre><code class="Code">(SELECT * FROM CUSTOMER_KNOWN_GOOD</code>
+<code class="CodeEmphasis"><b>MINUS</b></code>
+<code class="Code">SELECT * FROM CUSTOMER_TEST)</code>
+<code class="CodeEmphasis"><b>UNION ALL</b></code>
+<code class="Code">(SELECT * FROM CUSTOMER_TEST</code>
+<code class="CodeEmphasis"><b>MINUS</b></code>
+<code class="Code">SELECT * FROM CUSTOMER_KNOWN_GOOD);</code>
+</pre>
+
+<p class="Body">Let's talk a bit about how this query works. We can look
+ at it as the union of two compound queries. The parentheses ensure that
+ both MINUS operations take place first before the UNION ALL operation 
+is performed. The result of the first MINUS query will be those rows in 
+CUSTOMER_KNOWN_GOOD that are not also in CUSTOMER_TEST. The result of 
+the second MINUS query will be those rows in CUSTOMER_TEST that are not 
+also in CUSTOMER_KNOWN_GOOD. The UNION ALL operator simply combines 
+these two result sets for convenience. If no rows are returned by this 
+query, then we know that both tables have identical rows. Any rows 
+returned by this query represent differences between the CUSTOMER_TEST 
+and CUSTOMER_KNOWN_GOOD tables.</p>
+
+
+<p class="Body">If the possibility exists for one or both tables to 
+contain duplicate rows, we must use a more general form of this query in
+ order to test two tables for equality. This more general form uses row 
+counts to detect duplicates:</p>
+
+<pre><code class="Code">(SELECT C1.*,COUNT(*) </code>
+<code class="Code"> FROM CUSTOMER_KNOWN_GOOD</code>
+<code class="Code"> GROUP BY C1.CUST_NBR, C1.NAME...</code>
+<code class="Code"><em class="CodeUserInput">MINUS</em></code>
+<code class="Code"> SELECT C2.*, COUNT(*)</code>
+<code class="Code"> FROM CUSTOMER_TEST C2</code>
+<code class="Code"> GROUP BY C2.CUST_NBR, C2.NAME...)</code>
+<code class="Code"><em class="CodeUserInput">UNION ALL</em></code>
+<code class="Code">(SELECT C3.*,COUNT(*) </code>
+<code class="Code"> FROM CUSTOMER_TEST C3</code>
+<code class="Code"> GROUP BY C3.CUST_NBR, C3.NAME...</code>
+<code class="Code"><em class="CodeUserInput">MINUS</em></code>
+<code class="Code"> SELECT C4.*, COUNT(*)</code>
+<code class="Code"> FROM CUSTOMER_KNOWN_GOOD C4</code>
+<code class="Code"> GROUP BY C4.CUST_NBR, C4.NAME...)</code>
+</pre>
+
+<p class="Body">This query is getting complex! The GROUP BY clause (see Chapter 4) for each SELECT must list <em class="Emphasis">all</em>
+ columns for the table being selected. Any duplicate rows will be 
+grouped together, and the count will reflect the number of duplicates. 
+If the number of duplicates is the same in both tables, the MINUS 
+operations will cancel those rows out. If any rows are different, or if 
+any occurrence counts are different, the resulting rows will be reported
+ by the query. </p>
+
+
+<p class="Body">Let's look at an example to illustrate how this query works. We'll start with the following tables and data:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">DESC CUSTOMER_KNOWN_GOOD</em></code>
+<code class="Code"> Name                         Null?    Type</code>
+<code class="Code"> ---------------------------- -------- ----------------</code>
+<code class="Code"> CUST_NBR                     NOT NULL NUMBER(5)</code>
+<code class="Code"> NAME                         NOT NULL VARCHAR2(30)</code>
+<code class="Code">&nbsp;</code>
+<code class="Code"><em class="CodeUserInput">SELECT * FROM CUSTOMER_KNOWN_GOOD;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">   CUST_NBR NAME</code>
+<code class="Code">----------- ------------------------------</code>
+<code class="Code">          1 Sony</code>
+<code class="Code">          1 Sony</code>
+<code class="Code">          2 Samsung</code>
+<code class="Code">          3 Panasonic</code>
+<code class="Code">          3 Panasonic</code>
+<code class="Code">          3 Panasonic</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">6 rows selected.</code>
+<code class="Code">&nbsp;</code>
+<code class="Code"><em class="CodeUserInput">DESC CUSTOMER_TEST</em></code>
+<code class="Code">Name                         Null?    Type</code>
+<code class="Code"> ---------------------------- -------- ----------------</code>
+<code class="Code"> CUST_NBR                     NOT NULL NUMBER(5)</code>
+<code class="Code"> NAME                         NOT NULL VARCHAR2(30)</code>
+<code class="Code">&nbsp;</code>
+<code class="Code"><em class="CodeUserInput">SELECT * FROM CUSTOMER_TEST;</em></code>
+<code class="Code">   CUST_NBR NAME</code>
+<code class="Code">----------- ------------------------------</code>
+<code class="Code">          1 Sony</code>
+<code class="Code">          1 Sony</code>
+<code class="Code">          2 Samsung</code>
+<code class="Code">          2 Samsung</code>
+<code class="Code">          3 Panasonic</code>
+</pre>
+
+<p class="Body">As we can see the CUSTOMER_KNOWN_GOOD and CUSTOMER_TEST 
+tables have the same structure, but different data. Also notice that 
+none of these tables has a primary or unique key; there are duplicate 
+records in both. The following SQL will compare these two tables 
+effectively:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">(SELECT C1.*, COUNT(*)</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER_KNOWN_GOOD C1</em></code>
+<code class="Code"><em class="CodeUserInput">GROUP BY C1.CUST_NBR, C1.NAME</em></code>
+<code class="Code">MINUS</code>
+<code class="Code"><em class="CodeUserInput">SELECT C2.*, COUNT(*)</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER_TEST C2</em></code>
+<code class="Code"><em class="CodeUserInput">GROUP BY C2.CUST_NBR, C2.NAME)</em></code>
+<code class="Code">UNION ALL</code>
+<code class="Code"><em class="CodeUserInput">(SELECT C3.*, COUNT(*)</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER_TEST C3</em></code>
+<code class="Code"><em class="CodeUserInput">GROUP BY C3.CUST_NBR, C3.NAME</em></code>
+<code class="Code">MINUS</code>
+<code class="Code"><em class="CodeUserInput">SELECT C4.*, COUNT(*)</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER_KNOWN_GOOD C4</em></code>
+<code class="Code"><em class="CodeUserInput">GROUP BY C4.CUST_NBR, C4.NAME);</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">   CUST_NBR NAME                             COUNT(*)</code>
+<code class="Code">----------- ------------------------------ ----------</code>
+<code class="Code">          2 Samsung                                 1</code>
+<code class="Code">          3 Panasonic                               3</code>
+<code class="Code">          2 Samsung                                 2</code>
+<code class="Code">          3 Panasonic                               1</code>
+</pre>
+
+<p class="Body">These results indicate that one table 
+(CUSTOMER_KNOWN_GOOD) has one record for "Samsung", whereas the second 
+table (CUSTOMER_TEST) has two records for the same customer. Also, one 
+table (CUSTOMER_KNOWN_GOOD) has three records for "Panasonic", whereas 
+the second table (CUSTOMER_TEST) has one record for the same customer. 
+Both the tables have the same number of rows (two) for "Sony", and 
+therefore "Sony" doesn't appear in the output.</p>
+
+<blockquote>
+
+<p class="NoteTip"><b>TIP:</b> &nbsp;
+Duplicate rows are not possible in tables that have a primary key or at 
+least one unique index. Use the short form of the table comparison query
+ for such tables. 
+</p></blockquote>
+
+<h2 class="HeadA">Using NULLs in Compound Queries</h2>
+
+
+<p class="Body">We discussed union compatibility conditions at the 
+beginning of this chapter. The union compatibility issue gets 
+interesting when NULLs are involved. As we know, NULL doesn't have a 
+datatype, and NULL can be used in place of a value of any datatype. If 
+we purposely select NULL as a column value in a component query, Oracle 
+no longer has two datatypes to compare in order to see whether the two 
+component queries are compatible. For character columns, this is no 
+problem. For example:</p>
+
+<pre><code class="CodeEmphasis"><b>SELECT 1 NUM, 'DEFINITE' STRING FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT 2 NUM, NULL STRING FROM DUAL;</b></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">       NUM STRING</code>
+<code class="Code">---------- --------</code>
+<code class="Code">         1 DEFINITE</code>
+<code class="Code">         2</code>
+</pre>
+
+<p class="Body">Notice that Oracle considers the character string 
+'DEFINITE' from the first component query to be compatible with the NULL
+ value supplied for the corresponding column in the second component 
+qery. However, if a NUMBER or a DATE column of a component query is set 
+to NULL, we must explicitly tell Oracle what "flavor" of NULL to use. 
+Otherwise, we'll encounter errors. For example:</p>
+
+<pre><code class="Code"><em class="LineEmphasis">SELECT 1 NUM, 'DEFINITE' STRING FROM DUAL</em></code>
+<code class="Code"><em class="LineEmphasis">UNION</em></code>
+<code class="Code"><em class="LineEmphasis">SELECT NULL NUM, 'UNKNOWN' STRING FROM DUAL;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">SELECT 1 NUM, 'DEFINITE' STRING FROM DUAL</code>
+<code class="Code">       *</code>
+<code class="Code">ERROR at line 1:</code>
+<code class="Code">ORA-01790: expression must have same datatype as corresponding expression</code>
+</pre>
+
+<p class="Body">Note that the use of NULL in the second component query 
+causes a datatype mismatch between the first column of the first 
+component query, and the first column of the second component query. 
+Using NULL for a DATE column causes the same problem, as in the 
+following example:</p>
+
+<pre><code class="CodeEmphasis"><b>SELECT 1 NUM, SYSDATE DATES FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT 2 NUM, NULL DATES FROM DUAL;</b></code>
+<code class="Code">SELECT 1 NUM, SYSDATE DATES FROM DUAL</code>
+<code class="Code">              *</code>
+<code class="Code">ERROR at line 1:</code>
+<code class="Code">ORA-01790: expression must have same datatype as corresponding expression </code>
+</pre>
+
+<p class="Body">In these cases, we need to cast the NULL to a suitable datatype to fix the problem, as in the following examples:</p>
+
+<pre><code class="CodeEmphasis"><b>SELECT 1 NUM, 'DEFINITE' STRING FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT TO_NUMBER(NULL) NUM, 'UNKNOWN' STRING FROM DUAL;</b></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">       NUM STRING</code>
+<code class="Code">---------- --------</code>
+<code class="Code">         1 DEFINITE</code>
+<code class="Code">           UNKNOWN</code>
+<code class="Code">&nbsp;</code>
+<code class="CodeEmphasis"><b>SELECT 1 NUM, SYSDATE DATES FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT 2 NUM, TO_DATE(NULL) DATES FROM DUAL;</b></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">       NUM DATES</code>
+<code class="Code">---------- ---------</code>
+<code class="Code">         1 06-JAN-02</code>
+<code class="Code">         2</code>
+</pre>
+
+<p class="Body">This problem of union compatibility when using NULLs is encountered in Oracle8<em class="Emphasis">i</em>. However, there is no such problem in Oracle9<em class="Emphasis">i</em>, as we can see in the following examples generated from an Oracle9<em class="Emphasis">i</em> database:</p>
+
+<pre><code class="CodeEmphasis"><b>SELECT 1 NUM, 'DEFINITE' STRING FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT NULL NUM, 'UNKNOWN' STRING FROM DUAL;</b></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">       NUM STRING</code>
+<code class="Code">---------- --------</code>
+<code class="Code">         1 DEFINITE</code>
+<code class="Code">           UNKNOWN</code>
+<code class="CodeEmphasis"><b>&nbsp;</b></code>
+<code class="CodeEmphasis"><b>SELECT 1 NUM, SYSDATE DATES FROM DUAL</b></code>
+<code class="CodeEmphasis"><b>UNION</b></code>
+<code class="CodeEmphasis"><b>SELECT 2 NUM, NULL DATES FROM DUAL;</b></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">       NUM DATES</code>
+<code class="Code">---------- ---------</code>
+<code class="Code">         1 06-JAN-02</code>
+<code class="Code">         2</code>
+</pre>
+
+<p class="Body">Oracle9<em class="Emphasis">i</em> is smart enough to know which flavor of NULL to use in a compound query.</p>
+
+
+<h2 class="HeadA">Rules and Restrictions on Set Operations</h2>
+
+
+<p class="Body">Other than the union compatibility conditions discussed 
+at the beginning of the chapter, there are some other rules and 
+restrictions that apply to the set operations. These rules and 
+restrictions are as follows:</p>
+
+
+<p class="Body">Column names for the result set are derived from the first SELECT: </p>
+
+<pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR "Customer ID", NAME "Customer Name"</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="CodeEmphasis"><b>&nbsp;</b></code>
+<code class="CodeEmphasis"><b>Customer ID Customer Name</b></code>
+<code class="Code">----------- ----------------------</code>
+<code class="Code">          1 Cooper Industries</code>
+<code class="Code">          2 Emblazon Corp.</code>
+<code class="Code">          3 Ditech Corp.</code>
+<code class="Code">          4 Flowtech Inc.</code>
+<code class="Code">          5 Gentech Industries</code>
+<code class="Code">          8 Zantech Inc.</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">6 rows selected.</code>
+</pre>
+
+<p class="Body">Although both SELECTs use column aliases, the result set
+ takes the column names from the first SELECT. The same thing happens 
+when we create a view based on a set operation. The column names in the 
+view are taken from the first SELECT:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">CREATE VIEW V_TEST_CUST AS</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT CUST_NBR "Customer ID", NAME "Customer Name"</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT C.CUST_NBR, C.NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER C</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE C.CUST_NBR IN (SELECT O.CUST_NBR</em></code>
+<code class="Code"><em class="CodeUserInput">                     FROM CUST_ORDER O, EMPLOYEE E</em></code>
+<code class="Code"><em class="CodeUserInput">                     WHERE O.SALES_EMP_ID = E.EMP_ID</em></code>
+<code class="Code"><em class="CodeUserInput">                     AND E.LNAME = 'MARTIN');</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">View created.</code>
+<code class="Code">&nbsp;</code>
+<code class="Code"><em class="CodeUserInput">DESC V_TEST_CUST</em></code>
+<code class="Code"> Name                            Null?    Type</code>
+<code class="Code"> ------------------------------- -------- ----</code>
+<code class="Code"> <em class="LineEmphasis">Customer_ID</em>                              NUMBER</code>
+<code class="Code"> <em class="LineEmphasis">Customer_Name</em>                            VARCHAR2(45)</code>
+</pre>
+
+<p class="Body">If we want to use ORDER BY in a query involving set 
+operations, we must place the ORDER BY at the end of the entire 
+statement. The ORDER BY clause can appear only once at the end of the 
+compound query. The component queries can't have individual ORDER BY 
+clauses. For example:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT EMP_ID, LNAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM EMPLOYEE</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE LNAME = 'MARTIN'</em></code>
+<code class="Code"><em class="CodeUserInput">ORDER BY CUST_NBR;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ---------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         5 Gentech Industries</code>
+<code class="Code">      7654 MARTIN</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">6 rows selected.</code>
+</pre>
+
+<p class="Body">Note that the column name used in the ORDER BY clause of
+ this query is taken from the first SELECT. We couldn't order these 
+results by EMP_ID. If we attempt to ORDER BY EMP_ID, we will get an 
+error, as in the following example:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT EMP_ID, LNAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM EMPLOYEE</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE LNAME = 'MARTIN'</em><em class="CodeReplaceable">ORDER BY EMP_ID;</em></code>
+<code class="Code">ORDER BY EMP_ID</code>
+<code class="Code">         *</code>
+<code class="Code">ERROR at line 8:</code>
+<code class="Code">ORA-00904: invalid column name</code>
+</pre>
+
+<p class="Body">The ORDER BY clause doesn't recognize the column names 
+of the second SELECT. To avoid confusion over column names, it is a 
+common practice to ORDER BY column positions:</p>
+
+<pre><code class="Code"><em class="CodeUserInput">SELECT CUST_NBR, NAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM CUSTOMER</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE REGION_ID = 5</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT EMP_ID, LNAME</em></code>
+<code class="Code"><em class="CodeUserInput">FROM EMPLOYEE</em></code>
+<code class="Code"><em class="CodeUserInput">WHERE LNAME = 'MARTIN'</em></code>
+<code class="Code"><em class="CodeUserInput">ORDER BY 1;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">  CUST_NBR NAME</code>
+<code class="Code">---------- ---------------------</code>
+<code class="Code">         1 Cooper Industries</code>
+<code class="Code">         2 Emblazon Corp.</code>
+<code class="Code">         3 Ditech Corp.</code>
+<code class="Code">         4 Flowtech Inc.</code>
+<code class="Code">         5 Gentech Industries</code>
+<code class="Code">      7654 MARTIN</code>
+<code class="Code">&nbsp;</code>
+<code class="Code">6 rows selected.</code>
+</pre>
+
+<blockquote>
+<p class="NoteTip"><b>TIP:</b> &nbsp;
+Unlike ORDER BY, we can use GROUP BY and HAVING clauses in component queries.
+</p></blockquote>
+
+<p class="Body">Component queries are executed from top to bottom. If we
+ want to alter the sequence of execution, use parentheses appropriately.
+ For example:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT * FROM SUPPLIER_GOOD</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT * FROM SUPPLIER_TEST</em></code>
+<code class="Code"><em class="CodeUserInput">MINUS</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT * FROM SUPPLIER;</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">SUPPLIER_ID NAME</code>
+<code class="Code">----------- --------------------------</code>
+<code class="Code">          4 Toshiba</code>
+</pre>
+
+<p class="Body">Oracle performs the UNION between SUPPLIER_GOOD and 
+SUPPLIER_TEST first, and then performs the MINUS between the result of 
+the UNION and the SUPPLIER table. If we want the MINUS between 
+SUPPLIER_TEST and SUPPLIER to be performed first, and then the UNION 
+between SUPPLIER_GOOD and the result of MINUS, we must use parentheses 
+to indicate so:
+</p><pre><code class="Code"><em class="CodeUserInput">SELECT * FROM SUPPLIER_GOOD</em></code>
+<code class="Code"><em class="CodeUserInput">UNION</em></code>
+<code class="Code"><em class="CodeUserInput">(SELECT * FROM SUPPLIER_TEST</em></code>
+<code class="Code"><em class="CodeUserInput">MINUS</em></code>
+<code class="Code"><em class="CodeUserInput">SELECT * FROM SUPPLIER);</em></code>
+<code class="Code">&nbsp;</code>
+<code class="Code">SUPPLIER_ID NAME</code>
+<code class="Code">----------- -------------------------</code>
+<code class="Code">          1 Sony</code>
+<code class="Code">          2 Samsung</code>
+<code class="Code">          3 Panasonic</code>
+<code class="Code">          4 Toshiba</code>
+</pre>
+
+<p class="Body">The parentheses in this query forces the MINUS to be 
+performed before the UNION. Notice the difference in the result as 
+compared to the previous example.
+
+</p><p class="Body">The following list summarizes some simple rules, restrictions, and notes that don't require examples:
+</p><ul>
+<li class="ListBullet">Set operations are not permitted on columns of 
+type BLOB, CLOB, BFILE, and VARRAY, nor are set operations permitted on 
+nested table columns.</li>
+<p>
+</p><li class="ListBullet">Since UNION, INTERSECT, and MINUS operators 
+involve sort operations, they are not allowed on LONG columns. However, 
+UNION ALL is allowed on LONG columns.</li>
+<p>
+</p><li class="ListBullet">Set operations are not allowed on SELECT statements containing TABLE collection expressions.</li>
+<p>
+</p><li class="ListBullet">SELECT statements involved in set operations can't use the FOR UPDATE clause.</li>
+<p>
+</p><li class="ListBullet">The number and size of columns in the SELECT 
+list of component queries are limited by the block size of the database.
+ The total bytes of the columns SELECTed can't exceed one database 
+block.</li>
+<p>
+</p></ul>
+
+
+</blockquote>
+
+
+<!-- End of sample chapter -->
+<p><b>Back to: <a href="http://oreilly.com/catalog/mastorasql/">Mastering Oracle SQL</a></b></p>
+
+<!-- O'Reilly Footer Begins Here -->
+
+<center>
+<hr noshade="noshade" size="1">
+<font face="Verdana, Arial, Helvetica" size="1">
+<a href="http://www.oreilly.com/">
+<b>oreilly.com&nbsp;Home</b></a> <b> | </b>
+<a href="http://www.oreilly.com/sales/bookstores">
+<b>O'Reilly&nbsp;Bookstores</b></a> <b> | </b>
+<a href="http://www.oreilly.com/order_new/">
+<b>How&nbsp;to&nbsp;Order</b></a> <b> | </b>
+<a href="http://www.oreilly.com/oreilly/contact.html">
+<b>O'Reilly&nbsp;Contacts<br></b></a>
+<a href="http://www.oreilly.com/international/">
+<b>International</b></a> <b> | </b>
+<a href="http://www.oreilly.com/oreilly/about.html">
+<b>About&nbsp;O'Reilly</b></a> <b> | </b>
+<a href="http://www.oreilly.com/affiliates.html">
+<b>Affiliated&nbsp;Companies</b></a> <b> | </b>
+<a href="http://www.oreilly.com/privacy_policy.html">
+<b>Privacy&nbsp;Policy</b></a><p>
+<em>© 2001, O'Reilly &amp; Associates, Inc.</em><br>
+<a href="mailto:webmaster@oreilly.com"><i>webmaster@oreilly.com</i></a></p>
+</font>
+</center>
+
+<!-- O'Reilly Footer Ends Here -->
+
+</body></html>

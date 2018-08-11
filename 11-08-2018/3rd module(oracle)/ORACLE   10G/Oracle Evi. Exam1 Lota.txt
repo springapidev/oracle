@@ -1,0 +1,64 @@
+***create table emp15(
+empId number(10) primary key,
+empnme VARCHAR2(10),
+salary number(10),
+joiningDate date  DEFAULT sysdate,
+address VARCHAR2(20)
+);
+
+***
+ALTER TABLE EMP15
+ADD departmentId number(10);
+ALTER TABLE EMP15
+ADD departmentName VARCHAR2(10);
+
+***
+INSERT INTO EMP15
+VALUES(&ID, '&NAME',&SALARY,'&JOINGDATE','&ADDRESS',&DEPT_ID,'&DEPT_NAME');
+
+INSERT INTO EMP15
+VALUES(103,'Nazma',12600,'02-jun-2015','khulna',40,'c#');
+
+INSERT INTO EMP15
+VALUES(104,'Nobi',9000,'02-may-2015','narsarngdi',50,'dd');
+
+INSERT INTO EMP15
+VALUES(105,'Rakin',13000,'02-mar-2015','dhaka',80,'wpha
+
+***
+create view emp_view as
+select empnme, empId,departmentName
+from emp15
+where departmentId=80;
+
+***
+select empnme, empId,departmentId, MAX(salary)
+from emp15
+GROUP BY empnme, empId,departmentId
+HAVING MAX(salary)>12000;
+
+
+****
+select departmentId, sum(salary)
+from emp15
+GROUP BY rollup(departmentId)
+;
+
+pp:
+select empnme, empId,departmentId, MAX(salary)
+from emp15
+GROUP BY rollup(empnme, empId,departmentId)
+;
+
+
+select empnme, empId,departmentId, max(salary)
+from emp15
+where departmentId=80
+GROUP BY rollup(departmentId,empnme, empId)
+;
+
+
+select empnme, empId,departmentId, MAX(salary), count(departmentId)
+from emp15
+GROUP BY rollup(empnme, empId,departmentId)
+;

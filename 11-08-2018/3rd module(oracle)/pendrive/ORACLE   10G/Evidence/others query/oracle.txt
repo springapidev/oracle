@@ -1,0 +1,65 @@
+select first_name||' '|| last_name "name", salary, salary*12 "annual salary"
+from employees;
+select first_name||' '|| last_name "Name", salary, salary*12 "Total salary"
+from employees;
+SELECT last_name "Name",salary*12 "Annual salary"
+FROM employees;
+SELECT last_name||job_id AS "Employees" from employees;
+SELECT department_name ||
+q'[,it's assigned Manager Id:]'
+||manager_id
+AS "department and Manager"
+FROM departments;
+select last_name ||q'[ has Manager]'||manager_id
+from employees;
+
+select * from employees
+where department_id!=50 And salary<6000;
+
+select * from employees
+where salary=6000 or salary=5000 or salary=7000;
+
+select *
+from employees
+where salary not in(6000,5000,7000);
+
+select *
+from employees
+where salary in(6000,5000,7000);
+
+select *
+from employees
+where salary in(6000,5000,7000);
+select *
+from employees
+where salary in(6000,5000,7000);
+
+select last_name,job_id,department_id,
+from employees
+WHERE last_name='Whalen';
+
+
+select last_name,job_id,department_id
+from employees
+WHERE commission_pct is Null;
+
+select *
+from employees
+WHERE salary between 5000 and 6000;
+
+select *
+from employees
+WHERE Hire_date between '01-Jan-95' and '31-Dec-95';
+
+select *
+from employees
+WHERE last_name like 'H%';
+
+select *
+from employees
+WHERE last_name like 'H_n%';
+
+select *
+from employees
+WHERE Hire_date like '%95';
+

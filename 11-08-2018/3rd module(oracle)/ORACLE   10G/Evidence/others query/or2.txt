@@ -1,0 +1,63 @@
+select employee_id, hire_date, to_char(sysdate, 'DD,DY,Mon,YYYY') month_hired
+from employees;
+
+
+select sysdate, TO_CHAR(sysdate,'HH:MM:SS')
+from employees;
+
+
+select sysdate, TO_CHAR(sysdate,'HH:MI:SSSS')
+from dual;
+
+select last_name,to_char(hire_date,'fmDdspth "of" Month YYYY fmHHspth:MI:SS am')
+hire_date
+from employees;
+
+
+select employee_id,salary, to_char(salary,'9,99,999.99L'),to_char(salary,'0,00,000.00')
+from employees;
+
+select to_char(-555,'9999.99PR')
+from dual;
+
+
+select to_date('04-07-12','MM-DD-YY'),to_number('0,24,000.00$','0,00,000.00L')
+from dual;
+
+select last_name,UPPER(concat(substr(last_name,1,8),'_US'))
+from employees
+where department_id=60;
+
+select last_name,salary,NVL(commission_pct,0)*salary+salary
+from employees;
+
+select first_name,length(first_name)"expr1",
+last_name,length(last_name) "expr2",
+NULLIF(length(first_name),length(last_name))result
+from employees;
+
+select last_name,commission_pct,manager_id, coalesce(commission_pct,manager_id,-1)comm
+from employees
+order by commission_pct;
+
+
+select last_name,job_id,salary,
+CASE job_id WHEN 'IT_PROG' THEN 1.10*salary
+when 'ST_CLERK' THEN 1.15*salary
+when 'SA_REP' THEN 1.20*salary
+ELSE salary END "REVISED_SALARY"
+from employees;
+
+select last_name,salary,
+DECODE(TRUNC(salary/2000,0),
+0,0.00,
+1,0.09,
+2,0.20,
+3,0.30,
+4,0.40,
+5,0.42,
+6,0.44,
+  0.45) TAX_RATE
+from employees
+WHERE department_id=80;
+

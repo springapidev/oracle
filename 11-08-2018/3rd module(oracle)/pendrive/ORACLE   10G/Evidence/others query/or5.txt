@@ -1,0 +1,15 @@
+Test:Exam
+ select employee_id,last_name,job_id,salary,
+(case WHEN salary>25000 THEN 'A Grade'
+       WHEN salary>15000 THEN 'B Grade'
+       WHEN salary>10000 THEN 'C Grade'
+       WHEN salary>5000 THEN 'D Grade'
+       ELSE 'F Grade' END) Required_salary
+from employees;
+
+
+Create table another table values:
+
+create table Salerep(Empid,name,sal,commi)
+As select employee_id,last_name,salary,commission_pct
+from employees;  

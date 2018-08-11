@@ -1,0 +1,24 @@
+1. [ch-6] combining the two queries, placing one query inside the other
+	query is called subquery .....
+a.The subquery (inner query) executes once before the main query (outer query).
+b. The result of the subquery is used by the main query.
+c.The Mainquery executes once before the sub query .
+ans: a,b
+
+2. [ch-6] You can place the subquery in a number of SQL clauses, including the following:
+• WHERE clause
+• HAVING clause
+• FROM clause
+In the syntax: operator includes a comparison condition-
+a. single-row operators (>, =, >=, <, <>, <=) 
+b. multiple-row operators (IN, ANY, ALL)
+c. single-row operators (IN, ANY, ALL)
+ans: a,b
+
+3. [ch-6] Guidelines for Using Subqueries- 
+a. Enclose subqueries in parentheses.
+b. Place subqueries on the both side of the comparison condition.
+c. The ORDER BY clause in the subquery is not needed unless you are performing Top-N analysis.
+d. Use single-row operators with single-row subqueries, and use multiple-row operators with
+multiple-row subqueries
+ans: a,c,d

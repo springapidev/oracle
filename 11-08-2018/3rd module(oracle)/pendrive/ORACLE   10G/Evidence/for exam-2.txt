@@ -1,0 +1,27 @@
+select perid,name,age,salary,salary+salary*.25 N_salary,joindate
+from person;
+
+
+select perid,name,age,salary,joindate
+from person
+where salary=(select min(salary) from person)
+;
+
+select perid,name,age,salary,joindate
+from person
+where salary>(select avg(salary) from person)
+;
+
+
+select perid,name,age,salary,joindate
+from person
+where salary<(select avg(salary) from person)
+;
+
+
+update person
+set
+salary=salary+salary*.20;
+
+alter table sales1
+add(perid number(10) references person(perid));

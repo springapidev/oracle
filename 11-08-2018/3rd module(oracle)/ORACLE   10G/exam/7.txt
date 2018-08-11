@@ -1,0 +1,68 @@
+CREATE TABLE e_sales(
+sales_no NUMBER(10) PRIMARY KEY,
+product_id NUMBER(10) UNIQUE,
+product_name VARCHAR2(20) CHECK (product_name IN('pen', 'pencil', 'book', 'khata')),
+quantity NUMBER(12) CHECK (quantity >0),
+price NUMBER(10,2),
+sales_date DATE,
+customer VARCHAR2(10)
+)
+
+
+CREATE SEQUENCE e_sales_id_seq
+INCREMENT BY 1
+START WITH 900
+MAXVALUE 9999
+NOCYCLE
+NOCACHE;
+
+
+ALTER TABLE e_sales
+MODIFY product_id NUMBER(10) NOT NULL; 
+
+
+INSERT INTO e_sales
+VALUES(e_sales_id_seq.NEXTVAL, 102, 'pencil', 10, 10, sysdate, 'noman' );
+
+
+ALTER TABLE e_sales
+DROP CONSTRAINTS SYS_C005566 ;
+
+
+CREATE OR REPLACE VIEW e_sales_view
+AS SELECT * FROM e_sales;
+
+
+CREATE SYNONYM  e_sales_view_syno FOR e_sales_view;
+
+
+
+SELECT * 
+FROM e_sales 
+WHERE sales_date  IN (SELECT sales_date FROM e_sales WHERE product_name = 'pen') 
+AND product_name <> 'pen';
+
+
+SELECT sales_no, customer, product_name, quantity, price, quantity*price "TOTAL"
+FROM e_sales
+
+
+CREATE OR REPLACE VIEW e_sales_view
+AS SELECT sales_no, customer, product_name, quantity, price, quantity*price "TOTAL"
+FROM e_sales;
+
+
+SELECT product_name,SUM(total)
+FROM e_sales_view
+GROUP BY product_name;
+
+
+
+SELECT customer, product_name, SUM(total)
+FROM e_sales_view
+GROUP BY customer,product_name
+ORDER BY customer;
+
+
+SELECT * FROM e_sales
+WHERE quantity >(SELECT AVG(quantity) FROM e_sales WHERE product_name = 'pen')

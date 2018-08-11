@@ -1,0 +1,27 @@
+SELECT product_name, sum(quantity) "Quantity", sum(price) "Total Price" 
+FROM sales
+GROUP BY product_name;
+
+
+SELECT product_name, max(quantity) "Quantity"
+FROM sales
+GROUP BY product_name;
+
+
+
+SELECT clint_name, product_name, sum(quantity) "Quantity", sum(price) "Total Price" 
+FROM sales
+GROUP BY clint_name,product_name;
+
+
+
+
+SELECT product_name, sales_date, sum(quantity) "Quantity", sum(price) "Total Price" 
+FROM sales
+GROUP BY sales_date, product_name
+ORDER BY sales_date;
+
+
+
+select * from sales 
+where trim(sales_date)='12-JUL-13'

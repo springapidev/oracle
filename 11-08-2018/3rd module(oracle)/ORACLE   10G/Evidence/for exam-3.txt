@@ -1,0 +1,27 @@
+create table em_detail(
+eid number(10),
+ename varchar2(20),
+salary number(10),
+hire_date date,
+address varchar2(30));
+
+alter table em_detail
+add constraint em_d_pk primary key(eid);
+
+alter table em_detail
+add (phone number(20),job_title varchar2(20));
+
+insert into em_detail
+values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_title');
+
+select ename,job_title,salary,salary+salary*.3 "Salary with Bonus"
+from em_detail;
+
+select ename,salary
+from em_detail
+where salary=(select min(salary) from em_detail)
+;
+
+update em_detail
+set
+job_title='Manager';

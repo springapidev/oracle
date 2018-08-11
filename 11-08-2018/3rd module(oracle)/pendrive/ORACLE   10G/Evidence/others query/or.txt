@@ -1,0 +1,32 @@
+select  initcap('The job id for '||upper(last_name) ||' is '
+||lower(job_id)) as"EMPLOYEE DETAILS"
+from employees;
+
+
+select employee_id, last_name, department_id
+from employees
+where lower(last_name)='higgins';
+
+select length(last_name),last_name,instr(last_name,'le')
+from employees;
+
+select employee_id,LPAD(salary,10,'*'), RPAD(salary,10,'*')
+from employees;
+
+select last_name,replace(last_name,'A','aa')
+from employees;
+
+select last_name,trim('A' from last_name)
+from employees;
+
+select round(45.938,1)
+from dual;
+
+select round(45.938,-1)
+from dual;
+
+select round(55.938,-2)
+from dual;
+
+select round(45.923,2),round(45.923,0),round(45.923,-1)
+from dual;

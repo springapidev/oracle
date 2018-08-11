@@ -1,0 +1,7 @@
+set echo off
+set feedback off
+set pagesize 0
+set ttitle "ABC"
+
+select *
+from employees;

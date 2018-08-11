@@ -1,0 +1,55 @@
+create table person(
+perid number(10),
+name varchar2(20) not null,
+age number(4) check(age>18),
+salary number(12,2),
+joindate date,
+designation varchar2(20),
+constraints per_pk primary key(perid));
+
+
+create table sales1(
+salesid number(10),
+product varchar2(10) not null,
+unit number(10) check(unit>0),
+price number(10,2),
+salesdate date default sysdate,
+customer varchar2(20),
+constraints sal_pk primary key(salesid));
+
+
+create sequence per_seq
+increment by 1
+start with 100
+maxvalue 1000
+minvalue 1;
+
+
+create sequence sal_seq
+increment by 1
+start with 500
+maxvalue 1000
+minvalue 1;
+
+insert into person
+values(per_seq.nextval,'&name',&age,&salary,'&joindate','&designation');
+
+insert into sales1
+values(sal_seq.nextval,'&product',&unit,&price,default,'&customer');
+
+
+alter table person
+drop column designation;
+
+alter table sales1
+modify product varchar2(20);
+
+
+update sales1
+set
+price=(select min(price) from sales1 where product='Pen')
+where salesid=503;
+
+select perid,name,salary
+from person
+where name in(select customer from sales1);

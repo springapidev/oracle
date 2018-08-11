@@ -1,0 +1,44 @@
+update employees
+set salary=1000;
+
+
+
+
+select * from employees
+where employee_id=113;
+
+
+update employees
+set department_id=90
+where employee_id=113;
+
+
+select * from employees
+where department_id=90;
+
+
+update employees
+set salary=salary+2000,commission_pct=.5
+where Department_id=90;
+
+
+update employees
+set job_id=(select job_id
+from employees
+where employee_id=205),
+salary=(select salary
+from employees
+where employee_id=205)
+where employee_id=114;
+
+
+insert into
+(select employee_id,last_name ,email,hire_date,job_id,salary,department_id
+from employees
+where department_id=50)
+values (99999,'Taylor','DTAYLOR',
+TO_DATE('07-JUN-99','DD-MON-RR'),
+'ST_CLERK',5000,50);
+
+
+insert into products values(555,'Pant',10,100);

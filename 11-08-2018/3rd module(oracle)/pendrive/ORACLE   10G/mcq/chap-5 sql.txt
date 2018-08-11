@@ -1,0 +1,101 @@
+1. [ch-5] Joins that are compliant with the SQL:1999 standard include the following:
+
+a. Cross joins
+b. Natural joins
+c. USING clause
+d. Arbitrary join conditions for outer joins
+e. Equi-join
+
+Ans:a,b,c,d
+
+2. [ch-5] which one is true
+
+a. To join tables, you can use join syntax that is compliant with the SQL:1999 standard.
+b. Prior to the Oracle9i release, the join syntax was different from the ANSI standards.
+c. The SQL:1999–compliant join syntax  offers any performance benefits over the Oracle-proprietary join syntax that existed in prior releases
+
+Ans:a,b
+
+3. [ch-5] which one is  not true Creating Natural Joins
+
+a. The NATURAL JOIN clause is based on all columns in the two tables that have the same name.
+b. It selects rows from the two tables that have equal values in all matched columns.
+c. The columns having the same names have different data types, produce result
+
+Ans:c
+
+4. [ch-5] which one is  true Creating Joins with the USING Clause
+
+a. If several columns have the same names but the data types do not match, the NATURAL JOIN clause
+can be modified with the USING clause to specify the columns that should be used for an equijoin.
+b. Use the USING clause to match only one column when more than one column matches.
+c. use a table name or alias in the referenced columns.
+d. The NATURAL JOIN and USING clauses are mutually exclusive. 
+
+Ans:a,b,d
+
+5. [ch-5] Equijoins are also called 
+
+a. simple joins or inner joins.
+b. Self join
+c. outer Join
+
+Ans:a
+
+
+6. [ch-5] Write the use of table prefixes 
+
+a. Use table prefixes to qualify column names that are in multiple tables.
+b. Use table prefixes to improve performance.
+c. Use column aliases to distinguish columns that have identical names but reside in same tables
+
+Ans:a,b
+
+7. [ch-5] Guidelines for table aliases is not true
+
+a. Table aliases can be up to 20 characters in length, but shorter aliases are better than longer nes.
+b. If a table alias is used for a particular table name in the FROM clause, then that table alias must be substituted for the table name throughout the SELECT statement.
+c. Table aliases should be meaningful.
+d.  The table alias is valid for only the current SELECT statement.
+
+Ans:a,b,c,d
+
+
+8. [ch-5] SELECT e.employee_id, e.last_name, e.department_id,d.department_id, d.location_id 
+	  FROM employees e JOIN departments d ON (e.department_id = d.department_id);
+   what is the type ?
+a. Equi-join
+b. SQL:1999 stander join 
+c. Non Equi-Join
+
+Ans:a
+
+9. [ch-5] which one is true for self 
+a. The ON clause can also be used to join columns that have different names, within the same table .
+b. The ON clause can also be used to join columns that have different names, within the same table or    in a different table.
+c. all are true
+
+Ans:b
+
+10. [ch-5] SELECT e.last_name, e.department_id, d.department_name FROM employees e LEFT OUTER JOIN departments d ON (e.department_id = d.department_id)  which one is equivalent .
+
+a. SELECT e.last_name, e.department_id, d.department_name FROM employees , departments d 
+where e.department_id(+) = d.department_id
+b. SELECT e.last_name, e.department_id, d.department_name FROM employees , departments d 
+where e.department_id = d.department_id(+)
+c. SELECT e.last_name, e.department_id, d.department_name FROM employees , departments d 
+where e.department_id(+) = d.department_id(+)
+
+Ans:b
+
+11. [ch-5] A Cartesian product is formed when:
+
+a. A join condition is omitted
+b. A join condition is invalid
+c. All rows in the first table are joined to any rows in the second table
+
+Ans:a,b,c
+
+
+
+

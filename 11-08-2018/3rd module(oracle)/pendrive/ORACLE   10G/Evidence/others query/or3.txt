@@ -1,0 +1,44 @@
+select sum(salary),avg(salary),max(salary),min(salary)
+from employees;
+
+
+select sum(salary),avg(salary),max(salary),min(salary)
+from employees group by department_id;
+
+select count(*) 
+from employees;
+
+select count(commission_pct),department_id
+from employees group by department_id; 
+
+select distinct(department_id)
+from employees ; 
+
+select avg(salary),max(salary),min(salary),sum(salary)
+from employees
+where job_id like '%REP%'; 
+
+
+select max(avg(salary))
+from employees
+group by department_id;
+
+
+select e.employee_id,e.last_name,d.department_name
+from employees e, departments d
+where e.department_id=d.department_id
+
+select d.department_id,d.department_name,l.location_id,l.city
+from departments d,locations l
+where d.location_id=l.location_id;
+
+
+select employee_id,last_name,salary,salary+salary*0.155"New salary",(salary*0.155)+salary-salary"Increase"
+from employees;
+
+
+select last_name,length(last_name)
+from employees;
+
+select last_name,trunc (mod((sysdate-hire_date),365))"MONTH_WORKED"
+from employees;

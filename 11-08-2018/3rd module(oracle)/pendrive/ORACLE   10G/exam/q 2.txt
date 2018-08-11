@@ -1,0 +1,18 @@
+ALTER TABLE sales
+ADD delevary_date date;
+
+
+ALTER TABLE sales
+DROP COLUMN delevary_date;
+
+
+ALTER TABLE sales
+MODIFY price number(12,2);
+
+
+ALTER TABLE sales
+ADD CONSTRAINTS product_name_ck CHECK( product_name IN('shirt','pant'));
+
+
+ALTER TABLE sales
+RENAME COLUMN customer_name TO clint_name;

@@ -1,0 +1,74 @@
+1. [ch-4] Group functions operate on sets of rows to give one result per group.which one is not group fuction-
+a. AVG, COUNT
+c. MAX, MIN
+d STD, SUM, VARI
+ans: a
+
+2. [ch-4]  Guidelines for Using Group Functions
+
+a. DISTINCT makes the function consider only nonduplicate values.
+b. The data types for the functions with an expr argument may be CHAR, VARCHAR2,NUMBER or DATE.
+c. All group functions are not ignore null values.
+ans: c 
+
+
+3. [ch-4] Using the Group Functions
+a. use AVG, SUM, MIN, and MAX functions against columns that can store numeric data.
+b. use the MAX and MIN functions for numeric, character, and date data types.
+c. use AVG, SUM, MIN, and MAX functions against columns that can store date data. 
+ans: a,b
+
+4. [ch-4] The COUNT function has three formats :which one is correct
+a. COUNT(*) including duplicate rows and rows containing Not null values in any of the columns.
+b. COUNT(expr) COUNT(expr) returns the number of non-null values that are in the column identified by expr.
+c. COUNT(DISTINCT expr)  returns the number of distinct null values of the expr.
+ans: b
+
+5. [ch-4] You can divide rows in a table into smaller groups by using the GROUP BY clause.
+which one is not Guidelines------
+a. group function in a SELECT clause, you can select individual results as well.
+b. Using a WHERE clause, you can exclude rows before dividing them into groups.
+c. You must include the columns in the GROUP BY clause.
+d. You cannot use a column alias in the GROUP BY clause.
+ans: a
+
+6. [ch-4] SELECT department_id, AVG(salary) FROM employees GROUP BY department_id ;what is the result
+
+a. display deparment_id ,average salary of each department
+b. display deparment_id ,average salary of all department
+c. error
+ans: 
+
+7. [ch-4] SELECT employee_id, AVG(salary) FROM employees GROUP BY department_id ;what is the result
+
+a. display employee_id ,average salary of each department
+b. display employee_id ,average salary of all department
+c. error
+ans: a
+
+8. [ch-4] SELECT department_id, AVG(salary) FROM employees GROUP BY department_id 
+          where department_id=80 ;what is the result
+
+a. display deparment_id ,average salary of one department
+b. display deparment_id ,average salary of all department
+c. error
+ans: c
+
+9. [ch-4] for Illegal Queries Using Group Functions which one is not true 
+a. You can use the WHERE clause to restrict groups.
+b. You use the HAVING clause to restrict groups.
+c. You cannot use group functions in the WHERE clause
+ans: a
+
+10. [ch-4] When you use the HAVING clause, the Oracle server restricts groups as follows:
+
+l1. Groups matching the HAVING clause are displayed.
+l2. The group function is applied.
+l3. Rows are grouped.
+
+set in correct order
+a. l2 l3 l4
+b. l1.l2 l3
+c. l3,l2,l1
+
+ans: c
