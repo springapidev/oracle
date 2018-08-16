@@ -1,0 +1,44 @@
+Step-1:  Create table
+CREATE TABLE student (
+  USER_ID       NUMBER (5) primary key,
+  USERNAME      VARCHAR2 (20)  NOT NULL
+ )
+
+Step-2: Create Procedure
+
+CREATE OR REPLACE PROCEDURE getStudentByUserId(
+	   p_userid IN STUDENT.USER_ID%TYPE,
+	   p_username OUT STUDENT.USERNAME%TYPE)
+	  
+IS
+BEGIN
+
+  SELECT USERNAME 
+  INTO p_username
+  from  STUDENT WHERE USER_ID = p_userid;
+
+END;
+
+Step-3: Insert Data
+
+insert into student values(1,'admin');
+insert into student values(2,'abc');
+insert into student values(3,'test');
+
+Step-4: call Procedure and Display data
+
+DECLARE
+   p_username STUDENT.USERNAME%TYPE;
+  
+BEGIN
+
+   getStudentByUserId(1,p_username);
+
+   DBMS_OUTPUT.PUT_LINE('username :  ' || p_username);
+  
+END;
+
+Happy Coding!
+Note: 
+%TYPE is used to declare variables with relation to the data type 
+of a column in an existing table:

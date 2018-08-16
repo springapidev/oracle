@@ -1,5 +1,0 @@
-insert into member
-values(member_id_seq.nextval,)
-
-
-
