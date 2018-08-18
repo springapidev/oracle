@@ -1,0 +1,18 @@
+CREATE or REPLACE TRIGGER customer_after_insert AFTER INSERT ON customer
+FOR EACH ROW
+DECLARE
+BEGIN
+insert into customer_backup values (:new.id, :new.name, :new.mobile, :new.country);
+DBMS_OUTPUT.PUT_LINE('Record successfully inserted into customer_backup table');
+END;
+
+CREATE or REPLACE TRIGGER customer_after_update
+AFTER UPDATE ON customer
+FOR EACH ROW
+DECLARE
+BEGIN
+update customer_backup
+set name = :new.name, mobile = :new.mobile, country = :new.country
+where id = :old.id;
+DBMS_OUTPUT.PUT_LINE('Record successfully updated into customer and customer_backup table');
+END;
