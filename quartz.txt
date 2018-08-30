@@ -1,1 +1,0 @@
-https://examples.javacodegeeks.com/enterprise-java/quartz/quartz-helloworld-example/

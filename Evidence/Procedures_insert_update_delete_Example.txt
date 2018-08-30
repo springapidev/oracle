@@ -1,0 +1,76 @@
+============================== Insert Example=========================
+
+1. create a Table
+
+CREATE TABLE CUSTOMER ( 
+  id       NUMBER (5)  primary key, 
+  name      VARCHAR2 (20)  NOT NULL, 
+  mobile    VARCHAR2 (11)  NOT NULL, 
+  country  VARCHAR2(50) Default 'BD'
+  )
+
+
+2. Create a Stored Procedure
+
+A stored procedure, accept 4 IN parameters and insert it into table "CUSTOMER"
+
+CREATE OR REPLACE PROCEDURE insertCustomer(
+	   p_id IN CUSTOMER.id%TYPE,
+	   p_name IN CUSTOMER.name%TYPE,
+	   p_mobile IN CUSTOMER.mobile%TYPE,
+	   p_country IN CUSTOMER.country%TYPE)
+IS
+BEGIN
+
+  INSERT INTO CUSTOMER (id, name, mobile, country) 
+  VALUES (p_id, p_name,p_mobile, p_country);
+
+  COMMIT;
+
+END;
+/
+
+
+3. Calls from PL/SQL
+
+Call from PL/SQL like this :
+
+BEGIN
+   insertCustomer(100,'Mahbub','01686000000','USA');
+END;
+
+============================== Update Example=========================
+CREATE OR REPLACE PROCEDURE updateCustomer(
+	   p_id IN CUSTOMER.id%TYPE,
+	   p_name IN CUSTOMER.name%TYPE)
+IS
+BEGIN
+
+  update CUSTOMER set name=p_name where id=p_id;
+
+  COMMIT;
+
+END;
+/
+Call: 
+Begin
+updateCustomer(100, 'Mr. Mahbub');
+end;
+
+
+============================== Delete Example=========================
+CREATE OR REPLACE PROCEDURE deleteCustomer(
+	   p_id IN CUSTOMER.id%TYPE)
+IS
+BEGIN
+
+  delete from CUSTOMER where id=p_id;
+
+  COMMIT;
+
+END;
+/
+Call: 
+Begin
+deleteCustomer(100);
+end;
