@@ -1,3 +1,4 @@
+0. Show the usages of savepoint and rollback at 
 1.create an user name eid
 2. create following tables;
 	A. department
@@ -7,6 +8,7 @@
 		joining_date using default, country default as BD,
 		dep_id Foreign Key with department
 	C. Show Both table Structres.
+	D. Create 3 triggers(Insert, update, delete) for employee table.
 3. Create sequence for
 	A. department incremented by 10
 	B. employee incremented by 5
@@ -17,7 +19,7 @@
 	B. create an index for the column department_name
 	C. show index again.
 	D.Insert 3 data's to departments for ADMIN, SOFTWARE and MARKETING 
-	  using Sequence.
+	  using Sequence and Procedure.
 	E. create view for department
 	F. Show View List
 	G. create synonym for table and View
@@ -27,7 +29,7 @@
 	B. create an index for the column emp_name
 	C. show sequence again.
 	D.Insert 5 data's to employee 
-	  using sequence.
+	  using sequence and Procedure.
 	E. create view for employee
 	F. Show View List
 	G. create synonym for table and View
@@ -36,4 +38,5 @@
 6.  A. update MARKETING department to SALES
 	B. add new column at employee table like email unique
 	C. update first row of employee table with department SALES.
-	D. 
+
+	
