@@ -22,6 +22,8 @@ Step-9:  Give privileges/permission to user 'XYZ' for table create
 Step-10: Try to create table, if you see an error asking you insufficient 
 		table space, then.....Try connect AGAIN as sysdba 
 ->alter user xyz quota 500m on system;
+..............For Unlimted Table Space......
+->grant unlimited tablespace to demo;
 Step-11: Now connect AGAIN as sysdba
 -> create table test(id number(5) primary key,name varchar2(15));
 

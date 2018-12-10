@@ -1,0 +1,19 @@
+Quiz-1:
+There is company named Rahim & sons Inc. There are 3 types of employees to designation. 
+One is Manager, 5 are supervisors and 10 are Marketing Officers. They need to build a system, Manager 
+will be able to do anything on the database system. Supervisors can create table, view and sequence. 
+And Marketing Officers can only view all the datas;
+1. Create table named department, contact and employee.
+ A. department: id PK, dep_name Unique
+ B. contact: id, mobile unique, country default Bangladesh
+ C. employee: id, emp_name, salary (starting salary 25000),joining_date (Before 2000),
+ department_id FK Not null and contact_id uinque FK
+2. create 3 sequences for each table.
+	A. department sequence should be incremented by 10 and start with 10.
+	B. contact sequence should be incremented by 5 and start with 5.
+	C. employee sequence should be incremented by 1.
+	
+3. insert 16 datas into employee table.
+4. create a view for employee table to display the following data:
+emp ID, emp Name, Anual Salary, Department Name, Mobile, Country
+5. create synonym for q. no 4

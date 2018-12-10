@@ -1,0 +1,323 @@
+SQL> connect sys as sysdba;
+Connected.
+SQL> create role manager;
+create role manager
+            *
+ERROR at line 1:
+ORA-01921: role name 'MANAGER' conflicts with another user or role name 
+
+
+SQL> create role n_manager;
+
+Role created.
+
+SQL> create role n_supervisor;
+
+Role created.
+
+SQL> create role n_marketing_offiecer;
+
+Role created.
+
+SQL> grant dba to n_manager;
+
+Grant succeeded.
+
+SQL> grant create_session, create table, create view, create sequence, create synonym to n_supervisor;
+grant create_session, create table, create view, create sequence, create synonym to n_supervisor
+      *
+ERROR at line 1:
+ORA-01919: role 'CREATE_SESSION' does not exist 
+
+
+SQL> grant create session, create table, create view, create sequence, create synonym to n_supervisor;
+
+Grant succeeded.
+
+SQL> create user u_manager identified by u_manager;
+
+User created.
+
+SQL> grant n_manager to u_manager;
+
+Grant succeeded.
+
+SQL> create user u_supervisor1 identified by u_supervisor;
+
+User created.
+
+SQL> create user u_supervisor2 identified by u_supervisor;
+
+User created.
+
+SQL> create user u_supervisor3 identified by u_supervisor;
+
+User created.
+
+SQL> create user u_supervisor4 identified by u_supervisor;
+
+User created.
+
+SQL> create user u_supervisor5 identified by u_supervisor;
+
+User created.
+
+SQL> grant n_supervisor to u_supervisor1,u_supervisor2, u_supervisor3, u_supervisor4, u_supervisor5;
+
+Grant succeeded.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> connect u_supervisor1
+Connected.
+SQL> create table department(id number(5) primary key, dep_name varchar2(50) unique);
+create table department(id number(5) primary key, dep_name varchar2(50) unique)
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'SYSTEM' 
+
+
+SQL> connect sys as sysdba;
+Connected.
+SQL> grant unlimited tablespace to n_supervisor;
+
+Grant succeeded.
+
+SQL> connect u_supervisor1
+Connected.
+SQL> create table department(id number(5) primary key, dep_name varchar2(50) unique);
+create table department(id number(5) primary key, dep_name varchar2(50) unique)
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'SYSTEM' 
+
+
+SQL> connect sys as sysdba;
+Connected.
+SQL> grant unlimited tablespace to u_supervisor1;
+
+Grant succeeded.
+
+SQL> connect u_supervisor1
+ERROR:
+ORA-01017: invalid username/password; logon denied 
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect u_supervisor1
+Connected.
+SQL> create table department(id number(5) primary key, dep_name varchar2(50) unique);
+
+Table created.
+
+SQL> create table contact(id number(5) primary key, mobile number(11) unique, country varchar2(50) default 'Bangladesh');
+
+Table created.
+
+SQL> create table employee(id number(5) primary key, emp_name varchar2(50) not null, salary number(9,2) check (salary >= 25000), joining_date date check (joining_date < '01-JAN-2000'), department_id number(5) not null, contact_id number(5) unique, foreign key (department_id) references department(id), foreign key (contact_id) references contact(id));
+
+Table created.
+
+SQL> create sequence dep_seq increment by 10 start with 10 nocycle nocache;
+
+Sequence created.
+
+SQL> create sequence con_seq increment by 5 start with 5 nocycle nocache;
+
+Sequence created.
+
+SQL> create sequence emp_seq increment by 1 start with 1 nocycle nocache;
+
+Sequence created.
+
+SQL> insert into department(id, name) values(dep_seq.nextval, 'Admin');
+insert into department(id, name) values(dep_seq.nextval, 'Admin')
+                           *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> insert into department(id, dep_name) values(dep_seq.nextval, 'Admin');
+
+1 row created.
+
+SQL> insert into department(id, dep_name) values(dep_seq.nextval, 'Sales');
+
+1 row created.
+
+SQL> insert into conatct(id, mobile) values(con_seq.nextval, 01686239111);
+insert into conatct(id, mobile) values(con_seq.nextval, 01686239111)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239111);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239112);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239113);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239114);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239115);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239116);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239117);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239118);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239119);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239120);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239121);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239122);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239123);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239124);
+
+1 row created.
+
+SQL> insert into contact(id, mobile) values(con_seq.nextval, 01686239125);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 5);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 5);
+insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 5)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (U_SUPERVISOR1.SYS_C007556) violated 
+
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 10);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 15);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 20);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 25);
+
+1 row created.
+
+SQL> insert into employee(id,emp_name, salary, joining_date, department_id, contact_id) values(emp_seq.nextval,'Mr. A', 30000,'01-FEB-1998', 10, 30);
+
+1 row created.
+
+SQL> create view emp_view as select e.emp_name "Emp Name", e.salary "Annual Salalry",d.department_name,c.mobile, c.country from employee e, department d, contact c where e.department_id=d.id and e.contact_id=c.id;
+create view emp_view as select e.emp_name "Emp Name", e.salary "Annual Salalry",d.department_name,c.mobile, c.country from employee e, department d, contact c where e.department_id=d.id and e.contact_id=c.id
+                                                                                *
+ERROR at line 1:
+ORA-00904: "D"."DEPARTMENT_NAME": invalid identifier 
+
+
+SQL> create view emp_view as select e.emp_name "Emp Name", e.salary "Annual Salalry",d.dep_name,c.mobile, c.country from employee e, department d, contact c where e.department_id=d.id and e.contact_id=c.id;
+
+View created.
+
+SQL> select * from emp_view;
+
+Emp Name                                           Annual Salalry               
+-------------------------------------------------- --------------               
+DEP_NAME                                               MOBILE                   
+-------------------------------------------------- ----------                   
+COUNTRY                                                                         
+--------------------------------------------------                              
+Mr. A                                                       30000               
+Admin                                              1686239111                   
+Bangladesh                                                                      
+                                                                                
+Mr. A                                                       30000               
+Admin                                              1686239112                   
+Bangladesh                                                                      
+
+Emp Name                                           Annual Salalry               
+-------------------------------------------------- --------------               
+DEP_NAME                                               MOBILE                   
+-------------------------------------------------- ----------                   
+COUNTRY                                                                         
+--------------------------------------------------                              
+                                                                                
+Mr. A                                                       30000               
+Admin                                              1686239113                   
+Bangladesh                                                                      
+                                                                                
+Mr. A                                                       30000               
+Admin                                              1686239114                   
+
+Emp Name                                           Annual Salalry               
+-------------------------------------------------- --------------               
+DEP_NAME                                               MOBILE                   
+-------------------------------------------------- ----------                   
+COUNTRY                                                                         
+--------------------------------------------------                              
+Bangladesh                                                                      
+                                                                                
+Mr. A                                                       30000               
+Admin                                              1686239115                   
+Bangladesh                                                                      
+                                                                                
+Mr. A                                                       30000               
+
+Emp Name                                           Annual Salalry               
+-------------------------------------------------- --------------               
+DEP_NAME                                               MOBILE                   
+-------------------------------------------------- ----------                   
+COUNTRY                                                                         
+--------------------------------------------------                              
+Admin                                              1686239116                   
+Bangladesh                                                                      
+                                                                                
+
+6 rows selected.
+
+SQL> create synonym emp_view_syn for emp_view;
+
+Synonym created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
