@@ -1,0 +1,21 @@
+Quiz-2:
+0. create user user100 and give grant dba, then connect and start 
+working
+Ans. conect sys as sysdba
+password: sys
+create user user100 identified by user100;
+grant dba to user100;
+
+1. Create table named department and employee.
+ A. department: id PK, dep_name Unique
+ C. employee: id, name, salary (starting salary more than 25000),
+ joining_date (Before 2000), department_id FK Not null 
+2. create 3 sequences for each table.
+	A. department sequence should be incremented by 10 and start 
+	with 10. 
+	B. employee sequence should be incremented by 1.	
+3. Create Trigger on employee table for insert, update and delete
+4. Insert, update and delete data using procedure
+5. create a view for employee table to display the following data:
+emp ID, emp Name, Anual Salary, Department Name
+6. create synonym for q. no 4

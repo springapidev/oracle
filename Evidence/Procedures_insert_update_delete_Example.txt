@@ -21,12 +21,9 @@ CREATE OR REPLACE PROCEDURE insertCustomer(
 	   p_country IN CUSTOMER.country%TYPE)
 IS
 BEGIN
-
   INSERT INTO CUSTOMER (id, name, mobile, country) 
   VALUES (p_id, p_name,p_mobile, p_country);
-
   COMMIT;
-
 END;
 /
 

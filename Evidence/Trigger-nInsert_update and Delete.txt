@@ -8,7 +8,10 @@ END;
 ==================
 insert into usa values(2,'Mr','Shohan');
 ===============================
-select * from usa;
+select * from usa_backup;
+
+
+
 ================
 CREATE or REPLACE TRIGGER usa_after_update
 AFTER UPDATE ON usa
@@ -23,6 +26,17 @@ END;
 ========================
 update usa set usaid=100
 where usaid=1;
+
+
+
+
+
+
+
+
+
+
+
 ========================
 CREATE or REPLACE TRIGGER usa_after_delete
 AFTER DELETE ON usa
