@@ -5,7 +5,7 @@
 		Fields: dep_id, department_name	
 	B. employee
 		Fields: emp_id, emp_name, mobile unique, salary more than 10000,
-		joining_date using default, country default as BD,
+		joining_date using default sysdate, country default as BD,
 		dep_id Foreign Key with department
 	C. Show Both table Structres.
 	D. Create 3 triggers(Insert, update, delete) for employee table.

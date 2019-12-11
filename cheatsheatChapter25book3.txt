@@ -341,5 +341,13 @@ SQL> select * from dba_unused_col_tabs;
 OWNER                          TABLE_NAME                          COUNT        
 ------------------------------ ------------------------------ ----------        
 JP                             TEST                                    1        
-
+===============Check Roles under a USER =============
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'HR';
 SQL> spool off;
+
+
+
+
+
+
+
